@@ -10,7 +10,7 @@ permissions:
   contents: read
 
 jobs:
-  react:
+  spring:
     name: Spring build & deploy
     runs-on: ubuntu-20.04
     defaults:
@@ -54,7 +54,7 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY_ID }} 
           aws-region: ap-northeast-2
 
-      # react 빌드한 /build를 s3로 업로드
+      # gradle 빌드 s3로 업로드
       - name: Upload gradle project to S3
         env: 
           PROJECT_NAME: issue-tracker

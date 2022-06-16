@@ -1,5 +1,6 @@
-REPO=/home/ec2-user/issue-tracker
+mkdir /home/ec2-user/logs
 
+REPO=/home/ec2-user/issue-tracker
 cd $REPO
 
 JAR_NAME=$(ls $REPO/build/libs | grep '.jar' | tail -n 1)
@@ -12,9 +13,11 @@ then
 else
     echo "> kill -15 $SPRINGBOOT_PID"
     kill -15 $SPRINGBOOT_PID
-    sleep 5
+    sleep 25
 fi
 
 echo "> $JAR_PATH deploy"
 
-nohup java -jar $JAR_PATH >> /home/ec2-user/Issues-tracker-deploy.log 2>&1 &
+export LOG_FILE_PATH=/home/ec2-user/logs
+
+nohup java -jar -Dspring.profiles.active=prod $JAR_PATH FILE_LOG_PATTERN=> /dev/null 2> /dev/null < /dev/null &
