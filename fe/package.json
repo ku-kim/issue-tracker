@@ -29,6 +29,43 @@
       "airbnb-typescript",
       "prettier"
     ],
+    "rules": {
+      "react/require-default-props": 0,
+      "react/react-in-jsx-scope": 0,
+      "react/jsx-props-no-spreading": 0,
+      "import/order": [
+        "error",
+        {
+          "groups": [
+            "builtin",
+            "external",
+            "internal"
+          ],
+          "pathGroups": [
+            {
+              "pattern": "react",
+              "group": "external",
+              "position": "before"
+            }
+          ],
+          "pathGroupsExcludedImportTypes": [
+            "react"
+          ],
+          "alphabetize": {
+            "order": "asc",
+            "caseInsensitive": false
+          }
+        }
+      ]
+    },
+    "plugins": [
+      "import"
+    ],
+    "settings": {
+      "import/resolver": {
+        "typescript": {}
+      }
+    },
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
       "project": "./tsconfig.json",
@@ -55,6 +92,8 @@
     "@typescript-eslint/parser": "^5.28.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-airbnb-typescript": "^17.0.0",
-    "eslint-config-prettier": "^8.5.0"
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-import-resolver-typescript": "^2.7.1",
+    "eslint-plugin-import": "^2.26.0"
   }
 }
