@@ -12,7 +12,7 @@ then
 else
     echo "> kill -15 $SPRINGBOOT_PID"
     kill -15 $SPRINGBOOT_PID
-    sleep 5
+    sleep 25
 fi
 
 echo "> $JAR_PATH deploy"
