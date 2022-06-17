@@ -10,3 +10,6 @@ oauth:
       authorization-uri: https://github.com/login/oauth/authorize
       token-uri: https://github.com/login/oauth/access_token
       user-info: https://api.github.com/user
+
+jwt:
+  secret: ${JWT_SECRET_KEY}
