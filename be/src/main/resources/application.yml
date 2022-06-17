@@ -1,6 +1,8 @@
 spring:
   profiles:
     active: ${profile}
+  config:
+    import: classpath:auth/auth.yml
 
 
 # Default servlet contest-path
