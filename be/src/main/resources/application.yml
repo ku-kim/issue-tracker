@@ -1,3 +1,9 @@
 spring:
   profiles:
     active: ${profile}
+
+
+# Default servlet contest-path
+server:
+  servlet:
+    context-path: /api
