@@ -13,39 +13,82 @@ const Wrapper = styled.div<{
   background-color: ${({ isFocused }) => (isFocused ? COLOR.WHITE : COLOR.GREY[200])};
   border: 1px solid ${({ isFocused }) => (isFocused ? COLOR.BLACK : 'transparent')};
 
-  ${({ templateStyle }) => {
-    let borderStyle;
+  ${({ templateStyle, isFocused }) => {
+    let styles;
     switch (templateStyle) {
       case 'small':
-        borderStyle = css`
+        styles = css`
+          padding-left: 24px;
           border-radius: 11px;
         `;
         break;
       case 'large':
-        borderStyle = css`
+        styles = css`
+          ${isFocused
+            ? css`
+                padding: 8px 24px;
+              `
+            : css`
+                padding: 18px 24px;
+              `}
+          flex-direction: column;
           border-radius: 16px;
         `;
         break;
       case 'medium':
-        borderStyle = css`
+        styles = css`
+          ${isFocused
+            ? css`
+                padding: 4px 24px;
+              `
+            : css`
+                padding: 14px 24px;
+              `}
+          flex-direction: column;
           border-radius: 14px;
         `;
         break;
       default:
         break;
     }
-    return borderStyle;
+    return styles;
   }};
 
   .input-label {
-    ${({ templateStyle, isFocused }) => {
-      let inputLabelStyle = ``;
+    ${({ templateStyle, isFocused, size }) => {
+      let inputLabelStyle;
       switch (templateStyle) {
         case 'small':
+          inputLabelStyle = css`
+            width: 80px;
+            line-height: ${size.height};
+            margin-right: 8px;
+            ${isFocused
+              ? css`
+                  font-size: 12px;
+                  color: ${COLOR.GREY[400]};
+                `
+              : css`
+                  font-size: 16px;
+                  color: ${COLOR.GREY[500]};
+                `};
+          `;
           break;
         case 'large':
         case 'medium':
-          inputLabelStyle += isFocused ? `display: block;` : `display: none`;
+          inputLabelStyle = css`
+            font-size: 12px;
+            height: 20px;
+            line-height: 20px;
+            color: ${COLOR.GREY[500]};
+            ${isFocused
+              ? css`
+                  display: block;
+                `
+              : css`
+                  display: none;
+                `}
+          `;
           break;
         default:
           break;
@@ -55,13 +98,38 @@ const Wrapper = styled.div<{
   }
 
   .input-wrap {
+    ${({ templateStyle, isFocused }) => {
+      let inputWrapStyle;
+      switch (templateStyle) {
+        case 'small':
+          inputWrapStyle = css`
+            width: calc(100% - 80px);
+          `;
+          break;
+        case 'large':
+        case 'medium':
+          inputWrapStyle = css`
+            ${isFocused
+              ? css`
+                  height: calc(100% - 20px);
+                `
+              : css`
+                  height: 100%;
+                `}
+          `;
+          break;
+        default:
+          break;
+      }
+      return inputWrapStyle;
+    }}
   }
 `;
 
 function Input({
   placeholder,
   size,
-  InputTitle = '',
+  inputLabel = '',
   inputId,
   templateStyle = 'medium',
 }: InputProps) {
@@ -73,12 +141,14 @@ function Input({
   };
   return (
     <Wrapper size={size} isFocused={isFocused} templateStyle={templateStyle}>
-      <label className="input-label" htmlFor={inputId}>
-        {InputTitle}
-      </label>
+      {inputLabel && (
+        <label className="input-label" htmlFor={inputId}>
+          {inputLabel}
+        </label>
+      )}
       <div className="input-wrap">
         <input
-          placeholder={placeholder}
+          placeholder={isFocused ? '' : placeholder}
           onChange={onChange}
           value={inputText}
           onFocus={() => setIsFocused(true)}
@@ -105,5 +175,5 @@ interface InputProps {
   size: SizeType;
   templateStyle?: TemplateStyleType;
   inputId: string;
-  InputTitle?: React.ReactNode;
+  inputLabel?: React.ReactNode;
 }
