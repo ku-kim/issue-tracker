@@ -8,20 +8,20 @@ import java.util.Date;
 import java.time.Instant;
 import java.util.Map;
 import javax.crypto.SecretKey;
-import lombok.Getter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @Component
-@Getter
 public class LoginTokenGenerator {
 
-	public static final long HALF_HOUR = 30L;
+	private static final long HALF_HOUR = 30L;
+	private static final int ONE_MINUTE = 60;
 	@Value("${jwt.secret}")
 	private String jwtSecret;
 
 	public String accessToken(Long userId) {
-		return loginToken(userId, Date.from(Instant.now().plusSeconds(60 * HALF_HOUR)));
+		return loginToken(userId,
+			Date.from(Instant.now().plusSeconds(ONE_MINUTE * HALF_HOUR)));
 	}
 
 	private String loginToken(Long userId, Date plusMinutes) {
