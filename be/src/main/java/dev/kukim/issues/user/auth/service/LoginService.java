@@ -30,7 +30,7 @@ public class LoginService {
 	private User findOrCreatUser(GithubUserResponse githubUserResponse) {
 		Long findId = githubUserResponse.getId();
 
-		return userRepository.findById(findId).orElseGet(() ->
+		return userRepository.findByThirdPartyId(findId).orElseGet(() ->
 			userRepository.save(UserMapper.INSTANCE.map(githubUserResponse)));
 	}
 
