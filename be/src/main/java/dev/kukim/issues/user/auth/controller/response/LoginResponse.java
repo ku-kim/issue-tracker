@@ -1,15 +1,11 @@
 package dev.kukim.issues.user.auth.controller.response;
 
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
 
-@NoArgsConstructor
-@AllArgsConstructor
+@Getter
 @Builder
-@Data
 public class LoginResponse {
 
 	private String accessToken;
