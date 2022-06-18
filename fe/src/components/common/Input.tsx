@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import styled, { css } from 'styled-components';
 import { COLOR } from 'styles/color';
+import FONT from 'styles/font';
 
 const Wrapper = styled.div<{
   size: SizeType;
@@ -12,6 +13,7 @@ const Wrapper = styled.div<{
   height: ${({ size }) => size.height};
   background-color: ${({ isFocused }) => (isFocused ? COLOR.WHITE : COLOR.GREY[200])};
   border: 1px solid ${({ isFocused }) => (isFocused ? COLOR.BLACK : 'transparent')};
+  font-weight: ${FONT.WEIGHT.REGULAR};
 
   ${({ templateStyle, isFocused }) => {
     let styles;
@@ -69,7 +71,7 @@ const Wrapper = styled.div<{
                   color: ${COLOR.GREY[400]};
                 `
               : css`
-                  font-size: 16px;
+                  font-size: ${FONT.SIZE.SMALL};
                   color: ${COLOR.GREY[500]};
                 `};
           `;
