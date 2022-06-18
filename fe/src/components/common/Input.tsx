@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { COLOR } from 'styles/color';
 
 const Wrapper = styled.div<{
@@ -12,6 +12,30 @@ const Wrapper = styled.div<{
   height: ${({ size }) => size.height};
   background-color: ${({ isFocused }) => (isFocused ? COLOR.WHITE : COLOR.GREY[200])};
   border: 1px solid ${({ isFocused }) => (isFocused ? COLOR.BLACK : 'transparent')};
+
+  ${({ templateStyle }) => {
+    let borderStyle;
+    switch (templateStyle) {
+      case 'small':
+        borderStyle = css`
+          border-radius: 11px;
+        `;
+        break;
+      case 'large':
+        borderStyle = css`
+          border-radius: 16px;
+        `;
+        break;
+      case 'medium':
+        borderStyle = css`
+          border-radius: 14px;
+        `;
+        break;
+      default:
+        break;
+    }
+    return borderStyle;
+  }};
 
   .input-label {
     ${({ templateStyle, isFocused }) => {
