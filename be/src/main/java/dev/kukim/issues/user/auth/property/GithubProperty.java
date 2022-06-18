@@ -1,22 +1,27 @@
 package dev.kukim.issues.user.auth.property;
 
+import javax.validation.constraints.NotEmpty;
 import lombok.Getter;
-import org.springframework.beans.factory.annotation.Value;
+import lombok.Setter;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
+import org.springframework.validation.annotation.Validated;
 
 @Component
-@Getter
+@Getter @Setter
+@Validated
+@ConfigurationProperties("oauth.github")
 public class GithubProperty {
 
-	@Value("${oauth.provider.github.token-uri}")
+	@NotEmpty
 	private String accessTokenUri;
 
-	@Value("${oauth.provider.github.user-info}")
+	@NotEmpty
 	private String userInfoUri;
 
-	@Value("${oauth.client.github.client.id}")
+	@NotEmpty
 	private String clientId;
 
-	@Value("${oauth.client.github.client.secret}")
+	@NotEmpty
 	private String clientSecret;
 }
