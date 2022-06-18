@@ -7,6 +7,7 @@ import { ReactComponent as CheckBoxInitial } from 'assets/check-box-initial.svg'
 import { ReactComponent as CheckOffCircle } from 'assets/check-off-circle.svg';
 import { ReactComponent as CheckOnCircle } from 'assets/check-on-circle.svg';
 import { ReactComponent as Edit } from 'assets/edit.svg';
+import { ReactComponent as Logo } from 'assets/logo.svg';
 import { ReactComponent as Milestone } from 'assets/milestone.svg';
 import { ReactComponent as Paperclip } from 'assets/paperclip.svg';
 import { ReactComponent as Plus } from 'assets/plus.svg';
@@ -17,6 +18,7 @@ import { ReactComponent as Tag } from 'assets/tag.svg';
 import { ReactComponent as Trash } from 'assets/trash.svg';
 import { ReactComponent as XSquare } from 'assets/x-square.svg';
 import { COLOR } from 'styles/color';
+import SIZE from 'styles/size';
 
 const iconComponents = {
   alertCircle: AlertCircle,
@@ -37,16 +39,23 @@ const iconComponents = {
   tag: Tag,
   trash: Trash,
   xSquare: XSquare,
+  logo: Logo,
 };
 
-function Icon({ icon, fill = 'none', stroke = COLOR.BLACK }: IconProps) {
+function Icon({
+  icon,
+  width = SIZE.ICON.WIDTH,
+  height = SIZE.ICON.HEIGHT,
+  fill = 'none',
+  stroke = COLOR.BLACK,
+}: IconProps) {
   const SelectedIcon = iconComponents[icon];
 
   if (!SelectedIcon) {
     throw new Error(`${icon} 컴포넌트를 찾을 수 없습니다. `);
   }
 
-  return <SelectedIcon fill={fill} stroke={stroke} />;
+  return <SelectedIcon width={width} height={height} fill={fill} stroke={stroke} />;
 }
 
 export default Icon;
@@ -55,6 +64,8 @@ type IconComponentsKeys = keyof typeof iconComponents;
 
 interface IconProps {
   icon: IconComponentsKeys;
+  width?: number;
+  height?: number;
   fill?: string;
   stroke?: string;
 }
