@@ -2,6 +2,17 @@ import styled from 'styled-components';
 import { COLOR } from 'styles/color';
 import SIZE from 'styles/size';
 
+function ListContainer({ headerItem, children }: ListContainerProps) {
+  return (
+    <Wrapper>
+      <div className="list-header">{headerItem}</div>
+      <div className="list-body">{children}</div>
+    </Wrapper>
+  );
+}
+
+export default ListContainer;
+
 const BORDER_COLOR = COLOR.GREY[300];
 
 const Wrapper = styled.div`
@@ -33,18 +44,6 @@ const Wrapper = styled.div`
     }
   }
 `;
-
-function ListContainer({ headerItem, children }: ListContainerProps) {
-  return (
-    <Wrapper>
-      <div className="list-header">{headerItem}</div>
-      <div className="list-body">{children}</div>
-    </Wrapper>
-  );
-}
-
-export default ListContainer;
-
 interface ListContainerProps {
   headerItem: React.ReactNode;
   children: React.ReactNode;
