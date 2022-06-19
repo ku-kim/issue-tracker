@@ -4,6 +4,44 @@ import { COLOR } from 'styles/color';
 import FONT from 'styles/font';
 import SIZE from 'styles/size';
 
+function Input({
+  template = 'MEDIUM',
+  placeholder,
+  width = `${SIZE.INPUT[template].WIDTH}px`,
+  height = `${SIZE.INPUT[template].HEIGHT}px`,
+  inputLabel = '',
+  inputId,
+}: InputProps) {
+  const [isFocused, setIsFocused] = useState(false);
+  const [inputText, setInputText] = useState('');
+
+  const onChange = ({ target }: { target: HTMLInputElement }) => {
+    setInputText(target.value);
+  };
+  return (
+    <Wrapper width={width} height={height} isFocused={isFocused} template={template}>
+      {inputLabel && (
+        <label className="input-label" htmlFor={inputId}>
+          {inputLabel}
+        </label>
+      )}
+      <div className="input-wrap">
+        <input
+          placeholder={isFocused ? '' : placeholder}
+          onChange={onChange}
+          value={inputText}
+          onFocus={() => setIsFocused(true)}
+          onBlur={() => setIsFocused(false)}
+          id={inputId}
+          style={{ background: 'transparent' }}
+        />
+      </div>
+    </Wrapper>
+  );
+}
+
+export default Input;
+
 const INPUT_STYLES = {
   SMALL: {
     PADDING: {
@@ -163,44 +201,6 @@ const Wrapper = styled.div<{
       template !== 'SMALL' && isFocused && INPUT_STYLES.MEDIUM.INPUT_WRAP.FOCUSED}
   }
 `;
-
-function Input({
-  template = 'MEDIUM',
-  placeholder,
-  width = `${SIZE.INPUT[template].WIDTH}px`,
-  height = `${SIZE.INPUT[template].HEIGHT}px`,
-  inputLabel = '',
-  inputId,
-}: InputProps) {
-  const [isFocused, setIsFocused] = useState(false);
-  const [inputText, setInputText] = useState('');
-
-  const onChange = ({ target }: { target: HTMLInputElement }) => {
-    setInputText(target.value);
-  };
-  return (
-    <Wrapper width={width} height={height} isFocused={isFocused} template={template}>
-      {inputLabel && (
-        <label className="input-label" htmlFor={inputId}>
-          {inputLabel}
-        </label>
-      )}
-      <div className="input-wrap">
-        <input
-          placeholder={isFocused ? '' : placeholder}
-          onChange={onChange}
-          value={inputText}
-          onFocus={() => setIsFocused(true)}
-          onBlur={() => setIsFocused(false)}
-          id={inputId}
-          style={{ background: 'transparent' }}
-        />
-      </div>
-    </Wrapper>
-  );
-}
-
-export default Input;
 
 type TemplateType = keyof typeof INPUT_STYLES;
 
