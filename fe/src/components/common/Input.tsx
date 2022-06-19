@@ -2,6 +2,7 @@ import { useState } from 'react';
 import styled, { css } from 'styled-components';
 import { COLOR } from 'styles/color';
 import FONT from 'styles/font';
+import SIZE from 'styles/size';
 
 const INPUT_STYLES = {
   SMALL: {
@@ -92,20 +93,20 @@ const INPUT_STYLES = {
 };
 
 const Wrapper = styled.div<{
-  size: SizeType;
+  width?: string;
+  height?: string;
   isFocused: boolean;
   template: TemplateType;
 }>`
   display: flex;
-  width: ${({ size }) => size.width};
-  height: ${({ size }) => size.height};
+  width: ${({ width }) => width};
+  height: ${({ height }) => height};
   background-color: ${({ isFocused }) => (isFocused ? COLOR.WHITE : COLOR.GREY[200])};
   border: 1px solid ${({ isFocused }) => (isFocused ? COLOR.BLACK : 'transparent')};
   font-weight: ${FONT.WEIGHT.REGULAR};
 
-  ${({ template }) => {
-    return INPUT_STYLES[template].PADDING.INITIAL, INPUT_STYLES[template].BORDER;
-  }};
+  ${({ template }) => INPUT_STYLES[template].PADDING.INITIAL};
+  ${({ template }) => INPUT_STYLES[template].BORDER};
 
   /* template MEDIUM, LARGE style */
   ${({ template }) => template !== 'SMALL' && INPUT_STYLES[template].FLEX}
@@ -114,14 +115,15 @@ const Wrapper = styled.div<{
 
   .input-label {
     /* template SMALL style */
+    width: ${({ template }) => template === 'SMALL' && INPUT_STYLES[template].LABEL.WIDTH}px;
+    line-height: ${({ height }) => height};
+    ${({ template }) => template === 'SMALL' && INPUT_STYLES[template].LABEL.MARGIN}
     ${({ template }) =>
       template === 'SMALL' &&
-      (INPUT_STYLES[template].LABEL.WIDTH,
-      INPUT_STYLES[template].LABEL.MARGIN,
       css`
         font-size: ${INPUT_STYLES[template].LABEL.FONT_STYLE.INITIAL.SIZE};
         color: ${INPUT_STYLES[template].LABEL.FONT_STYLE.INITIAL.COLOR};
-      `)}
+      `}
 
     ${({ isFocused, template }) =>
       template === 'SMALL' &&
@@ -132,15 +134,15 @@ const Wrapper = styled.div<{
       `}
 
     /* template MEDIUM, LARGE style */
+    height: ${({ template }) => template !== 'SMALL' && INPUT_STYLES.MEDIUM.LABEL.HEIGHT}px;
     ${({ template }) =>
       template !== 'SMALL' &&
-      (INPUT_STYLES.MEDIUM.LABEL.HEIGHT,
       css`
         font-size: ${INPUT_STYLES.MEDIUM.LABEL.FONT_STYLE.INITIAL.SIZE};
         color: ${INPUT_STYLES.MEDIUM.LABEL.FONT_STYLE.INITIAL.COLOR};
-        line-height: ${INPUT_STYLES.MEDIUM.LABEL.FONT_STYLE.INITIAL.LINE_HEIGHT};
+        line-height: ${INPUT_STYLES.MEDIUM.LABEL.FONT_STYLE.INITIAL.LINE_HEIGHT}px;
         display: ${INPUT_STYLES.MEDIUM.LABEL.DISPLAY};
-      `)}
+      `}
 
     ${({ isFocused, template }) =>
       template !== 'SMALL' &&
@@ -162,7 +164,14 @@ const Wrapper = styled.div<{
   }
 `;
 
-function Input({ placeholder, size, inputLabel = '', inputId, template = 'MEDIUM' }: InputProps) {
+function Input({
+  template = 'MEDIUM',
+  placeholder,
+  width = `${SIZE.INPUT[template].WIDTH}px`,
+  height = `${SIZE.INPUT[template].HEIGHT}px`,
+  inputLabel = '',
+  inputId,
+}: InputProps) {
   const [isFocused, setIsFocused] = useState(false);
   const [inputText, setInputText] = useState('');
 
@@ -170,7 +179,7 @@ function Input({ placeholder, size, inputLabel = '', inputId, template = 'MEDIUM
     setInputText(target.value);
   };
   return (
-    <Wrapper size={size} isFocused={isFocused} template={template}>
+    <Wrapper width={width} height={height} isFocused={isFocused} template={template}>
       {inputLabel && (
         <label className="input-label" htmlFor={inputId}>
           {inputLabel}
@@ -195,14 +204,10 @@ export default Input;
 
 type TemplateType = keyof typeof INPUT_STYLES;
 
-interface SizeType {
-  width: string;
-  height: string;
-}
-
 interface InputProps {
   placeholder: string;
-  size: SizeType;
+  width?: string;
+  height?: string;
   template?: TemplateType;
   inputId: string;
   inputLabel?: React.ReactNode;
