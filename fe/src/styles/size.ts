@@ -31,6 +31,20 @@ const SIZE = {
       HEIGHT: 40,
     },
   },
+  LIST_CONTAINER: {
+    WIDTH: 1280,
+    PADDING_LEFT: 32,
+    BORDER_RADIUS: 16,
+    HEADER: {
+      HEIGHT: 64,
+      PADDING_TOP: 18,
+      FONT_SIZE: 16,
+    },
+    BODY: {
+      ITEM_HEIGHT: 100,
+      PADDING_TOP: 16,
+    },
+  },
 };
 
 export default SIZE;
