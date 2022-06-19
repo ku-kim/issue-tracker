@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import IssueLabel from 'components/IssueLabel';
+import Button from 'components/common/Button';
 import Icon from 'components/common/Icon';
 import Label from 'components/common/Label';
 import Logo from 'components/common/Logo';
@@ -100,6 +101,35 @@ function Template() {
       <Column>
         <IssueLabel state="open" />
         <IssueLabel state="close" />
+      </Column>
+      <Title>Buttons</Title>
+      <Column>
+        <Button
+          template="LARGE"
+          backgroundColor={{ initial: COLOR.BLUE[100], hover: COLOR.GREEN[200] }}
+          width="300px"
+        >
+          버튼 LARGE
+        </Button>
+        <Button
+          template="MEDIUM_STANDARD"
+          backgroundColor={{ initial: COLOR.BLUE[200] }}
+          width="300px"
+        >
+          버튼 MEDIUM_STANDARD
+        </Button>
+        <Button
+          template="MEDIUM_TEXT"
+          backgroundColor={{ initial: COLOR.BLUE[100], disabled: COLOR.WHITE }}
+          width="100px"
+          borderStyle="border-radius: 30px; border: 3px solid purple;"
+          fontStyles={{
+            fontColor: { initial: COLOR.BLACK, hover: COLOR.BLUE[200], disabled: COLOR.GREEN[200] },
+          }}
+          disabled
+        >
+          버튼 MEDIUM_TEXT
+        </Button>
       </Column>
     </Wrap>
   );
