@@ -3,10 +3,98 @@ import styled, { css } from 'styled-components';
 import { COLOR } from 'styles/color';
 import FONT from 'styles/font';
 
+const INPUT_STYLES = {
+  SMALL: {
+    PADDING: {
+      INITIAL: css`
+        padding-left: 24px;
+      `,
+    },
+    BORDER: css`
+      border-radius: 11px;
+    `,
+    LABEL: {
+      WIDTH: 80,
+      MARGIN: css`
+        margin-right: 8px;
+      `,
+      FONT_STYLE: {
+        INITIAL: {
+          SIZE: FONT.SIZE.X_SMALL,
+          COLOR: COLOR.GREY[400],
+        },
+        FOCUSED: {
+          SIZE: FONT.SIZE.SMALL,
+          COLOR: COLOR.GREY[500],
+        },
+      },
+    },
+    INPUT_WRAP: {
+      INITIAL: css`
+        width: calc(100% - 80px);
+      `,
+    },
+  },
+  MEDIUM: {
+    PADDING: {
+      INITIAL: css`
+        padding: 14px 24px;
+      `,
+      FOCUSED: css`
+        padding: 4px 24px;
+      `,
+    },
+    BORDER: css`
+      border-radius: 14px;
+    `,
+    FLEX: css`
+      flex-direction: column;
+    `,
+    LABEL: {
+      HEIGHT: 20,
+      DISPLAY: 'none',
+      FONT_STYLE: {
+        INITIAL: {
+          LINE_HEIGHT: 20,
+          SIZE: FONT.SIZE.X_SMALL,
+          COLOR: COLOR.GREY[500],
+        },
+        FOCUSED: {
+          DISPLAY: 'block',
+        },
+      },
+    },
+    INPUT_WRAP: {
+      INITIAL: css`
+        height: 100%;
+      `,
+      FOCUSED: css`
+        height: calc(100% - 20px);
+      `,
+    },
+  },
+  LARGE: {
+    PADDING: {
+      INITIAL: css`
+        padding: 14px 24px;
+      `,
+      FOCUSED: css`
+        padding: 8px 24px;
+      `,
+    },
+    BORDER: css`
+      border-radius: 16px;
+    `,
+    FLEX: css`
+      flex-direction: column;
+    `,
+  },
+};
+
 const Wrapper = styled.div<{
   size: SizeType;
   isFocused: boolean;
-  templateStyle: TemplateStyleType;
+  template: TemplateType;
 }>`
   display: flex;
   width: ${({ size }) => size.width};
@@ -15,126 +103,66 @@ const Wrapper = styled.div<{
   border: 1px solid ${({ isFocused }) => (isFocused ? COLOR.BLACK : 'transparent')};
   font-weight: ${FONT.WEIGHT.REGULAR};
 
-  ${({ templateStyle, isFocused }) => {
-    let styles;
-    switch (templateStyle) {
-      case 'small':
-        styles = css`
-          padding-left: 24px;
-          border-radius: 11px;
-        `;
-        break;
-      case 'large':
-        styles = css`
-          ${isFocused
-            ? css`
-                padding: 8px 24px;
-              `
-            : css`
-                padding: 18px 24px;
-              `}
-          flex-direction: column;
-          border-radius: 16px;
-        `;
-        break;
-      case 'medium':
-        styles = css`
-          ${isFocused
-            ? css`
-                padding: 4px 24px;
-              `
-            : css`
-                padding: 14px 24px;
-              `}
-          flex-direction: column;
-          border-radius: 14px;
-        `;
-        break;
-      default:
-        break;
-    }
-    return styles;
+  ${({ template }) => {
+    return INPUT_STYLES[template].PADDING.INITIAL, INPUT_STYLES[template].BORDER;
   }};
 
+  /* template MEDIUM, LARGE style */
+  ${({ template }) => template !== 'SMALL' && INPUT_STYLES[template].FLEX}
+  ${({ isFocused, template }) =>
+    template !== 'SMALL' && isFocused && INPUT_STYLES[template].PADDING.FOCUSED}
+
   .input-label {
-    ${({ templateStyle, isFocused, size }) => {
-      let inputLabelStyle;
-      switch (templateStyle) {
-        case 'small':
-          inputLabelStyle = css`
-            width: 80px;
-            line-height: ${size.height};
-            margin-right: 8px;
-            ${isFocused
-              ? css`
-                  font-size: 12px;
-                  color: ${COLOR.GREY[400]};
-                `
-              : css`
-                  font-size: ${FONT.SIZE.SMALL};
-                  color: ${COLOR.GREY[500]};
-                `};
-          `;
-          break;
-        case 'large':
-        case 'medium':
-          inputLabelStyle = css`
-            font-size: 12px;
-            height: 20px;
-            line-height: 20px;
-            color: ${COLOR.GREY[500]};
-            ${isFocused
-              ? css`
-                  display: block;
-                `
-              : css`
-                  display: none;
-                `}
-          `;
-          break;
-        default:
-          break;
-      }
-      return inputLabelStyle;
-    }}
+    /* template SMALL style */
+    ${({ template }) =>
+      template === 'SMALL' &&
+      (INPUT_STYLES[template].LABEL.WIDTH,
+      INPUT_STYLES[template].LABEL.MARGIN,
+      css`
+        font-size: ${INPUT_STYLES[template].LABEL.FONT_STYLE.INITIAL.SIZE};
+        color: ${INPUT_STYLES[template].LABEL.FONT_STYLE.INITIAL.COLOR};
+      `)}
+
+    ${({ isFocused, template }) =>
+      template === 'SMALL' &&
+      isFocused &&
+      css`
+        font-size: ${INPUT_STYLES[template].LABEL.FONT_STYLE.FOCUSED.SIZE};
+        color: ${INPUT_STYLES[template].LABEL.FONT_STYLE.FOCUSED.COLOR};
+      `}
+
+    /* template MEDIUM, LARGE style */
+    ${({ template }) =>
+      template !== 'SMALL' &&
+      (INPUT_STYLES.MEDIUM.LABEL.HEIGHT,
+      css`
+        font-size: ${INPUT_STYLES.MEDIUM.LABEL.FONT_STYLE.INITIAL.SIZE};
+        color: ${INPUT_STYLES.MEDIUM.LABEL.FONT_STYLE.INITIAL.COLOR};
+        line-height: ${INPUT_STYLES.MEDIUM.LABEL.FONT_STYLE.INITIAL.LINE_HEIGHT};
+        display: ${INPUT_STYLES.MEDIUM.LABEL.DISPLAY};
+      `)}
+
+    ${({ isFocused, template }) =>
+      template !== 'SMALL' &&
+      isFocused &&
+      css`
+        display: ${INPUT_STYLES.MEDIUM.LABEL.FONT_STYLE.FOCUSED.DISPLAY};
+      `}
   }
 
   .input-wrap {
-    ${({ templateStyle, isFocused }) => {
-      let inputWrapStyle;
-      switch (templateStyle) {
-        case 'small':
-          inputWrapStyle = css`
-            width: calc(100% - 80px);
-          `;
-          break;
-        case 'large':
-        case 'medium':
-          inputWrapStyle = css`
-            ${isFocused
-              ? css`
-                  height: calc(100% - 20px);
-                `
-              : css`
-                  height: 100%;
-                `}
-          `;
-          break;
-        default:
-          break;
-      }
-      return inputWrapStyle;
-    }}
+    /* template SMALL style */
+    ${({ template }) => template === 'SMALL' && INPUT_STYLES.SMALL.INPUT_WRAP.INITIAL}
+
+    /* template MEDIUM, LARGE style */
+    ${({ template }) => template !== 'SMALL' && INPUT_STYLES.MEDIUM.INPUT_WRAP.INITIAL}
+
+    ${({ isFocused, template }) =>
+      template !== 'SMALL' && isFocused && INPUT_STYLES.MEDIUM.INPUT_WRAP.FOCUSED}
   }
 `;
 
-function Input({
-  placeholder,
-  size,
-  inputLabel = '',
-  inputId,
-  templateStyle = 'medium',
-}: InputProps) {
+function Input({ placeholder, size, inputLabel = '', inputId, template = 'MEDIUM' }: InputProps) {
   const [isFocused, setIsFocused] = useState(false);
   const [inputText, setInputText] = useState('');
 
@@ -142,7 +170,7 @@ function Input({
     setInputText(target.value);
   };
   return (
-    <Wrapper size={size} isFocused={isFocused} templateStyle={templateStyle}>
+    <Wrapper size={size} isFocused={isFocused} template={template}>
       {inputLabel && (
         <label className="input-label" htmlFor={inputId}>
           {inputLabel}
@@ -165,17 +193,17 @@ function Input({
 
 export default Input;
 
+type TemplateType = keyof typeof INPUT_STYLES;
+
 interface SizeType {
   width: string;
   height: string;
 }
 
-type TemplateStyleType = 'small' | 'large' | 'medium';
-
 interface InputProps {
   placeholder: string;
   size: SizeType;
-  templateStyle?: TemplateStyleType;
+  template?: TemplateType;
   inputId: string;
   inputLabel?: React.ReactNode;
 }
