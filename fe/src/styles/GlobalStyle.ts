@@ -27,6 +27,12 @@ const GlobalStyle = createGlobalStyle`
   button { 
     cursor: pointer;
   }
+
+  .ellipsis {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space:nowrap;
+  }
 `;
 
 export default GlobalStyle;
