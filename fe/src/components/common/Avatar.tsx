@@ -13,6 +13,7 @@ function Avatar({ size, imgSource }: { size: AvatarTemplateType; imgSource: stri
 const AVATAR_STYLES = {
   BACKGROUND_COLOR: COLOR.GREY[300],
   BORDER_RADIUS: 50,
+  BORDER_COLOR: COLOR.GREY[300],
 };
 
 const Div = styled.div<{ size: AvatarTemplateType }>`
@@ -21,6 +22,7 @@ const Div = styled.div<{ size: AvatarTemplateType }>`
   height: ${({ size }) => SIZE.AVATAR[size]}px;
   overflow: hidden;
   border-radius: ${AVATAR_STYLES.BORDER_RADIUS}%;
+  border: 1px solid ${AVATAR_STYLES.BORDER_COLOR};
 `;
 
 type AvatarTemplateType = keyof typeof SIZE.AVATAR;
