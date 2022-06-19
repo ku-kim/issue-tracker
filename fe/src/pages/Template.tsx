@@ -5,6 +5,7 @@ import Button from 'components/common/Button';
 import Icon from 'components/common/Icon';
 import Input from 'components/common/Input';
 import Label from 'components/common/Label';
+import ListContainer from 'components/common/ListContainer';
 import Logo from 'components/common/Logo';
 import Text from 'components/common/Text';
 import { COLOR } from 'styles/color';
@@ -161,6 +162,18 @@ function Template() {
           inputId="template-input3"
           inputLabel="label"
         />
+      </Column>
+
+      <Title>ListContainer</Title>
+      <Column>
+        <ListContainer headerItem="ListContainer테스트">
+          <div>
+            <Text size={FONT.SIZE.MEDIUM}>텍스트1</Text>
+          </div>
+          <div>
+            <Text size={FONT.SIZE.MEDIUM}>텍스트2</Text>
+          </div>
+        </ListContainer>
       </Column>
     </Wrap>
   );
