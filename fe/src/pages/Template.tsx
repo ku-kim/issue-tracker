@@ -1,5 +1,7 @@
 import styled from 'styled-components';
+import IssueLabel from 'components/IssueLabel';
 import Icon from 'components/common/Icon';
+import Label from 'components/common/Label';
 import Logo from 'components/common/Logo';
 import Text from 'components/common/Text';
 import { COLOR } from 'styles/color';
@@ -82,6 +84,23 @@ function Template() {
         <Color color={COLOR.GREEN[200]} />
         <Color color={COLOR.GREEN[100]} />
       </Row>
+      <Title>Label</Title>
+      <Column>
+        <Label backgroundColor={COLOR.GREY[100]} color={COLOR.BLACK}>
+          라벨 이름
+        </Label>
+        <Label backgroundColor={COLOR.GREY[600]} color={COLOR.WHITE}>
+          라벨 이름
+        </Label>
+        <Label backgroundColor={COLOR.WHITE} color={COLOR.GREY[500]} borderColor={COLOR.GREY[300]}>
+          라벨 이름
+        </Label>
+      </Column>
+      <Title>Issue Label</Title>
+      <Column>
+        <IssueLabel state="open" />
+        <IssueLabel state="close" />
+      </Column>
     </Wrap>
   );
 }
