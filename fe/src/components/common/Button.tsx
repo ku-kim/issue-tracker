@@ -2,6 +2,41 @@ import styled, { css } from 'styled-components';
 import { COLOR } from 'styles/color';
 import FONT from 'styles/font';
 
+function Button({
+  template,
+  onClick,
+  children,
+  disabled,
+  width = `${BUTTON_STYLES[template].SIZE.WIDTH}px`,
+  height = `${BUTTON_STYLES[template].SIZE.HEIGHT}px`,
+  borderStyle = BUTTON_STYLES[template].BORDER_STYLE,
+  fontStyles = {
+    fontSize: BUTTON_STYLES[template].FONT_STYLE.SIZE,
+    fontColor: { initial: BUTTON_STYLES[template].FONT_STYLE.COLOR },
+    fontWeight: BUTTON_STYLES[template].FONT_STYLE.WEIGHT,
+  },
+  backgroundColor,
+}: ButtonProps) {
+  return (
+    <StyledButton
+      className="ellipsis"
+      onClick={onClick}
+      disabled={disabled}
+      width={width}
+      height={height}
+      borderStyle={borderStyle}
+      fontSize={fontStyles.fontSize}
+      fontWeight={fontStyles.fontWeight}
+      fontColor={fontStyles.fontColor}
+      backgroundColor={backgroundColor}
+    >
+      {children}
+    </StyledButton>
+  );
+}
+
+export default Button;
+
 const BUTTON_STYLES = {
   LARGE: {
     SIZE: {
@@ -93,41 +128,6 @@ const BUTTON_STYLES = {
   },
 };
 
-function Button({
-  templateStyle,
-  onClick,
-  children,
-  disabled,
-  width = `${BUTTON_STYLES[templateStyle].SIZE.WIDTH}px`,
-  height = `${BUTTON_STYLES[templateStyle].SIZE.HEIGHT}px`,
-  borderStyle = BUTTON_STYLES[templateStyle].BORDER_STYLE,
-  fontStyles = {
-    fontSize: BUTTON_STYLES[templateStyle].FONT_STYLE.SIZE,
-    fontColor: { initial: BUTTON_STYLES[templateStyle].FONT_STYLE.COLOR },
-    fontWeight: BUTTON_STYLES[templateStyle].FONT_STYLE.WEIGHT,
-  },
-  backgroundColor,
-}: ButtonProps) {
-  return (
-    <StyledButton
-      className="ellipsis"
-      onClick={onClick}
-      disabled={disabled}
-      width={width}
-      height={height}
-      borderStyle={borderStyle}
-      fontSize={fontStyles.fontSize}
-      fontWeight={fontStyles.fontWeight}
-      fontColor={fontStyles.fontColor}
-      backgroundColor={backgroundColor}
-    >
-      {children}
-    </StyledButton>
-  );
-}
-
-export default Button;
-
 const StyledButton = styled.button<{
   width: string;
   height: string;
@@ -165,7 +165,7 @@ const StyledButton = styled.button<{
   }
 `;
 
-type TemplateStyleType = keyof typeof BUTTON_STYLES;
+type TemplateType = keyof typeof BUTTON_STYLES;
 
 interface ButtonProps {
   onClick?: () => void;
@@ -174,7 +174,7 @@ interface ButtonProps {
   width?: string;
   height?: string;
   borderStyle?: string;
-  templateStyle: TemplateStyleType;
+  template: TemplateType;
   fontStyles?: FontStyles;
   backgroundColor: BackGroundColors;
 }
