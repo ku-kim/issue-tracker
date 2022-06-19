@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import IssueLabel from 'components/IssueLabel';
+import Avatar from 'components/common/Avatar';
 import Button from 'components/common/Button';
 import Icon from 'components/common/Icon';
 import Label from 'components/common/Label';
@@ -101,6 +102,11 @@ function Template() {
       <Column>
         <IssueLabel state="open" />
         <IssueLabel state="close" />
+      </Column>
+      <Title>Avatar</Title>
+      <Column>
+        <Avatar size="LARGE" imgSource="https://placeimg.com/44/44/animals" />
+        <Avatar size="SMALL" imgSource="https://placeimg.com/20/20/animals" />
       </Column>
       <Title>Buttons</Title>
       <Column>
