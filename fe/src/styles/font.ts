@@ -4,6 +4,7 @@ const FONT = {
     LARGE: '24px',
     MEDIUM: '18px',
     SMALL: '16px',
+    X_SMALL: '12px',
   },
   WEIGHT: {
     REGULAR: 400,
