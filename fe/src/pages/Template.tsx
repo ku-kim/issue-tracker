@@ -3,6 +3,7 @@ import IssueLabel from 'components/IssueLabel';
 import Avatar from 'components/common/Avatar';
 import Button from 'components/common/Button';
 import Icon from 'components/common/Icon';
+import Input from 'components/common/Input';
 import Label from 'components/common/Label';
 import Logo from 'components/common/Logo';
 import Text from 'components/common/Text';
@@ -108,6 +109,7 @@ function Template() {
         <Avatar size="LARGE" imgSource="https://placeimg.com/44/44/animals" />
         <Avatar size="SMALL" imgSource="https://placeimg.com/20/20/animals" />
       </Column>
+
       <Title>Buttons</Title>
       <Column>
         <Button
@@ -137,12 +139,36 @@ function Template() {
           버튼 MEDIUM_TEXT
         </Button>
       </Column>
+
+      <Title>Input</Title>
+      <Column>
+        <Input
+          placeholder="placeholder"
+          template="MEDIUM"
+          inputId="template-input1"
+          inputLabel="label"
+        />
+        <Input
+          placeholder="placeholder"
+          template="LARGE"
+          inputId="template-input2"
+          inputLabel="label"
+        />
+        <Input
+          placeholder="placeholder"
+          width="500px"
+          template="SMALL"
+          inputId="template-input3"
+          inputLabel="label"
+        />
+      </Column>
     </Wrap>
   );
 }
 
 const Wrap = styled.div`
   display: flex;
+  padding: 20px;
   flex-direction: column;
   gap: 50px;
 `;
