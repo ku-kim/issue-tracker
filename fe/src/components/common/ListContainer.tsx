@@ -24,6 +24,8 @@ const Wrapper = styled.div`
   .list-header {
     width: 100%;
     height: ${SIZE.LIST_CONTAINER.HEADER.HEIGHT}px;
+    display: flex;
+    align-items: center;
     background-color: ${COLOR.GREY[100]};
     font-size: ${SIZE.LIST_CONTAINER.HEADER.FONT_SIZE}px;
     padding: ${SIZE.LIST_CONTAINER.HEADER.PADDING_TOP}px ${SIZE.LIST_CONTAINER.PADDING_LEFT}px;
@@ -34,7 +36,8 @@ const Wrapper = styled.div`
     width: 100%;
     background-color: ${COLOR.WHITE};
 
-    &:nth-child(n) {
+    /* children div tag로 작성 */
+    div:nth-child(n) {
       height: ${SIZE.LIST_CONTAINER.BODY.ITEM_HEIGHT};
       padding: ${SIZE.LIST_CONTAINER.BODY.PADDING_TOP}px ${SIZE.LIST_CONTAINER.PADDING_LEFT}px;
 
