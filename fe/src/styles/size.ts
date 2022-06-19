@@ -13,6 +13,10 @@ const SIZE = {
     WIDTH: 16,
     HEIGHT: 16,
   },
+  AVATAR: {
+    LARGE: 44,
+    SMALL: 20,
+  },
 };
 
 export default SIZE;
