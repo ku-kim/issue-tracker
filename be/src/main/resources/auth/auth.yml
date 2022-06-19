@@ -1,0 +1,11 @@
+# oauth
+oauth:
+  github:
+      client-id: ${GITHUB_CLIENT_ID}
+      client-secret: ${GITHUB_CLIENT_SECRET}
+      authorization-uri: https://github.com/login/oauth/authorize
+      access-token-uri: https://github.com/login/oauth/access_token
+      user-info-uri: https://api.github.com/user
+
+jwt:
+  secret: ${JWT_SECRET_KEY}
