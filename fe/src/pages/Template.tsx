@@ -175,6 +175,16 @@ function Template() {
           </div>
         </ListContainer>
       </Column>
+      <Column>
+        <ListContainer headerItem="ListContainer width 조절 테스트" width="500px">
+          <div>
+            <Text size={FONT.SIZE.MEDIUM}>텍스트1</Text>
+          </div>
+          <div>
+            <Text size={FONT.SIZE.MEDIUM}>텍스트2</Text>
+          </div>
+        </ListContainer>
+      </Column>
     </Wrap>
   );
 }

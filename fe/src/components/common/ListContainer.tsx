@@ -2,9 +2,13 @@ import styled from 'styled-components';
 import { COLOR } from 'styles/color';
 import SIZE from 'styles/size';
 
-function ListContainer({ headerItem, children }: ListContainerProps) {
+function ListContainer({
+  headerItem,
+  children,
+  width = `${SIZE.LIST_CONTAINER.WIDTH}px`,
+}: ListContainerProps) {
   return (
-    <Wrapper>
+    <Wrapper width={width}>
       <div className="list-header">{headerItem}</div>
       <div className="list-body">{children}</div>
     </Wrapper>
@@ -15,8 +19,8 @@ export default ListContainer;
 
 const BORDER_COLOR = COLOR.GREY[300];
 
-const Wrapper = styled.div`
-  width: ${SIZE.LIST_CONTAINER.WIDTH}px;
+const Wrapper = styled.div<{ width: string }>`
+  width: ${({ width }) => width};
   border-radius: ${SIZE.LIST_CONTAINER.BORDER_RADIUS}px;
   border: 1px solid ${BORDER_COLOR};
   overflow: hidden;
@@ -48,6 +52,7 @@ const Wrapper = styled.div`
   }
 `;
 interface ListContainerProps {
+  width?: string;
   headerItem: React.ReactNode;
   children: React.ReactNode;
 }
