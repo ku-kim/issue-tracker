@@ -32,7 +32,7 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   width: fit-content;
-  height: 32px;
+  height: ${SIZE.DROPDOWN_BTN.HEIGHT}px;
 `;
 
 const Button = styled.button`
