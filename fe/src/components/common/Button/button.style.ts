@@ -1,41 +1,7 @@
-import styled, { css } from 'styled-components';
+import { css } from 'styled-components';
 import { COLOR } from 'styles/color';
 import FONT from 'styles/font';
-
-function Button({
-  template,
-  onClick,
-  children,
-  disabled,
-  width = `${BUTTON_STYLES[template].SIZE.WIDTH}px`,
-  height = `${BUTTON_STYLES[template].SIZE.HEIGHT}px`,
-  borderStyle = BUTTON_STYLES[template].BORDER_STYLE,
-  fontStyles = {
-    fontSize: BUTTON_STYLES[template].FONT_STYLE.SIZE,
-    fontColor: { initial: BUTTON_STYLES[template].FONT_STYLE.COLOR },
-    fontWeight: BUTTON_STYLES[template].FONT_STYLE.WEIGHT,
-  },
-  backgroundColor,
-}: ButtonProps) {
-  return (
-    <StyledButton
-      className="ellipsis"
-      onClick={onClick}
-      disabled={disabled}
-      width={width}
-      height={height}
-      borderStyle={borderStyle}
-      fontSize={fontStyles.fontSize}
-      fontWeight={fontStyles.fontWeight}
-      fontColor={fontStyles.fontColor}
-      backgroundColor={backgroundColor}
-    >
-      {children}
-    </StyledButton>
-  );
-}
-
-export default Button;
+// import { BackGroundColors, FontColors } from './buttonTypes';
 
 const BUTTON_STYLES = {
   LARGE: {
@@ -128,7 +94,7 @@ const BUTTON_STYLES = {
   },
 };
 
-const StyledButton = styled.button<{
+const buttonStyle = css<{
   width: string;
   height: string;
   borderStyle?: string;
@@ -165,9 +131,11 @@ const StyledButton = styled.button<{
   }
 `;
 
-type TemplateType = keyof typeof BUTTON_STYLES;
+export { BUTTON_STYLES, buttonStyle };
 
-interface ButtonProps {
+export type TemplateType = keyof typeof BUTTON_STYLES;
+
+export interface ButtonProps {
   onClick?: () => void;
   children: React.ReactNode;
   disabled?: boolean;
@@ -179,14 +147,14 @@ interface ButtonProps {
   backgroundColor: BackGroundColors;
 }
 
-interface FontColors {
+export interface FontColors {
   initial: string;
   active?: string;
   hover?: string;
   disabled?: string;
 }
 
-interface FontStyles {
+export interface FontStyles {
   fontSize?: string;
   fontColor?: FontColors;
   fontWeight?: number;
