@@ -1,7 +1,6 @@
 import { css } from 'styled-components';
 import { COLOR } from 'styles/color';
 import FONT from 'styles/font';
-// import { BackGroundColors, FontColors } from './buttonTypes';
 
 const BUTTON_STYLES = {
   LARGE: {
