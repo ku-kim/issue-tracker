@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import IssueLabel from 'components/IssueLabel';
 import Avatar from 'components/common/Avatar';
 import Button from 'components/common/Button';
+import DropdownBtn from 'components/common/DropdownBtn';
 import Icon from 'components/common/Icon';
 import Input from 'components/common/Input';
 import Label from 'components/common/Label';
@@ -16,8 +17,8 @@ function Template() {
     <Wrap>
       <Title>Logo</Title>
       <Column>
-        <Logo size="medium" />
-        <Logo size="large" />
+        <Logo size="MEDIUM" />
+        <Logo size="LARGE" />
       </Column>
       <Title>Text Regular</Title>
       <Column>
@@ -185,6 +186,16 @@ function Template() {
           </div>
         </ListContainer>
       </Column>
+
+      <Title>DropdownButton</Title>
+      <Row style={{ gap: '300px' }}>
+        <DropdownBtn name="Filter" startLocation="LEFT">
+          <div>이러한 리스트</div>
+        </DropdownBtn>
+        <DropdownBtn name="Filter" startLocation="RIGHT">
+          <div>이러한 리스트</div>
+        </DropdownBtn>
+      </Row>
     </Wrap>
   );
 }

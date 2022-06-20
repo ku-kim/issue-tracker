@@ -6,6 +6,7 @@ import { ReactComponent as CheckBoxDisable } from 'assets/check-box-disable.svg'
 import { ReactComponent as CheckBoxInitial } from 'assets/check-box-initial.svg';
 import { ReactComponent as CheckOffCircle } from 'assets/check-off-circle.svg';
 import { ReactComponent as CheckOnCircle } from 'assets/check-on-circle.svg';
+import { ReactComponent as Down } from 'assets/down.svg';
 import { ReactComponent as Edit } from 'assets/edit.svg';
 import { ReactComponent as Logo } from 'assets/logo.svg';
 import { ReactComponent as Milestone } from 'assets/milestone.svg';
@@ -29,6 +30,7 @@ const iconComponents = {
   checkBoxInitial: CheckBoxInitial,
   checkOffCircle: CheckOffCircle,
   checkOnCircle: CheckOnCircle,
+  down: Down,
   edit: Edit,
   milestone: Milestone,
   paperclip: Paperclip,
