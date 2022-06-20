@@ -9,7 +9,7 @@ function DropdownBtn({ name, children, startLocation }: DropdownBtnProps) {
   const [isClicked, setIsClicked] = useState(false);
   return (
     <Wrapper>
-      <Btn className="rumka" onClick={handleClickedBtn}>
+      <Button onClick={handleClickedBtn}>
         {name}
         <Icon
           icon="down"
@@ -17,17 +17,13 @@ function DropdownBtn({ name, children, startLocation }: DropdownBtnProps) {
           height={SIZE.DOWN_BTN.HEIGHT}
           stroke="inherit"
         />
-      </Btn>
+      </Button>
       <Child startLocation={startLocation}>{isClicked && children}</Child>
     </Wrapper>
   );
 
   function handleClickedBtn() {
-    if (isClicked) {
-      setIsClicked(false);
-      return;
-    }
-    setIsClicked(true);
+    setIsClicked(!isClicked);
   }
 }
 
@@ -39,7 +35,7 @@ const Wrapper = styled.div`
   height: 32px;
 `;
 
-const Btn = styled.button<any>`
+const Button = styled.button<any>`
   display: flex;
   align-items: center;
   gap: 7px;
