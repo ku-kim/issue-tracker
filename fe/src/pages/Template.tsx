@@ -1,8 +1,14 @@
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import IssueLabel from 'components/IssueLabel';
 import Avatar from 'components/common/Avatar';
+<<<<<<< HEAD
 import Button from 'components/common/Button';
 import DropdownBtn from 'components/common/DropdownBtn';
+=======
+import Button from 'components/common/Button/Button';
+import ButtonLink from 'components/common/Button/ButtonLink';
+>>>>>>> 5251835 (:sparkles: ButtonLink 구현 및 Button 리팩토링)
 import Icon from 'components/common/Icon';
 import Input from 'components/common/Input';
 import Label from 'components/common/Label';
@@ -196,6 +202,17 @@ function Template() {
           <div>이러한 리스트</div>
         </DropdownBtn>
       </Row>
+      <Column>
+        <Link to="/">하이</Link>
+        <ButtonLink
+          template="MEDIUM_STANDARD"
+          backgroundColor={{ initial: COLOR.GREEN[200] }}
+          width="300px"
+          to="/"
+        >
+          ButtonLink
+        </ButtonLink>
+      </Column>
     </Wrap>
   );
 }
