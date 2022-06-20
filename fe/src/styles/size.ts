@@ -21,6 +21,9 @@ const SIZE = {
     WIDTH: 8,
     HEIGHT: 4,
   },
+  DROPDOWN_BTN: {
+    HEIGHT: 32,
+  },
   INPUT: {
     LARGE: {
       WIDTH: 340,
