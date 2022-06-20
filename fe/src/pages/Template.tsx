@@ -110,7 +110,7 @@ function Template() {
       </Column>
       <Title>Avatar</Title>
       <Column>
-        <Avatar size="LARGE" imgSource="https://placeimg.com/44/44/animals" />
+        <Avatar size="LARGE" imgSource="null" />
         <Avatar size="SMALL" imgSource="https://placeimg.com/20/20/animals" />
       </Column>
 
