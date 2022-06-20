@@ -35,7 +35,7 @@ const Wrapper = styled.div`
   height: 32px;
 `;
 
-const Button = styled.button<any>`
+const Button = styled.button`
   display: flex;
   align-items: center;
   gap: 7px;
@@ -45,10 +45,7 @@ const Button = styled.button<any>`
   font-size: ${FONT.SIZE.SMALL};
   font-weight: ${FONT.WEIGHT.BOLD};
   color: ${COLOR.GREY[500]};
-
-  color: ${COLOR.GREY[500]};
   stroke: ${COLOR.GREY[500]};
-
   &:hover {
     color: ${COLOR.GREY[600]};
     stroke: ${COLOR.GREY[600]};
