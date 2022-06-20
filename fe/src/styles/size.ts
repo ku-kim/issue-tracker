@@ -17,6 +17,10 @@ const SIZE = {
     LARGE: 44,
     SMALL: 20,
   },
+  DOWN_BTN: {
+    WIDTH: 8,
+    HEIGHT: 4,
+  },
   INPUT: {
     LARGE: {
       WIDTH: 340,
