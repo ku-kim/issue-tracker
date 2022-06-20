@@ -3,9 +3,11 @@ import { COLOR } from 'styles/color';
 import SIZE from 'styles/size';
 
 function Avatar({ size, imgSource }: { size: AvatarTemplateType; imgSource: string }) {
+  const hasImgSource = imgSource !== 'null';
+
   return (
     <Div size={size}>
-      <img src={imgSource} alt="회원 아바타 이미지" width="100%" height="100%" />
+      {hasImgSource && <img src={imgSource} alt="회원 아바타 이미지" width="100%" height="100%" />}
     </Div>
   );
 }
