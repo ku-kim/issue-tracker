@@ -1,6 +1,13 @@
+import styled from 'styled-components';
+import FilterBar from 'components/FilterBar';
 import IssueItem from 'components/IssueItem';
 import BlankMessage from 'components/common/BlankMessage';
+import ButtonLink from 'components/common/Button/ButtonLink';
+import Header from 'components/common/Header';
+import Icon from 'components/common/Icon';
 import ListContainer from 'components/common/ListContainer';
+import Tabs from 'components/common/Tabs';
+import { COLOR } from 'styles/color';
 
 const ISSUES: IssueType[] = [
   { id: '1234', number: 1, title: '비비 천재 1', author: '비비', milestone: '마일스톤 1' },
@@ -18,7 +25,21 @@ type IssueType = {
 
 function IssueList() {
   return (
-    <main>
+    <main className="wrap">
+      <Header avatarUrl="null" />
+      <MainHeader>
+        <FilterBar placeholder="Search all Issues" />
+        <div className="button-area">
+          <Tabs activeItem="LABEL" />
+          <ButtonLink
+            template="SMALL_STANDARD"
+            backgroundColor={{ initial: COLOR.BLUE[200], hover: COLOR.BLUE[300] }}
+            to="/"
+          >
+            <Icon icon="plus" stroke={COLOR.WHITE} /> 이슈작성
+          </ButtonLink>
+        </div>
+      </MainHeader>
       <ListContainer headerItem={<div>헤더</div>}>
         {ISSUES.length ? (
           ISSUES.map(({ id, number, title, author, milestone }) => (
@@ -37,5 +58,19 @@ function IssueList() {
     </main>
   );
 }
+
+const MainHeader = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 24px;
+
+  .button-area {
+    display: flex;
+
+    & > :not(:last-child) {
+      margin-right: 16px;
+    }
+  }
+`;
 
 export default IssueList;
