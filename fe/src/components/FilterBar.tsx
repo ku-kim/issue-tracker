@@ -1,0 +1,88 @@
+import { useState } from 'react';
+import styled from 'styled-components';
+import { COLOR } from 'styles/color';
+import FONT from 'styles/font';
+import SIZE from 'styles/size';
+import DropdownBtn from './common/DropdownBtn';
+import Icon from './common/Icon';
+
+function FilterBar({ placeholder }: { placeholder: string }) {
+  const [isFocused, setIsFocused] = useState(false);
+  const [inputText, setInputText] = useState('');
+
+  const onChange = ({ target }: { target: HTMLInputElement }) => {
+    setInputText(target.value);
+  };
+
+  return (
+    <Wrapper isFocused={isFocused}>
+      <DropdownBtn
+        name="필터"
+        startLocation="LEFT"
+        width={`${SIZE.FILTER_BAR.WIDTH}px`}
+        height="100%"
+        gap={SIZE.FILTER_BAR.GAP}
+        className="filter-dropdown"
+      >
+        필터 아이템
+      </DropdownBtn>
+
+      <div className="input-area">
+        <Icon icon="search" stroke="inherit" />
+        <input
+          type="text"
+          className="input-text"
+          placeholder={placeholder}
+          onFocus={() => setIsFocused(true)}
+          onBlur={() => setIsFocused(false)}
+          onChange={onChange}
+          value={inputText}
+        />
+      </div>
+    </Wrapper>
+  );
+}
+
+export default FilterBar;
+
+const Wrapper = styled.div<{ isFocused: boolean }>`
+  width: 601px;
+  height: 40px;
+  display: flex;
+  border-radius: 11px;
+  border: 1px solid ${({ isFocused }) => (isFocused ? COLOR.BLACK : COLOR.GREY[300])};
+  background-color: ${({ isFocused }) => (isFocused ? COLOR.WHITE : COLOR.GREY[300])};
+  overflow: hidden;
+
+  .filter-dropdown:hover {
+    background-color: ${COLOR.GREY[300]};
+  }
+
+  .input-area {
+    width: 472px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    stroke: ${COLOR.GREY[400]};
+    background-color: ${({ isFocused }) => (isFocused ? COLOR.WHITE : COLOR.GREY[200])};
+    border-left: 1px solid ${COLOR.GREY[300]};
+    stroke: ${({ isFocused }) => (isFocused ? COLOR.GREY[500] : COLOR.GREY[400])};
+
+    .input-text {
+      width: 400px;
+      height: 28px;
+      font-size: ${FONT.SIZE.SMALL};
+      margin-left: 10px;
+      background-color: transparent;
+
+      &::placeholder {
+        color: ${COLOR.GREY[400]};
+      }
+
+      &:focus {
+        color: ${COLOR.BLACK};
+      }
+    }
+  }
+`;
