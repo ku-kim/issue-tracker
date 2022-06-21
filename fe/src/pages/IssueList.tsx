@@ -16,6 +16,8 @@ const ISSUES: IssueType[] = [
   { id: '3456', number: 3, title: '비비 천재 3', author: '비비', milestone: '마일스톤 3' },
 ];
 
+const isEmptyIssue = ISSUES.length === 0;
+
 type IssueType = {
   id: string;
   number: number;
@@ -42,7 +44,7 @@ function IssueList() {
         </div>
       </MainHeader>
       <ListContainer headerItem={<div>헤더</div>}>
-        {ISSUES.length ? (
+        {(!isEmptyIssue &&
           ISSUES.map(({ id, number, title, author, milestone }) => (
             <IssueItem
               key={id}
@@ -51,10 +53,7 @@ function IssueList() {
               author={author}
               milestone={milestone}
             />
-          ))
-        ) : (
-          <BlankMessage text="등록된 이슈가 없습니다" />
-        )}
+          ))) || <BlankMessage text="등록된 이슈가 없습니다" />}
       </ListContainer>
     </main>
   );
