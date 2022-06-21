@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import FONT from 'styles/font';
 
 function Label({ backgroundColor, color, children, borderColor }: LabelProps) {
   return (
@@ -14,6 +15,7 @@ const Wrap = styled.div<WrapProps>`
   border-radius: 30px;
   background-color: ${({ backgroundColor }) => backgroundColor};
   color: ${({ color }) => color};
+  font-size: ${FONT.SIZE.X_SMALL};
   border: ${({ borderColor }) => borderColor && `1px solid ${borderColor}`};
 `;
 
