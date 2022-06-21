@@ -15,10 +15,11 @@ function Button({
     fontWeight: BUTTON_STYLES[template].FONT_STYLE.WEIGHT,
   },
   backgroundColor,
+  className,
 }: ButtonProps) {
   return (
     <CustomButton
-      className="ellipsis"
+      className={`ellipsis ${className}`}
       onClick={onClick}
       disabled={disabled}
       width={width}

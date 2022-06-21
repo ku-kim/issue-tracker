@@ -15,11 +15,12 @@ function ButtonLink({
   },
   backgroundColor,
   to,
+  className,
   ...props
 }: ButtonProps & LinkProps) {
   return (
     <CustomButtonLink
-      className="ellipsis"
+      className={`ellipsis ${className}`}
       width={width}
       height={height}
       borderStyle={borderStyle}
@@ -50,6 +51,8 @@ const CustomButtonLink = styled(Link).withConfig({
     ].includes(prop),
 })`
   ${buttonStyle};
-  text-align: center;
-  line-height: ${({ height }) => height};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
 `;
