@@ -7,6 +7,7 @@ import DropdownBtn from 'components/common/DropdownBtn';
 import Icon from 'components/common/Icon';
 import Input from 'components/common/Input';
 import Label from 'components/common/Label';
+import LinearGraph from 'components/common/LinearGraph';
 import ListContainer from 'components/common/ListContainer';
 import Logo from 'components/common/Logo';
 import Text from 'components/common/Text';
@@ -211,6 +212,25 @@ function Template() {
         >
           ButtonLink
         </ButtonLink>
+      </Column>
+
+      <Column>
+        <Title>Linear Graph</Title>
+
+        <Text>등록된 Issue가 0개 인경우</Text>
+        <LinearGraph totalCount={0} doneCount={0} />
+
+        <Text>1 / 5 DONE</Text>
+        <LinearGraph totalCount={5} doneCount={1} />
+
+        <Text>5 / 10 DONE</Text>
+        <LinearGraph totalCount={10} doneCount={5} />
+
+        <Text>3 / 4 DONE</Text>
+        <LinearGraph totalCount={4} doneCount={3} />
+
+        <Text>4 / 4 DONE</Text>
+        <LinearGraph totalCount={4} doneCount={4} />
       </Column>
     </Wrap>
   );
