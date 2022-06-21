@@ -19,7 +19,7 @@ function Button({
 }: ButtonProps) {
   return (
     <CustomButton
-      className={`ellipsis ${className}`}
+      className={`ellipsis flex-center ${className}`}
       onClick={onClick}
       disabled={disabled}
       width={width}

@@ -45,7 +45,7 @@ function LabelList() {
   return (
     <main className="wrap">
       <Header avatarUrl="null" />
-      <SubNav location="LABEL" linkTo="/" />
+      <SubNav location="LABEL" />
       <ListContainer
         headerItem={
           <Text weight={FONT.WEIGHT.BOLD} color={COLOR.GREY[500]}>

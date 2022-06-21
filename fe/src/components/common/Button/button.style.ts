@@ -109,6 +109,7 @@ const buttonStyle = css<{
   font-size: ${({ fontSize }) => fontSize};
   font-weight: ${({ fontWeight }) => fontWeight};
   color: ${({ fontColor }) => fontColor?.initial};
+  gap: 10px;
 
   &:not(:disabled):hover {
     background-color: ${({ backgroundColor }) => backgroundColor.hover};
