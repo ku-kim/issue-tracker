@@ -40,9 +40,8 @@ const Wrapper = styled.div<{ width: string }>`
     width: 100%;
     background-color: ${COLOR.WHITE};
 
-    /* children div tag로 작성 */
-    div:nth-child(n) {
-      height: ${SIZE.LIST_CONTAINER.BODY.ITEM_HEIGHT};
+    > :nth-child(n) {
+      height: ${SIZE.LIST_CONTAINER.BODY.ITEM_HEIGHT}px;
       padding: ${SIZE.LIST_CONTAINER.BODY.PADDING_TOP}px ${SIZE.LIST_CONTAINER.PADDING_LEFT}px;
 
       &:not(:last-child) {

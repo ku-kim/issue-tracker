@@ -9,6 +9,10 @@ const SIZE = {
       HEIGHT: 40,
     },
   },
+  CHECKBOX: {
+    WIDTH: 16,
+    HEIGHT: 16,
+  },
   ICON: {
     WIDTH: 16,
     HEIGHT: 16,

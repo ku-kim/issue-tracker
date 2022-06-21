@@ -10,7 +10,7 @@ function Label({ backgroundColor, color, children, borderColor }: LabelProps) {
 
 const Wrap = styled.div<WrapProps>`
   width: fit-content;
-  padding: 10px 16px;
+  padding: 8px 16px;
   border-radius: 30px;
   background-color: ${({ backgroundColor }) => backgroundColor};
   color: ${({ color }) => color};
