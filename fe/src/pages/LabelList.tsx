@@ -4,6 +4,9 @@ import BlankMessage from 'components/common/BlankMessage';
 import Header from 'components/common/Header';
 import Label from 'components/common/Label';
 import ListContainer from 'components/common/ListContainer';
+import Text from 'components/common/Text';
+import { COLOR } from 'styles/color';
+import FONT from 'styles/font';
 
 const LABEL_MOCK_DATA: LabelItemProps[] = [
   {
@@ -35,18 +38,25 @@ const LABEL_MOCK_DATA: LabelItemProps[] = [
   },
 ];
 
-const isEmptyData = LABEL_MOCK_DATA.length === 0;
+const dataCount = LABEL_MOCK_DATA.length;
+const isEmptyData = dataCount === 0;
 
 function LabelList() {
   return (
     <main className="wrap">
       <Header avatarUrl="null" />
       <SubNav location="LABEL" linkTo="/" />
-      <ListContainer headerItem={<div>헤더</div>}>
+      <ListContainer
+        headerItem={
+          <Text weight={FONT.WEIGHT.BOLD} color={COLOR.GREY[500]}>
+            {dataCount}개의 레이블
+          </Text>
+        }
+      >
         {(!isEmptyData &&
           LABEL_MOCK_DATA.map(({ id, label, desc }) => (
             <LabelItem id={id} key={id} label={label} desc={desc} />
-          ))) || <BlankMessage text="등록된 라벨이 없습니다" />}
+          ))) || <BlankMessage text="등록된 이 없습니다" />}
       </ListContainer>
     </main>
   );
