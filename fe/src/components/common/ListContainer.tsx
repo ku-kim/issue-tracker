@@ -23,6 +23,7 @@ const Wrapper = styled.div<{ width: string }>`
   width: ${({ width }) => width};
   border-radius: ${SIZE.LIST_CONTAINER.BORDER_RADIUS}px;
   border: 1px solid ${BORDER_COLOR};
+  margin-bottom: 27px;
   overflow: hidden;
 
   .list-header {
@@ -41,7 +42,7 @@ const Wrapper = styled.div<{ width: string }>`
     background-color: ${COLOR.WHITE};
 
     > :nth-child(n) {
-      height: ${SIZE.LIST_CONTAINER.BODY.ITEM_HEIGHT}px;
+      min-height: ${SIZE.LIST_CONTAINER.BODY.ITEM_HEIGHT}px;
       padding: ${SIZE.LIST_CONTAINER.BODY.PADDING_TOP}px ${SIZE.LIST_CONTAINER.PADDING_LEFT}px;
 
       &:not(:last-child) {
