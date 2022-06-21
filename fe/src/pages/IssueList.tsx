@@ -8,6 +8,7 @@ import Icon from 'components/common/Icon';
 import ListContainer from 'components/common/ListContainer';
 import Tabs from 'components/common/Tabs';
 import { COLOR } from 'styles/color';
+import mainHeaderStyle from 'styles/mainHeaderStyle';
 
 const ISSUES: IssueType[] = [
   { id: '1234', number: 1, title: '비비 천재 1', author: '비비', milestone: '마일스톤 1' },
@@ -60,9 +61,7 @@ function IssueList() {
 }
 
 const MainHeader = styled.div`
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 24px;
+  ${mainHeaderStyle};
 
   .button-area {
     display: flex;
