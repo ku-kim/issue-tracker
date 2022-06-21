@@ -5,11 +5,20 @@ import FONT from 'styles/font';
 import SIZE from 'styles/size';
 import Icon from './Icon';
 
-function DropdownBtn({ name, children, startLocation }: DropdownBtnProps) {
+function DropdownBtn({
+  name,
+  children,
+  startLocation,
+  gap = SIZE.DROPDOWN_BTN.GAP,
+  width = 'fit-content',
+  height = `${SIZE.DROPDOWN_BTN.HEIGHT}px`,
+  className,
+}: DropdownBtnProps) {
   const [isClicked, setIsClicked] = useState(false);
+
   return (
-    <Wrapper>
-      <Button onClick={handleClickedBtn}>
+    <Wrapper width={width} height={height} className={className}>
+      <Button onClick={handleClickedBtn} gap={gap}>
         {name}
         <Icon
           icon="down"
@@ -27,21 +36,23 @@ function DropdownBtn({ name, children, startLocation }: DropdownBtnProps) {
   }
 }
 
-const Wrapper = styled.div`
+const Wrapper = styled.div<{ width: string; height: string }>`
   position: relative;
   display: flex;
+  align-items: center;
   flex-direction: column;
-  width: fit-content;
-  height: ${SIZE.DROPDOWN_BTN.HEIGHT}px;
+  width: ${({ width }) => width};
+  height: ${({ height }) => height};
 `;
 
-const Button = styled.button`
+const Button = styled.button<{ gap: number }>`
   display: flex;
   align-items: center;
-  gap: 7px;
+  gap: ${({ gap }) => gap}px;
   width: fit-content;
+  height: 100%;
   border: 0;
-  background-color: ${COLOR.WHITE};
+  background-color: transparent;
   font-size: ${FONT.SIZE.SMALL};
   font-weight: ${FONT.WEIGHT.BOLD};
   color: ${COLOR.GREY[500]};
@@ -65,6 +76,10 @@ type DropdownBtnProps = {
   name: string;
   children: React.ReactNode;
   startLocation: 'LEFT' | 'RIGHT';
+  gap?: number;
+  width?: string;
+  height?: string;
+  className?: string;
 };
 
 export default DropdownBtn;

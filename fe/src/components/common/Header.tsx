@@ -18,4 +18,5 @@ const Wrapper = styled.header`
   height: ${SIZE.HEADER.HEIGHT}px;
   display: flex;
   justify-content: space-between;
+  margin-top: 27px;
 `;
