@@ -27,17 +27,20 @@ function FilterBar({ placeholder }: { placeholder: string }) {
         필터 아이템
       </DropdownBtn>
 
-      <div className="input-area">
-        <Icon icon="search" stroke="inherit" />
-        <input
-          type="text"
-          className="input-text"
-          placeholder={placeholder}
-          onFocus={() => setIsFocused(true)}
-          onBlur={() => setIsFocused(false)}
-          onChange={onChange}
-          value={inputText}
-        />
+      <div className="input-area flex-center">
+        <label htmlFor="filter-bar-input" className="flex-center">
+          <Icon icon="search" stroke="inherit" />
+          <input
+            type="text"
+            className="input-text"
+            placeholder={placeholder}
+            onFocus={() => setIsFocused(true)}
+            onBlur={() => setIsFocused(false)}
+            onChange={onChange}
+            value={inputText}
+            id="filter-bar-input"
+          />
+        </label>
       </div>
     </Wrapper>
   );
@@ -61,9 +64,6 @@ const Wrapper = styled.div<{ isFocused: boolean }>`
   .input-area {
     width: 472px;
     height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     stroke: ${COLOR.GREY[400]};
     background-color: ${({ isFocused }) => (isFocused ? COLOR.WHITE : COLOR.GREY[200])};
     border-left: 1px solid ${COLOR.GREY[300]};

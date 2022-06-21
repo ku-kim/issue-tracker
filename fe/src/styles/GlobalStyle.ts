@@ -44,6 +44,12 @@ const GlobalStyle = createGlobalStyle`
     max-width: ${SIZE.WIDTH}px;
     margin: 0 auto;
   }
+
+  .flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 `;
 
 export default GlobalStyle;
