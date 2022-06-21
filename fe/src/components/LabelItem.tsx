@@ -47,7 +47,7 @@ function LabelItem({ id, label, desc }: LabelItemProps) {
 
 export default LabelItem;
 
-type LabelItemProps = {
+export type LabelItemProps = {
   id: string;
   label: JSX.Element;
   desc: string;
