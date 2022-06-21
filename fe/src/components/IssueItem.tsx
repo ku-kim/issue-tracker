@@ -15,7 +15,7 @@ function IssueItem({ number, title, author, milestone }: IssueItemProps) {
       <Contents>
         <Title>
           <Icon icon="alertCircle" stroke={COLOR.BLUE[200]} fill={COLOR.BLUE[100]} />
-          <Text size={FONT.SIZE.MEDIUM} weight={FONT.WEIGHT.BOLD}>
+          <Text size={FONT.SIZE.MEDIUM} weight={FONT.WEIGHT.BOLD} className="ellipsis">
             {title}
           </Text>
           <Label color={COLOR.WHITE} backgroundColor={COLOR.BLUE[300]}>

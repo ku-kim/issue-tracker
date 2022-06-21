@@ -3,12 +3,15 @@ import { COLOR } from 'styles/color';
 import FONT from 'styles/font';
 import ButtonLink from './common/Button/ButtonLink';
 import Icon from './common/Icon';
+import Text from './common/Text';
 
 function LabelItem({ id, label, desc }: LabelItemProps) {
   return (
     <Wrapper>
       <div className="label-area">{label}</div>
-      <div className="desc-area">{desc}</div>
+      <Text className="ellipsis" color={COLOR.GREY[500]}>
+        {desc}
+      </Text>
       <div className="button-area">
         <ButtonLink
           template="SMALL_TEXT"
@@ -57,11 +60,6 @@ const Wrapper = styled.div`
   display: grid;
   grid-template-columns: 2fr 5fr 2fr;
   align-items: center;
-
-  .desc-area {
-    font-size: ${FONT.SIZE.SMALL};
-    color: ${COLOR.GREY[500]};
-  }
 
   .button-area {
     display: flex;

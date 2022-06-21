@@ -6,10 +6,11 @@ function Text({
   size = FONT.SIZE.SMALL,
   weight = FONT.WEIGHT.REGULAR,
   color = COLOR.BLACK,
+  className = '',
   children,
 }: TextProps) {
   return (
-    <Span size={size} weight={weight} color={color}>
+    <Span size={size} weight={weight} color={color} className={className}>
       {children}
     </Span>
   );
@@ -19,6 +20,7 @@ type TextProps = {
   size?: string;
   weight?: number;
   color?: string;
+  className?: string;
   children: React.ReactNode;
 };
 
