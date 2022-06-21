@@ -34,7 +34,7 @@ function Tabs({ activeItem = null }: { activeItem?: ActiveItemType }) {
 
 export default Tabs;
 
-type ActiveItemType = 'LABEL' | 'MILESTONE' | null;
+export type ActiveItemType = 'LABEL' | 'MILESTONE' | null;
 
 const tabsButtonBackGroundColors = { initial: 'transparent', hover: COLOR.GREY[200] };
 
