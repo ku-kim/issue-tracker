@@ -1,21 +1,21 @@
 import styled from 'styled-components';
 import { COLOR } from 'styles/color';
 import mainHeaderStyle from 'styles/mainHeaderStyle';
-import ButtonLink from './common/Button/ButtonLink';
+import Button from './common/Button/Button';
 import Icon from './common/Icon';
 import Tabs, { ActiveItemType } from './common/Tabs';
 
-function SubNav({ location, linkTo }: SubNavProps) {
+function SubNav({ location }: SubNavProps) {
   return (
     <MainHeader>
       <Tabs activeItem={location} />
-      <ButtonLink
+      <Button
         template="SMALL_STANDARD"
         backgroundColor={{ initial: COLOR.BLUE[200], hover: COLOR.BLUE[300] }}
-        to={linkTo}
+        onClick={() => console.log(location)}
       >
         <Icon icon="plus" stroke={COLOR.WHITE} /> 추가
-      </ButtonLink>
+      </Button>
     </MainHeader>
   );
 }
@@ -28,5 +28,4 @@ const MainHeader = styled.div`
 
 type SubNavProps = {
   location: ActiveItemType;
-  linkTo: string;
 };

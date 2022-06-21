@@ -20,7 +20,7 @@ function ButtonLink({
 }: ButtonProps & LinkProps) {
   return (
     <CustomButtonLink
-      className={`ellipsis ${className}`}
+      className={`ellipsis flex-center ${className}`}
       width={width}
       height={height}
       borderStyle={borderStyle}
@@ -51,8 +51,4 @@ const CustomButtonLink = styled(Link).withConfig({
     ].includes(prop),
 })`
   ${buttonStyle};
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
 `;
