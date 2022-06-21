@@ -29,7 +29,7 @@ const BUTTON_STYLES = {
       WEIGHT: FONT.WEIGHT.BOLD,
     },
     BORDER_STYLE: `
-      border-radius: 20px;
+      border-radius: 11px;
       border: 0;
     `,
   },
@@ -144,6 +144,7 @@ export interface ButtonProps {
   template: TemplateType;
   fontStyles?: FontStyles;
   backgroundColor: BackGroundColors;
+  className?: string;
 }
 
 export interface FontColors {
