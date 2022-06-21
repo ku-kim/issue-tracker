@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import IssueLabel from 'components/IssueLabel';
 import Avatar from 'components/common/Avatar';
@@ -128,7 +127,9 @@ function Template() {
           backgroundColor={{ initial: COLOR.BLUE[200] }}
           width="300px"
         >
-          버튼 MEDIUM_STANDARD
+          <span className="ellipsis">
+            버튼 MEDIUM_STANDARD버튼 MEDIUM_STANDARD버튼 MEDIUM_STANDARD버튼 MEDIUM_STANDARD
+          </span>
         </Button>
         <Button
           template="MEDIUM_TEXT"
@@ -140,7 +141,7 @@ function Template() {
           }}
           disabled
         >
-          버튼 MEDIUM_TEXT
+          <span className="ellipsis">버튼 MEDIUM_TEXT</span>
         </Button>
       </Column>
 
@@ -198,8 +199,10 @@ function Template() {
           <div>이러한 리스트</div>
         </DropdownBtn>
       </Row>
+
       <Column>
-        <Link to="/">하이</Link>
+        <Title>ButtonLink</Title>
+
         <ButtonLink
           template="MEDIUM_STANDARD"
           backgroundColor={{ initial: COLOR.GREEN[200] }}

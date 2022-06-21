@@ -15,12 +15,12 @@ function ButtonLink({
   },
   backgroundColor,
   to,
-  className,
+  className = '',
   ...props
 }: ButtonProps & LinkProps) {
   return (
     <CustomButtonLink
-      className={`ellipsis flex-center ${className}`}
+      className={`flex-center ellipsis ${className}`}
       width={width}
       height={height}
       borderStyle={borderStyle}
