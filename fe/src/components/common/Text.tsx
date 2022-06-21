@@ -19,7 +19,7 @@ type TextProps = {
   size?: string;
   weight?: number;
   color?: string;
-  children: string;
+  children: React.ReactNode;
 };
 
 type SpanProps = Omit<TextProps, 'children'>;
