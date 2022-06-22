@@ -13,7 +13,7 @@ function Tabs({ activeItem = null }: { activeItem?: ActiveItemType }) {
         width="160px"
         height="40px"
         className={`tab-item ${activeItem === 'LABEL' ? 'active' : ''}`}
-        to="/"
+        to="/labelList"
       >
         <Icon icon="tag" stroke="inherit" /> 레이블 <span className="count">(0)</span>
       </ButtonLink>
@@ -23,7 +23,7 @@ function Tabs({ activeItem = null }: { activeItem?: ActiveItemType }) {
         width="160px"
         height="40px"
         className={`tab-item ${activeItem === 'MILESTONE' ? 'active' : ''}`}
-        to="/"
+        to="/milestoneList"
       >
         <Icon icon="milestone" stroke="transparent" fill="inherit" /> 마일스톤
         <span className="count">(0)</span>
