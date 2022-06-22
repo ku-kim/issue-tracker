@@ -5,7 +5,7 @@ import FONT from 'styles/font';
 const BUTTON_STYLES = {
   LARGE: {
     SIZE: {
-      WIDTH: 240,
+      WIDTH: 340,
       HEIGHT: 64,
     },
     FONT_STYLE: {
