@@ -39,7 +39,7 @@ const LABEL_MOCK_DATA: LabelItemProps[] = [
 ];
 
 const dataCount = LABEL_MOCK_DATA.length;
-const isEmptyData = dataCount === 0;
+const hasData = dataCount > 0;
 
 function LabelList() {
   return (
@@ -53,7 +53,7 @@ function LabelList() {
           </Text>
         }
       >
-        {(!isEmptyData &&
+        {(!hasData &&
           LABEL_MOCK_DATA.map(({ id, label, desc }) => (
             <LabelItem id={id} key={id} label={label} desc={desc} />
           ))) || <BlankMessage text="등록된 이 없습니다" />}
