@@ -5,7 +5,7 @@ import SIZE from 'styles/size';
 
 function Header({ avatarUrl }: { avatarUrl: string }) {
   return (
-    <Wrapper className="wrap">
+    <Wrapper>
       <Logo size="MEDIUM" />
       <Avatar size="LARGE" imgSource={avatarUrl} />
     </Wrapper>

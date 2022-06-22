@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import FilterBar from 'components/FilterBar';
+import IssueHeader from 'components/IssueHeader';
 import IssueItem from 'components/IssueItem';
 import BlankMessage from 'components/common/BlankMessage';
 import ButtonLink from 'components/common/Button/ButtonLink';
@@ -16,7 +17,7 @@ const ISSUES: IssueType[] = [
   { id: '3456', number: 3, title: '비비 천재 3', author: '비비', milestone: '마일스톤 3' },
 ];
 
-const isEmptyIssue = ISSUES.length === 0;
+const hasIssue = ISSUES.length > 0;
 
 type IssueType = {
   id: string;
@@ -43,8 +44,8 @@ function IssueList() {
           </ButtonLink>
         </div>
       </MainHeader>
-      <ListContainer headerItem={<div>헤더</div>}>
-        {(!isEmptyIssue &&
+      <ListContainer headerItem={<IssueHeader />}>
+        {(hasIssue &&
           ISSUES.map(({ id, number, title, author, milestone }) => (
             <IssueItem
               key={id}
