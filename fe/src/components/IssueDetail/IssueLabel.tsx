@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import Label from 'components/common/Label';
 import { COLOR } from 'styles/color';
-import Icon from './common/Icon';
+import Icon from '../common/Icon';
 
 function IssueLabel({ state }: IssueLabelProps) {
   switch (state) {

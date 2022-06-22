@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 import { COLOR } from 'styles/color';
 import FONT from 'styles/font';
+import Button from '../common/Button/Button';
+import DropdownBtn from '../common/DropdownBtn';
+import Icon from '../common/Icon';
 import Checkbox from './Checkbox';
-import Button from './common/Button/Button';
-import DropdownBtn from './common/DropdownBtn';
-import Icon from './common/Icon';
 
 function IssueHeader() {
   return (

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import IssueLabel from 'components/IssueLabel';
+import IssueLabel from 'components/IssueDetail/IssueLabel';
 import Avatar from 'components/common/Avatar';
 import Button from 'components/common/Button/Button';
 import ButtonLink from 'components/common/Button/ButtonLink';
