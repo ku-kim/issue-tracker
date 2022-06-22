@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 import { COLOR } from 'styles/color';
 import FONT from 'styles/font';
-import ButtonLink from './common/Button/ButtonLink';
-import Icon from './common/Icon';
-import Text from './common/Text';
+import ButtonLink from '../common/Button/ButtonLink';
+import Icon from '../common/Icon';
+import Text from '../common/Text';
 
 function LabelItem({ id, label, desc }: LabelItemProps) {
   return (

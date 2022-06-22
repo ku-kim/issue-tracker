@@ -1,9 +1,9 @@
-import LabelItem, { LabelItemProps } from 'components/LabelItem';
-import SubNav from 'components/SubNav';
+import LabelItem, { LabelItemProps } from 'components/LabelList/LabelItem';
 import BlankMessage from 'components/common/BlankMessage';
 import Header from 'components/common/Header';
 import Label from 'components/common/Label';
 import ListContainer from 'components/common/ListContainer';
+import SubNav from 'components/common/SubNav';
 import Text from 'components/common/Text';
 import { COLOR } from 'styles/color';
 import FONT from 'styles/font';

@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 import { COLOR } from 'styles/color';
 import mainHeaderStyle from 'styles/mainHeaderStyle';
-import Button from './common/Button/Button';
-import Icon from './common/Icon';
-import Tabs, { ActiveItemType } from './common/Tabs';
+import Button from './Button/Button';
+import Icon from './Icon';
+import Tabs, { ActiveItemType } from './Tabs';
 
 function SubNav({ location }: SubNavProps) {
   return (

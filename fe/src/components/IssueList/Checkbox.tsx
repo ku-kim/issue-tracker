@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import styled from 'styled-components';
 import { COLOR } from 'styles/color';
-import Icon from './common/Icon';
+import Icon from '../common/Icon';
 
 function Checkbox() {
   const [isChecked, setIsChecked] = useState(false);

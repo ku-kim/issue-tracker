@@ -3,8 +3,8 @@ import styled from 'styled-components';
 import { COLOR } from 'styles/color';
 import FONT from 'styles/font';
 import SIZE from 'styles/size';
-import DropdownBtn from './common/DropdownBtn';
-import Icon from './common/Icon';
+import DropdownBtn from '../common/DropdownBtn';
+import Icon from '../common/Icon';
 
 function FilterBar({ placeholder }: { placeholder: string }) {
   const [isFocused, setIsFocused] = useState(false);

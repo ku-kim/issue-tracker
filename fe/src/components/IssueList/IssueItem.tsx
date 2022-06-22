@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 import { COLOR } from 'styles/color';
 import FONT from 'styles/font';
+import Avatar from '../common/Avatar';
+import Icon from '../common/Icon';
+import Label from '../common/Label';
+import Text from '../common/Text';
 import Checkbox from './Checkbox';
-import Avatar from './common/Avatar';
-import Icon from './common/Icon';
-import Label from './common/Label';
-import Text from './common/Text';
 
 function IssueItem({ number, title, author, milestone }: IssueItemProps) {
   // TODO: createdAt으로 몇 분전 처리 ^^
