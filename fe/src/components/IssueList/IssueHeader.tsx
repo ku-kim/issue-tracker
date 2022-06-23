@@ -1,7 +1,6 @@
 import styled from 'styled-components';
+import TextButton from 'components/common/Button/TextButton';
 import { COLOR } from 'styles/color';
-import FONT from 'styles/font';
-import Button from '../common/Button/Button';
 import DropdownBtn from '../common/DropdownBtn';
 import Icon from '../common/Icon';
 import Checkbox from './Checkbox';
@@ -40,33 +39,6 @@ function IssueHeader() {
   );
 }
 
-function TextButton({ color, children }: TextButtonProps) {
-  return (
-    <Button
-      width="fit-contents"
-      template="MEDIUM_TEXT"
-      backgroundColor={{ initial: 'transparent' }}
-      fontStyles={{
-        fontColor: {
-          initial: `${color}`,
-          active: COLOR.BLACK,
-          hover: COLOR.GREY[600],
-          disabled: COLOR.GREY[400],
-        },
-        fontWeight: FONT.WEIGHT.BOLD,
-      }}
-      borderStyle="border: 0; padding: 0;"
-    >
-      <TitleWrapper>{children}</TitleWrapper>
-    </Button>
-  );
-}
-
-interface TextButtonProps {
-  color: string;
-  children: React.ReactNode;
-}
-
 const Wrapper = styled.div`
   display: flex;
   width: 100%;
@@ -77,13 +49,6 @@ const Wrapper = styled.div`
 const Buttons = styled.div`
   display: flex;
   gap: 24px;
-`;
-
-const TitleWrapper = styled.div`
-  width: fit-content;
-  display: flex;
-  align-items: center;
-  gap: 7px;
 `;
 
 const LeftBtns = styled.div`
