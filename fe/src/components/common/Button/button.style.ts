@@ -102,7 +102,6 @@ const buttonStyle = css<{
   fontWeight?: number;
   backgroundColor: BackGroundColors;
 }>`
-  /* min-width: 0; */
   width: ${({ width }) => width};
   height: ${({ height }) => height};
   ${({ borderStyle }) => css` ${borderStyle}}`};
