@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import ButtonLink from 'components/common/Button/ButtonLink';
+import TextButtonLink from 'components/common/Button/TextButtonLink';
 import Icon from 'components/common/Icon';
 import LinearGraph from 'components/common/LinearGraph';
 import Text from 'components/common/Text';
@@ -20,77 +20,47 @@ function MilestoneItem({ title, dueDate, desc, totalCount, doneCount, id }: Mile
             <Text color={COLOR.GREY[500]}>{dueDate}</Text>
           </IconText>
         </Item>
-
         <div>
           <Text color={COLOR.GREY[500]}>{desc}</Text>
         </div>
       </ItemWrap>
       <ItemWrap>
         <ButtonArea>
-          <ButtonLink
-            template="SMALL_TEXT"
-            backgroundColor={{ initial: COLOR.WHITE }}
-            fontStyles={{
-              fontColor: {
-                initial: COLOR.GREY[500],
-              },
-              fontSize: FONT.SIZE.X_SMALL,
-              fontWeight: FONT.WEIGHT.BOLD,
-            }}
-            to={`/${id}`}
-          >
+          <TextButtonLink to={`/${id}`} color={COLOR.GREY[500]}>
             <Icon icon="calendar" stroke={COLOR.GREY[500]} />
             닫기
-          </ButtonLink>
-          <ButtonLink
-            template="SMALL_TEXT"
-            backgroundColor={{ initial: COLOR.WHITE }}
-            fontStyles={{
-              fontColor: {
-                initial: COLOR.GREY[500],
-              },
-              fontSize: FONT.SIZE.X_SMALL,
-              fontWeight: FONT.WEIGHT.BOLD,
-            }}
-            to={`/${id}`}
-          >
+          </TextButtonLink>
+          <TextButtonLink to={`/${id}`} color={COLOR.GREY[500]}>
             <Icon icon="edit" stroke={COLOR.GREY[500]} />
             편집
-          </ButtonLink>
-          <ButtonLink
-            template="SMALL_TEXT"
-            backgroundColor={{ initial: COLOR.WHITE }}
-            fontStyles={{
-              fontColor: {
-                initial: COLOR.RED[200],
-              },
-              fontSize: FONT.SIZE.X_SMALL,
-              fontWeight: FONT.WEIGHT.BOLD,
-            }}
-            to="/"
-          >
+          </TextButtonLink>
+          <TextButtonLink to={`/${id}`} color={COLOR.RED[200]}>
             <Icon icon="trash" stroke={COLOR.RED[200]} />
             삭제
-          </ButtonLink>
+          </TextButtonLink>
         </ButtonArea>
         <GraphArea>
           <LinearGraph totalCount={totalCount} doneCount={doneCount} />
           <GraphDesc>
+            <GraphDescText>{totalCount ? (doneCount / totalCount) * 100 : 0}%</GraphDescText>
             <div>
-              <DescText color={COLOR.GREY[500]}>
-                {totalCount ? (doneCount / totalCount) * 100 : 0}%
-              </DescText>
-            </div>
-            <div>
-              <DescText color={COLOR.GREY[500]}>
-                열린 이슈{totalCount - doneCount ? totalCount - doneCount : 0}
-              </DescText>
-              <DescText color={COLOR.GREY[500]}>닫힌 이슈 {doneCount || 0}</DescText>
+              <GraphDescText>
+                열린 이슈 {totalCount - doneCount ? totalCount - doneCount : 0}
+              </GraphDescText>
+              <GraphDescText>닫힌 이슈 {doneCount || 0}</GraphDescText>
             </div>
           </GraphDesc>
         </GraphArea>
       </ItemWrap>
     </Wrapper>
+  );
+}
+
+function GraphDescText({ children }: { children: React.ReactNode }) {
+  return (
+    <Text color={COLOR.GREY[500]} size={FONT.SIZE.X_SMALL}>
+      {children}
+    </Text>
   );
 }
 
@@ -135,22 +105,22 @@ const GraphArea = styled.div`
 `;
 
 const GraphDesc = styled.div`
+  height: 25px;
   display: flex;
   justify-content: space-between;
+  align-items: flex-end;
+
+  div {
+    > :not(:last-child) {
+      margin-right: 10px;
+    }
+  }
 `;
 
 const IconText = styled.div`
   display: flex;
   align-items: center;
   ${itemGap}
-`;
-
-const DescText = styled(Text)`
-  font-size: ${FONT.SIZE.X_SMALL};
-
-  &:not(:last-child) {
-    margin-right: 10px;
-  }
 `;
 
 type MilestoneItemProps = {
