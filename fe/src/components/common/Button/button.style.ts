@@ -1,5 +1,6 @@
 import { css } from 'styled-components';
 import { COLOR } from 'styles/color';
+import { flexCenterStyle } from 'styles/commonStyles';
 import FONT from 'styles/font';
 
 const BUTTON_STYLES = {
@@ -110,6 +111,7 @@ const buttonStyle = css<{
   font-weight: ${({ fontWeight }) => fontWeight};
   color: ${({ fontColor }) => fontColor?.initial};
   gap: 10px;
+  ${flexCenterStyle};
 
   &:not(:disabled):hover {
     background-color: ${({ backgroundColor }) => backgroundColor.hover};
@@ -145,7 +147,6 @@ export interface ButtonProps {
   template: TemplateType;
   fontStyles?: FontStyles;
   backgroundColor: BackGroundColors;
-  className?: string;
 }
 
 export interface FontColors {

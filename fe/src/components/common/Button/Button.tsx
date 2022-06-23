@@ -15,11 +15,9 @@ function Button({
     fontWeight: BUTTON_STYLES[template].FONT_STYLE.WEIGHT,
   },
   backgroundColor,
-  className = '',
 }: ButtonProps) {
   return (
     <CustomButton
-      className={`flex-center ${className}`}
       onClick={onClick}
       disabled={disabled}
       width={width}

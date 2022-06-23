@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import styled from 'styled-components';
 import { COLOR } from 'styles/color';
+import { flexCenterStyle } from 'styles/commonStyles';
 import FONT from 'styles/font';
 import SIZE from 'styles/size';
 import DropdownBtn from '../common/DropdownBtn';
@@ -28,8 +29,8 @@ function FilterBar({ placeholder }: { placeholder: string }) {
         <div>이런이런이런</div>
       </FilterDropdown>
 
-      <InputArea isFocused={isFocused} className=" flex-center">
-        <label htmlFor={INPUT_ID} className="flex-center">
+      <InputArea isFocused={isFocused}>
+        <Label htmlFor={INPUT_ID}>
           <Icon icon="search" stroke="inherit" />
           <InputText
             type="text"
@@ -40,7 +41,7 @@ function FilterBar({ placeholder }: { placeholder: string }) {
             onChange={onChange}
             value={inputText}
           />
-        </label>
+        </Label>
       </InputArea>
     </Wrapper>
   );
@@ -64,12 +65,17 @@ const FilterDropdown = styled(DropdownBtn)`
 `;
 
 const InputArea = styled.div<{ isFocused: boolean }>`
+  ${flexCenterStyle};
   width: 472px;
   height: 100%;
   stroke: ${COLOR.GREY[400]};
   background-color: ${({ isFocused }) => (isFocused ? COLOR.WHITE : COLOR.GREY[200])};
   border-left: 1px solid ${COLOR.GREY[300]};
   stroke: ${({ isFocused }) => (isFocused ? COLOR.GREY[500] : COLOR.GREY[400])};
+`;
+
+const Label = styled.label`
+  ${flexCenterStyle};
 `;
 
 const InputText = styled.input`
