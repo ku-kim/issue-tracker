@@ -4,7 +4,6 @@ import java.time.LocalDate;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.format.annotation.DateTimeFormat;
 
 @NoArgsConstructor
 @Getter @Setter
@@ -14,7 +13,6 @@ public class MilestoneUpdateRequest {
 
 	private String description;
 
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate dueDate;
 
 	private Boolean open;
