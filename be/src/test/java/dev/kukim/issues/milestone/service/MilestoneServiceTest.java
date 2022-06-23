@@ -64,8 +64,8 @@ class MilestoneServiceTest extends MysqlTestContainer {
 		MilestoneListResponse milestoneListResponse = milestoneService.findAllBy("open");
 
 		assertThat(milestoneListResponse.getMilestones()).hasSize(1);
-		assertThat(milestoneListResponse.getMilestones()).extracting("title")
-			.contains("테스트 마일스톤 1");
+		assertThat(milestoneListResponse.getMilestones().get(0).getTitle())
+			.isEqualTo("테스트 마일스톤 1");
 	}
 
 
