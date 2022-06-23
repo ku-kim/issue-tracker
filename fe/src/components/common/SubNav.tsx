@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { COLOR } from 'styles/color';
-import mainHeaderStyle from 'styles/mainHeaderStyle';
+import { mainHeaderStyle } from 'styles/commonStyles';
 import Button from './Button/Button';
 import Icon from './Icon';
 import Tabs, { ActiveItemType } from './Tabs';

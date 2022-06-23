@@ -8,11 +8,11 @@ import Text from '../common/Text';
 function LabelItem({ id, label, desc }: LabelItemProps) {
   return (
     <Wrapper>
-      <div className="label-area">{label}</div>
+      <div>{label}</div>
       <Text className="ellipsis" color={COLOR.GREY[500]}>
         {desc}
       </Text>
-      <div className="button-area">
+      <ButtonArea>
         <ButtonLink
           template="SMALL_TEXT"
           backgroundColor={{ initial: COLOR.WHITE }}
@@ -43,7 +43,7 @@ function LabelItem({ id, label, desc }: LabelItemProps) {
           <Icon icon="trash" stroke={COLOR.RED[200]} />
           삭제
         </ButtonLink>
-      </div>
+      </ButtonArea>
     </Wrapper>
   );
 }
@@ -60,9 +60,9 @@ const Wrapper = styled.div`
   display: grid;
   grid-template-columns: 2fr 5fr 2fr;
   align-items: center;
+`;
 
-  .button-area {
-    display: flex;
-    justify-content: flex-end;
-  }
+const ButtonArea = styled.div`
+  display: flex;
+  justify-content: flex-end;
 `;

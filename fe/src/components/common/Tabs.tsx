@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { COLOR } from 'styles/color';
 import FONT from 'styles/font';
 import ButtonLink from './Button/ButtonLink';
@@ -7,34 +7,41 @@ import Icon from './Icon';
 function Tabs({ activeItem = null }: { activeItem?: ActiveItemType }) {
   return (
     <Wrapper>
-      <ButtonLink
-        template="MEDIUM_TEXT"
-        backgroundColor={tabsButtonBackGroundColors}
-        width="160px"
-        height="40px"
-        className={`tab-item ${activeItem === 'LABEL' ? 'active' : ''}`}
-        to="/labelList"
-      >
-        <Icon icon="tag" stroke="inherit" /> 레이블 <span className="count">(0)</span>
-      </ButtonLink>
-      <ButtonLink
-        template="MEDIUM_TEXT"
-        backgroundColor={tabsButtonBackGroundColors}
-        width="160px"
-        height="40px"
-        className={`tab-item ${activeItem === 'MILESTONE' ? 'active' : ''}`}
-        to="/milestoneList"
-      >
+      <TabItem to="/labelList" active={activeItem === 'LABEL'}>
+        <Icon icon="tag" stroke="inherit" /> 레이블 <TabItemCount>(0)</TabItemCount>
+      </TabItem>
+      <TabItem to="/milestoneList" active={activeItem === 'MILESTONE'}>
         <Icon icon="milestone" stroke="transparent" fill="inherit" /> 마일스톤
-        <span className="count">(0)</span>
-      </ButtonLink>
+        <TabItemCount>(0)</TabItemCount>
+      </TabItem>
     </Wrapper>
+  );
+}
+
+function TabItem({ children, active, to }: TabItemProps) {
+  return (
+    <TabItemButton
+      template="MEDIUM_TEXT"
+      backgroundColor={tabsButtonBackGroundColors}
+      width="160px"
+      height="40px"
+      to={to}
+      active={active}
+    >
+      {children}
+    </TabItemButton>
   );
 }
 
 export default Tabs;
 
 export type ActiveItemType = 'LABEL' | 'MILESTONE' | null;
+
+interface TabItemProps {
+  children: React.ReactNode;
+  active: boolean;
+  to: string;
+}
 
 const tabsButtonBackGroundColors = { initial: 'transparent', hover: COLOR.GREY[200] };
 
@@ -46,29 +53,37 @@ const Wrapper = styled.div`
   display: flex;
   overflow: hidden;
 
-  .tab-item {
-    stroke: ${COLOR.GREY[500]};
-    fill: ${COLOR.GREY[500]};
+  .count {
+    font-weight: ${FONT.WEIGHT.REGULAR};
+  }
+`;
 
-    &:not(:first-child) {
-      border-left: 1px solid ${COLOR.GREY[300]};
-    }
+const TabItemButton = styled(ButtonLink).withConfig({
+  shouldForwardProp: (prop) => !['active'].includes(prop),
+})<{ active: boolean }>`
+  stroke: ${COLOR.GREY[500]};
+  fill: ${COLOR.GREY[500]};
 
-    &:hover {
-      stroke: ${COLOR.GREY[600]};
-      fill: ${COLOR.GREY[600]};
-      color: ${COLOR.GREY[600]};
-    }
+  &:not(:first-child) {
+    border-left: 1px solid ${COLOR.GREY[300]};
+  }
 
-    &.active {
+  &:hover {
+    stroke: ${COLOR.GREY[600]};
+    fill: ${COLOR.GREY[600]};
+    color: ${COLOR.GREY[600]};
+  }
+
+  ${({ active }) =>
+    active &&
+    css`
       background-color: ${COLOR.GREY[300]};
       color: ${COLOR.GREY[600]};
       fill: ${COLOR.GREY[600]};
       stroke: ${COLOR.GREY[600]};
-    }
-  }
+    `};
+`;
 
-  .count {
-    font-weight: ${FONT.WEIGHT.REGULAR};
-  }
+const TabItemCount = styled.span`
+  font-weight: ${FONT.WEIGHT.REGULAR};
 `;

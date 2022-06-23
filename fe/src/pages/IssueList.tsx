@@ -9,7 +9,7 @@ import Icon from 'components/common/Icon';
 import ListContainer from 'components/common/ListContainer';
 import Tabs from 'components/common/Tabs';
 import { COLOR } from 'styles/color';
-import mainHeaderStyle from 'styles/mainHeaderStyle';
+import { mainHeaderStyle } from 'styles/commonStyles';
 import Z_INDEX from 'styles/zIndex';
 
 const ISSUES: IssueType[] = [
@@ -34,7 +34,7 @@ function IssueList() {
       <Header avatarUrl="null" />
       <MainHeader>
         <FilterBar placeholder="Search all Issues" />
-        <div className="button-area">
+        <ButtonArea>
           <Tabs activeItem="LABEL" />
           <ButtonLink
             template="SMALL_STANDARD"
@@ -43,7 +43,7 @@ function IssueList() {
           >
             <Icon icon="plus" stroke={COLOR.WHITE} /> 이슈작성
           </ButtonLink>
-        </div>
+        </ButtonArea>
       </MainHeader>
       <ListContainer headerItem={<IssueHeader />}>
         {(hasIssue &&
@@ -67,13 +67,13 @@ const Main = styled.main`
 
 const MainHeader = styled.div`
   ${mainHeaderStyle};
+`;
 
-  .button-area {
-    display: flex;
+const ButtonArea = styled.div`
+  display: flex;
 
-    & > :not(:last-child) {
-      margin-right: 16px;
-    }
+  & > :not(:last-child) {
+    margin-right: 16px;
   }
 `;
 
