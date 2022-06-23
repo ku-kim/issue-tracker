@@ -15,7 +15,7 @@ function MilestoneList() {
           dueDate="일정"
           desc="설명글"
           totalCount={5}
-          doneCount={2}
+          doneCount={6}
           id="12313"
         />
       </ListContainer>

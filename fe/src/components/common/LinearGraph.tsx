@@ -3,17 +3,21 @@ import { COLOR } from 'styles/color';
 import SIZE from 'styles/size';
 
 function LinearGraph({ totalCount, doneCount }: LinearGraphProps) {
-  if (doneCount > totalCount) {
-    throw new Error('doneCount는 totalCount를 초과하여 입력할 수 없습니다.');
+  try {
+    if (doneCount > totalCount) {
+      throw new Error('doneCount는 totalCount를 초과하여 입력할 수 없습니다.');
+    }
+
+    const donePercent = totalCount ? (doneCount / totalCount) * 100 : 0;
+
+    return (
+      <Wrapper percent={donePercent}>
+        <div className="filled-graph" />
+      </Wrapper>
+    );
+  } catch (error: any) {
+    return error.message;
   }
-
-  const donePercent = totalCount ? (doneCount / totalCount) * 100 : 0;
-
-  return (
-    <Wrapper percent={donePercent}>
-      <div className="filled-graph" />
-    </Wrapper>
-  );
 }
 
 export default LinearGraph;
