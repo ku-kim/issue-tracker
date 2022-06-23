@@ -12,8 +12,14 @@ function IssueHeader() {
       <LeftBtns>
         <Checkbox />
         <Buttons>
-          <OpenedIssueBtn />
-          <ClosedIssueBtn />
+          <TextButton color={COLOR.GREY[500]}>
+            <Icon icon="alertCircle" />
+            열린 이슈 (3)
+          </TextButton>
+          <TextButton color={COLOR.GREY[400]}>
+            <Icon icon="archive" />
+            닫힌 이슈 (0)
+          </TextButton>
         </Buttons>
       </LeftBtns>
       <RightBtns>
@@ -34,8 +40,7 @@ function IssueHeader() {
   );
 }
 
-// TODO: OpenedIssueBtn, ClosedIssueBtn 중복 로직 하나의 컴포넌트로 합치기
-function OpenedIssueBtn() {
+function TextButton({ color, children }: TextButtonProps) {
   return (
     <Button
       width="fit-contents"
@@ -43,7 +48,7 @@ function OpenedIssueBtn() {
       backgroundColor={{ initial: 'transparent' }}
       fontStyles={{
         fontColor: {
-          initial: COLOR.GREY[500],
+          initial: `${color}`,
           active: COLOR.BLACK,
           hover: COLOR.GREY[600],
           disabled: COLOR.GREY[400],
@@ -52,37 +57,14 @@ function OpenedIssueBtn() {
       }}
       borderStyle="border: 0; padding: 0;"
     >
-      <TitleWrapper>
-        <Icon icon="alertCircle" />
-        열린 이슈 (3)
-      </TitleWrapper>
+      <TitleWrapper>{children}</TitleWrapper>
     </Button>
   );
 }
 
-function ClosedIssueBtn() {
-  return (
-    <Button
-      width="fit-contents"
-      template="MEDIUM_TEXT"
-      backgroundColor={{ initial: 'transparent' }}
-      fontStyles={{
-        fontColor: {
-          initial: COLOR.GREY[400],
-          active: COLOR.BLACK,
-          hover: COLOR.GREY[600],
-          disabled: COLOR.GREY[400],
-        },
-        fontWeight: FONT.WEIGHT.BOLD,
-      }}
-      borderStyle="border: 0; padding: 0;"
-    >
-      <TitleWrapper>
-        <Icon icon="archive" />
-        닫힌 이슈 (0)
-      </TitleWrapper>
-    </Button>
-  );
+interface TextButtonProps {
+  color: string;
+  children: React.ReactNode;
 }
 
 const Wrapper = styled.div`
