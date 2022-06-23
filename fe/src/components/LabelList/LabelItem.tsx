@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { COLOR } from 'styles/color';
+import { ellipsisStyle } from 'styles/commonStyles';
 import FONT from 'styles/font';
 import ButtonLink from '../common/Button/ButtonLink';
 import Icon from '../common/Icon';
@@ -9,9 +10,7 @@ function LabelItem({ id, label, desc }: LabelItemProps) {
   return (
     <Wrapper>
       <div>{label}</div>
-      <Text className="ellipsis" color={COLOR.GREY[500]}>
-        {desc}
-      </Text>
+      <LabelDesc color={COLOR.GREY[500]}>{desc}</LabelDesc>
       <ButtonArea>
         <ButtonLink
           template="SMALL_TEXT"
@@ -60,6 +59,10 @@ const Wrapper = styled.div`
   display: grid;
   grid-template-columns: 2fr 5fr 2fr;
   align-items: center;
+`;
+
+const LabelDesc = styled(Text)`
+  ${ellipsisStyle};
 `;
 
 const ButtonArea = styled.div`

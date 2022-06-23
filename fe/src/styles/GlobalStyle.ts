@@ -1,6 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
 import reset from 'styled-reset';
-import SIZE from './size';
 
 const GlobalStyle = createGlobalStyle`
   ${reset}
@@ -35,24 +34,6 @@ const GlobalStyle = createGlobalStyle`
 
   button { 
     cursor: pointer;
-  }
-
-  .ellipsis {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space:nowrap;
-  }
-
-  .wrap {
-    width: ${SIZE.WIDTH}px;
-    max-width: ${SIZE.WIDTH}px;
-    margin: 0 auto;
-  }
-
-  .flex-center {
-    display: flex;
-    align-items: center;
-    justify-content: center;
   }
 `;
 

@@ -1,5 +1,6 @@
 import { Link, LinkProps } from 'react-router-dom';
 import styled from 'styled-components';
+import { ellipsisStyle } from 'styles/commonStyles';
 import { buttonStyle, BUTTON_STYLES, ButtonProps } from './button.style';
 
 function ButtonLink({
@@ -15,12 +16,10 @@ function ButtonLink({
   },
   backgroundColor,
   to,
-  className = '',
   ...props
 }: ButtonProps & LinkProps) {
   return (
     <CustomButtonLink
-      className={`flex-center ellipsis ${className}`}
       width={width}
       height={height}
       borderStyle={borderStyle}
@@ -51,4 +50,5 @@ const CustomButtonLink = styled(Link).withConfig({
     ].includes(prop),
 })`
   ${buttonStyle};
+  ${ellipsisStyle};
 `;

@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { COLOR } from 'styles/color';
+import { ellipsisStyle, flexCenterStyle } from 'styles/commonStyles';
 import FONT from 'styles/font';
 import Avatar from '../common/Avatar';
 import Icon from '../common/Icon';
@@ -15,9 +16,9 @@ function IssueItem({ number, title, author, milestone }: IssueItemProps) {
       <Contents>
         <Title>
           <Icon icon="alertCircle" stroke={COLOR.BLUE[200]} fill={COLOR.BLUE[100]} />
-          <Text size={FONT.SIZE.MEDIUM} weight={FONT.WEIGHT.BOLD} className="ellipsis">
+          <TitleText size={FONT.SIZE.MEDIUM} weight={FONT.WEIGHT.BOLD}>
             {title}
-          </Text>
+          </TitleText>
           <Label color={COLOR.WHITE} backgroundColor={COLOR.BLUE[300]}>
             documentation
           </Label>
@@ -28,9 +29,9 @@ function IssueItem({ number, title, author, milestone }: IssueItemProps) {
           </Text>
         </IssueInfo>
       </Contents>
-      <div className="flex-center">
+      <AvatarArea>
         <Avatar size="SMALL" imgSource="null" />
-      </div>
+      </AvatarArea>
     </Wrapper>
   );
 }
@@ -57,6 +58,17 @@ const Title = styled.div`
   display: flex;
   align-items: center;
   gap: 9px;
+`;
+
+const TitleText = styled(Text)`
+  ${ellipsisStyle};
+  display: flex;
+  align-items: center;
+  gap: 9px;
+`;
+
+const AvatarArea = styled.div`
+  ${flexCenterStyle};
 `;
 
 const IssueInfo = styled.div``;

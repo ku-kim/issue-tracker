@@ -9,7 +9,7 @@ import Icon from 'components/common/Icon';
 import ListContainer from 'components/common/ListContainer';
 import Tabs from 'components/common/Tabs';
 import { COLOR } from 'styles/color';
-import { mainHeaderStyle } from 'styles/commonStyles';
+import { mainHeaderStyle, wrapStyle } from 'styles/commonStyles';
 import Z_INDEX from 'styles/zIndex';
 
 const ISSUES: IssueType[] = [
@@ -30,7 +30,7 @@ type IssueType = {
 
 function IssueList() {
   return (
-    <Main className="wrap">
+    <Main>
       <Header avatarUrl="null" />
       <MainHeader>
         <FilterBar placeholder="Search all Issues" />
@@ -63,6 +63,7 @@ function IssueList() {
 
 const Main = styled.main`
   z-index: ${Z_INDEX.ROOT};
+  ${wrapStyle};
 `;
 
 const MainHeader = styled.div`
