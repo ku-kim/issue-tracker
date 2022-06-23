@@ -1,13 +1,12 @@
 package dev.kukim.issues;
 
-import dev.kukim.issues.user.auth.property.GithubProperty;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 @SpringBootApplication
-@EnableConfigurationProperties(GithubProperty.class)
+@ConfigurationPropertiesScan
 @EnableJpaAuditing
 public class IssuesApplication {
 
