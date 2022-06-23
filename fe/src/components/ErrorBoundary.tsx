@@ -1,22 +1,27 @@
-import React, { ReactNode } from 'react';
+import React, { ReactNode, useState } from 'react';
 
-class ErrorBoundary extends React.Component<{ children: ReactNode }, { hasError: boolean }> {
+class ErrorBoundary extends React.Component<
+  { children: ReactNode; fallback: ReactNode },
+  { hasError: boolean }
+> {
   constructor(props: any) {
     super(props);
     this.state = { hasError: false };
   }
 
   static getDerivedStateFromError(error: any) {
-    console.log(error);
+    console.error(error);
     return { hasError: true };
   }
 
   render() {
-    if (this.state.hasError) {
-      return <h1>Something went wrong.</h1>;
-    }
+    const { hasError } = this.state;
+    const { children, fallback } = this.props;
 
-    return this.props.children;
+    if (hasError) {
+      return fallback;
+    }
+    return children;
   }
 }
 
