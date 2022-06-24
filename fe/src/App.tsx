@@ -1,4 +1,5 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Callback from 'pages/Callback';
 import IssueList from 'pages/IssueList';
 import LabelList from 'pages/LabelList';
 import Login from 'pages/Login';
@@ -18,6 +19,7 @@ function App() {
           <Route path="/labelList" element={<LabelList />} />
           <Route path="/milestoneList" element={<MilestoneList />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/callback" element={<Callback />} />
         </Routes>
       </BrowserRouter>
     </>
