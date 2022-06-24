@@ -11,19 +11,25 @@ import java.util.Date;
 import java.time.Instant;
 import java.util.Map;
 import javax.crypto.SecretKey;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
+import javax.validation.constraints.NotEmpty;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.context.properties.ConstructorBinding;
+import org.springframework.validation.annotation.Validated;
 
-@Component
+@Validated
+@ConstructorBinding
+@ConfigurationProperties("jwt")
 public class LoginTokenGenerator {
 
 	private static final long HALF_HOUR = 30L;
 	private static final int ONE_MINUTE = 60;
 
-	@Value("${jwt.secret}")
-	private String jwtSecret;
-	private SecretKey secretKey;
+	@NotEmpty
+	private final String jwtSecret;
 
+	public LoginTokenGenerator(String jwtSecret) {
+		this.jwtSecret = jwtSecret;
+	}
 
 	public String createToken(Long userId) {
 		return generateToken(userId,
@@ -31,7 +37,7 @@ public class LoginTokenGenerator {
 	}
 
 	private String generateToken(Long userId, Date plusMinutes) {
-		secretKey = Keys.hmacShaKeyFor(jwtSecret.getBytes(StandardCharsets.UTF_8));
+		SecretKey secretKey = Keys.hmacShaKeyFor(jwtSecret.getBytes(StandardCharsets.UTF_8));
 		return Jwts.builder()
 			.setHeader(Map.of(
 				"typ", "JWT",
@@ -53,7 +59,7 @@ public class LoginTokenGenerator {
 	}
 
 	public Jws<Claims> getClaims(String token) {
-		secretKey = Keys.hmacShaKeyFor(jwtSecret.getBytes(StandardCharsets.UTF_8));
+		SecretKey secretKey = Keys.hmacShaKeyFor(jwtSecret.getBytes(StandardCharsets.UTF_8));
 		return Jwts.parserBuilder()
 			.setSigningKey(secretKey)
 			.build()

@@ -53,11 +53,7 @@ class LoginServiceTest extends MysqlTestContainer {
 		loginService = new LoginService(userRepository, loginTokenGenerator, githubOAuth);
 
 		// 외부 시스템(Github OAuth) 응답 폼 생성
-		this.githubUserResponse = new GithubUserResponse();
-		this.githubUserResponse.setId(123456L);
-		this.githubUserResponse.setName("kukim");
-		this.githubUserResponse.setAvatarUrl("http://test.com/kukim.jpg");
-		this.githubUserResponse.setEmail("test@test.com");
+		this.githubUserResponse = GithubUserResponse.of(123456L, "kukim", "http://test.com/kukim.jpg", "test@test.com");
 	}
 
 	@BeforeEach

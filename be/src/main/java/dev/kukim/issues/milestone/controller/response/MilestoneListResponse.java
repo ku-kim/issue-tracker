@@ -2,9 +2,8 @@ package dev.kukim.issues.milestone.controller.response;
 
 import java.util.List;
 import lombok.Getter;
-import lombok.Setter;
 
-@Getter @Setter
+@Getter
 public class MilestoneListResponse {
 
 	private final Long labelsCount;

@@ -6,11 +6,11 @@ import javax.validation.constraints.NotEmpty;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.format.annotation.DateTimeFormat;
 
 
 @NoArgsConstructor
-@Getter @Setter
+@Getter
+@Setter
 public class MilestoneCreateRequest {
 
 	@NotEmpty
@@ -18,7 +18,6 @@ public class MilestoneCreateRequest {
 
 	private String description;
 
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate dueDate;
 
 	private MilestoneCreateRequest(String title, String description, LocalDate dueDate) {
