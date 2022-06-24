@@ -12,7 +12,6 @@ function SubNav({ location }: SubNavProps) {
       <Button
         template="SMALL_STANDARD"
         backgroundColor={{ initial: COLOR.BLUE[200], hover: COLOR.BLUE[300] }}
-        onClick={() => console.log(location)}
       >
         <Icon icon="plus" stroke={COLOR.WHITE} /> 추가
       </Button>
