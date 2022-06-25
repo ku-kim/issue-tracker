@@ -10,26 +10,26 @@ function LinearGraph({ totalCount, doneCount }: LinearGraphProps) {
   const donePercent = totalCount ? (doneCount / totalCount) * 100 : 0;
 
   return (
-    <Wrapper percent={donePercent}>
-      <div className="filled-graph" />
+    <Wrapper>
+      <FilledGraph percent={donePercent} />
     </Wrapper>
   );
 }
 
 export default LinearGraph;
 
-const Wrapper = styled.div<{ percent: number }>`
+const Wrapper = styled.div`
   width: ${SIZE.LINEAR_GRAPH.WIDTH}px;
   height: ${SIZE.LINEAR_GRAPH.HEIGHT}px;
   background-color: ${COLOR.GREY[100]};
   border-radius: 10px;
   overflow: hidden;
+`;
 
-  .filled-graph {
-    width: ${({ percent }) => percent}%;
-    height: 100%;
-    background-color: ${COLOR.BLUE[200]};
-  }
+const FilledGraph = styled.div<{ percent: number }>`
+  width: ${({ percent }) => percent}%;
+  height: 100%;
+  background-color: ${COLOR.BLUE[200]};
 `;
 
 type LinearGraphProps = {

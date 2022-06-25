@@ -5,13 +5,14 @@ import Button from 'components/common/Button/Button';
 import ButtonLink from 'components/common/Button/ButtonLink';
 import DropdownBtn from 'components/common/DropdownBtn';
 import Icon from 'components/common/Icon';
-import Input from 'components/common/Input';
+import Input from 'components/common/Input/Input';
 import Label from 'components/common/Label';
 import LinearGraph from 'components/common/LinearGraph';
 import ListContainer from 'components/common/ListContainer';
 import Logo from 'components/common/Logo';
 import Text from 'components/common/Text';
 import { COLOR } from 'styles/color';
+import { ellipsisStyle } from 'styles/commonStyles';
 import FONT from 'styles/font';
 
 function Template() {
@@ -128,9 +129,9 @@ function Template() {
           backgroundColor={{ initial: COLOR.BLUE[200] }}
           width="300px"
         >
-          <span className="ellipsis">
+          <TextEllipsis>
             버튼 MEDIUM_STANDARD버튼 MEDIUM_STANDARD버튼 MEDIUM_STANDARD버튼 MEDIUM_STANDARD
-          </span>
+          </TextEllipsis>
         </Button>
         <Button
           template="MEDIUM_TEXT"
@@ -142,7 +143,7 @@ function Template() {
           }}
           disabled
         >
-          <span className="ellipsis">버튼 MEDIUM_TEXT</span>
+          <TextEllipsis>버튼 MEDIUM_TEXT</TextEllipsis>
         </Button>
       </Column>
 
@@ -263,6 +264,10 @@ const Color = styled.div`
   width: 50px;
   height: 50px;
   background-color: ${({ color }) => color};
+`;
+
+const TextEllipsis = styled(Text)`
+  ${ellipsisStyle};
 `;
 
 export default Template;

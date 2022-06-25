@@ -1,7 +1,6 @@
 import styled from 'styled-components';
+import TextButton from 'components/common/Button/TextButton';
 import { COLOR } from 'styles/color';
-import FONT from 'styles/font';
-import Button from '../common/Button/Button';
 import DropdownBtn from '../common/DropdownBtn';
 import Icon from '../common/Icon';
 import Checkbox from './Checkbox';
@@ -12,8 +11,14 @@ function IssueHeader() {
       <LeftBtns>
         <Checkbox />
         <Buttons>
-          <OpenedIssueBtn />
-          <ClosedIssueBtn />
+          <TextButton color={COLOR.GREY[500]}>
+            <Icon icon="alertCircle" />
+            열린 이슈 (3)
+          </TextButton>
+          <TextButton color={COLOR.GREY[400]}>
+            <Icon icon="archive" />
+            닫힌 이슈 (0)
+          </TextButton>
         </Buttons>
       </LeftBtns>
       <RightBtns>
@@ -34,57 +39,6 @@ function IssueHeader() {
   );
 }
 
-// TODO: OpenedIssueBtn, ClosedIssueBtn 중복 로직 하나의 컴포넌트로 합치기
-function OpenedIssueBtn() {
-  return (
-    <Button
-      width="fit-contents"
-      template="MEDIUM_TEXT"
-      backgroundColor={{ initial: 'transparent' }}
-      fontStyles={{
-        fontColor: {
-          initial: COLOR.GREY[500],
-          active: COLOR.BLACK,
-          hover: COLOR.GREY[600],
-          disabled: COLOR.GREY[400],
-        },
-        fontWeight: FONT.WEIGHT.BOLD,
-      }}
-      borderStyle="border: 0; padding: 0;"
-    >
-      <TitleWrapper>
-        <Icon icon="alertCircle" />
-        열린 이슈 (3)
-      </TitleWrapper>
-    </Button>
-  );
-}
-
-function ClosedIssueBtn() {
-  return (
-    <Button
-      width="fit-contents"
-      template="MEDIUM_TEXT"
-      backgroundColor={{ initial: 'transparent' }}
-      fontStyles={{
-        fontColor: {
-          initial: COLOR.GREY[400],
-          active: COLOR.BLACK,
-          hover: COLOR.GREY[600],
-          disabled: COLOR.GREY[400],
-        },
-        fontWeight: FONT.WEIGHT.BOLD,
-      }}
-      borderStyle="border: 0; padding: 0;"
-    >
-      <TitleWrapper>
-        <Icon icon="archive" />
-        닫힌 이슈 (0)
-      </TitleWrapper>
-    </Button>
-  );
-}
-
 const Wrapper = styled.div`
   display: flex;
   width: 100%;
@@ -95,13 +49,6 @@ const Wrapper = styled.div`
 const Buttons = styled.div`
   display: flex;
   gap: 24px;
-`;
-
-const TitleWrapper = styled.div`
-  width: fit-content;
-  display: flex;
-  align-items: center;
-  gap: 7px;
 `;
 
 const LeftBtns = styled.div`

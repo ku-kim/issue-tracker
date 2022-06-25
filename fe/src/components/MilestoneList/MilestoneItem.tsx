@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import ButtonLink from 'components/common/Button/ButtonLink';
+import styled, { css } from 'styled-components';
+import TextButtonLink from 'components/common/Button/TextButtonLink';
 import Icon from 'components/common/Icon';
 import LinearGraph from 'components/common/LinearGraph';
 import Text from 'components/common/Text';
@@ -9,8 +9,8 @@ import FONT from 'styles/font';
 function MilestoneItem({ title, dueDate, desc, totalCount, doneCount, id }: MilestoneItemProps) {
   return (
     <Wrapper>
-      <div className="item-wrap">
-        <div className="item">
+      <ItemWrap>
+        <Item>
           <IconText>
             <Icon icon="milestone" stroke="inherit" fill={COLOR.BLUE[200]} />
             <Text weight={FONT.WEIGHT.BOLD}>{title}</Text>
@@ -19,78 +19,48 @@ function MilestoneItem({ title, dueDate, desc, totalCount, doneCount, id }: Mile
             <Icon icon="calendar" stroke={COLOR.GREY[500]} />
             <Text color={COLOR.GREY[500]}>{dueDate}</Text>
           </IconText>
-        </div>
-
+        </Item>
         <div>
           <Text color={COLOR.GREY[500]}>{desc}</Text>
         </div>
-      </div>
-      <div className="item-wrap">
-        <div className="button-area">
-          <ButtonLink
-            template="SMALL_TEXT"
-            backgroundColor={{ initial: COLOR.WHITE }}
-            fontStyles={{
-              fontColor: {
-                initial: COLOR.GREY[500],
-              },
-              fontSize: FONT.SIZE.X_SMALL,
-              fontWeight: FONT.WEIGHT.BOLD,
-            }}
-            to={`/${id}`}
-          >
+      </ItemWrap>
+      <ItemWrap>
+        <ButtonArea>
+          <TextButtonLink to={`/${id}`} color={COLOR.GREY[500]}>
             <Icon icon="calendar" stroke={COLOR.GREY[500]} />
             닫기
-          </ButtonLink>
-          <ButtonLink
-            template="SMALL_TEXT"
-            backgroundColor={{ initial: COLOR.WHITE }}
-            fontStyles={{
-              fontColor: {
-                initial: COLOR.GREY[500],
-              },
-              fontSize: FONT.SIZE.X_SMALL,
-              fontWeight: FONT.WEIGHT.BOLD,
-            }}
-            to={`/${id}`}
-          >
+          </TextButtonLink>
+          <TextButtonLink to={`/${id}`} color={COLOR.GREY[500]}>
             <Icon icon="edit" stroke={COLOR.GREY[500]} />
             편집
-          </ButtonLink>
-          <ButtonLink
-            template="SMALL_TEXT"
-            backgroundColor={{ initial: COLOR.WHITE }}
-            fontStyles={{
-              fontColor: {
-                initial: COLOR.RED[200],
-              },
-              fontSize: FONT.SIZE.X_SMALL,
-              fontWeight: FONT.WEIGHT.BOLD,
-            }}
-            to="/"
-          >
+          </TextButtonLink>
+          <TextButtonLink to={`/${id}`} color={COLOR.RED[200]}>
             <Icon icon="trash" stroke={COLOR.RED[200]} />
             삭제
-          </ButtonLink>
-        </div>
-        <div className="item graph-area">
+          </TextButtonLink>
+        </ButtonArea>
+        <GraphArea>
           <LinearGraph totalCount={totalCount} doneCount={doneCount} />
-          <div className="desc">
+          <GraphDesc>
+            <GraphDescText>{totalCount ? (doneCount / totalCount) * 100 : 0}%</GraphDescText>
             <div>
-              <DescText color={COLOR.GREY[500]}>
-                {totalCount ? (doneCount / totalCount) * 100 : 0}%
-              </DescText>
+              <GraphDescText>
+                열린 이슈 {totalCount - doneCount ? totalCount - doneCount : 0}
+              </GraphDescText>
+              <GraphDescText>닫힌 이슈 {doneCount || 0}</GraphDescText>
             </div>
-            <div>
-              <DescText color={COLOR.GREY[500]}>
-                열린 이슈{totalCount - doneCount ? totalCount - doneCount : 0}
-              </DescText>
-              <DescText color={COLOR.GREY[500]}>닫힌 이슈 {doneCount || 0}</DescText>
-            </div>
-          </div>
-        </div>
-      </div>
+          </GraphDesc>
+        </GraphArea>
+      </ItemWrap>
     </Wrapper>
+  );
+}
+
+function GraphDescText({ children }: { children: React.ReactNode }) {
+  return (
+    <Text color={COLOR.GREY[500]} size={FONT.SIZE.X_SMALL}>
+      {children}
+    </Text>
   );
 }
 
@@ -100,36 +70,49 @@ const Wrapper = styled.div`
   padding: 1rem 0;
   display: flex;
   justify-content: space-between;
+`;
 
-  .item-wrap {
-    display: flex;
-    padding: 5px 0;
-    flex-direction: column;
-    justify-content: space-between;
-  }
+const itemGap = css`
+  gap: 10px;
+`;
 
-  .item {
-    display: flex;
-    gap: 10px;
-  }
+const ItemWrap = styled.div`
+  display: flex;
+  padding: 5px 0;
+  flex-direction: column;
+  justify-content: space-between;
+`;
 
-  .button-area {
-    display: flex;
+const Item = styled.div`
+  display: flex;
+  ${itemGap};
+`;
+
+const ButtonArea = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  margin-left: 10px;
+
+  a {
+    align-items: flex-start;
     justify-content: flex-end;
-    margin-left: 10px;
-
-    a {
-      align-items: flex-start;
-      justify-content: flex-end;
-    }
   }
+`;
 
-  .graph-area {
-    flex-direction: column;
+const GraphArea = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
 
-    .desc {
-      display: flex;
-      justify-content: space-between;
+const GraphDesc = styled.div`
+  height: 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+
+  div {
+    > :not(:last-child) {
+      margin-right: 10px;
     }
   }
 `;
@@ -137,15 +120,7 @@ const Wrapper = styled.div`
 const IconText = styled.div`
   display: flex;
   align-items: center;
-  gap: 10px;
-`;
-
-const DescText = styled(Text)`
-  font-size: ${FONT.SIZE.X_SMALL};
-
-  &:not(:last-child) {
-    margin-right: 10px;
-  }
+  ${itemGap}
 `;
 
 type MilestoneItemProps = {

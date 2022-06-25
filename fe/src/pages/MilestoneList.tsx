@@ -1,12 +1,14 @@
+import styled from 'styled-components';
 import MilestoneHeader from 'components/MilestoneList/MilestoneHeader';
 import MilestoneItem from 'components/MilestoneList/MilestoneItem';
 import Header from 'components/common/Header';
 import ListContainer from 'components/common/ListContainer';
 import SubNav from 'components/common/SubNav';
+import { wrapStyle } from 'styles/commonStyles';
 
 function MilestoneList() {
   return (
-    <main className="wrap">
+    <Main>
       <Header avatarUrl="null" />
       <SubNav location="MILESTONE" />
       <ListContainer headerItem={<MilestoneHeader />}>
@@ -19,8 +21,12 @@ function MilestoneList() {
           id="12313"
         />
       </ListContainer>
-    </main>
+    </Main>
   );
 }
 
 export default MilestoneList;
+
+const Main = styled.main`
+  ${wrapStyle};
+`;

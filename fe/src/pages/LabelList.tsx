@@ -1,3 +1,4 @@
+import styled from 'styled-components';
 import LabelItem, { LabelItemProps } from 'components/LabelList/LabelItem';
 import BlankMessage from 'components/common/BlankMessage';
 import Header from 'components/common/Header';
@@ -6,6 +7,7 @@ import ListContainer from 'components/common/ListContainer';
 import SubNav from 'components/common/SubNav';
 import Text from 'components/common/Text';
 import { COLOR } from 'styles/color';
+import { wrapStyle } from 'styles/commonStyles';
 import FONT from 'styles/font';
 
 const LABEL_MOCK_DATA: LabelItemProps[] = [
@@ -43,7 +45,7 @@ const hasData = dataCount > 0;
 
 function LabelList() {
   return (
-    <main className="wrap">
+    <Main>
       <Header avatarUrl="null" />
       <SubNav location="LABEL" />
       <ListContainer
@@ -58,8 +60,12 @@ function LabelList() {
             <LabelItem id={id} key={id} label={label} desc={desc} />
           ))) || <BlankMessage text="등록된 라벨이 없습니다" />}
       </ListContainer>
-    </main>
+    </Main>
   );
 }
 
 export default LabelList;
+
+const Main = styled.main`
+  ${wrapStyle}
+`;

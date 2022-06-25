@@ -1,46 +1,6 @@
-import { useState } from 'react';
 import styled, { css } from 'styled-components';
 import { COLOR } from 'styles/color';
 import FONT from 'styles/font';
-import SIZE from 'styles/size';
-
-function Input({
-  template = 'MEDIUM',
-  placeholder,
-  width = `${SIZE.INPUT[template].WIDTH}px`,
-  height = `${SIZE.INPUT[template].HEIGHT}px`,
-  inputLabel = '',
-  inputId,
-}: InputProps) {
-  const [isFocused, setIsFocused] = useState(false);
-  const [inputText, setInputText] = useState('');
-
-  const onChange = ({ target }: { target: HTMLInputElement }) => {
-    setInputText(target.value);
-  };
-  return (
-    <Wrapper width={width} height={height} isFocused={isFocused} template={template}>
-      {inputLabel && (
-        <label className="input-label" htmlFor={inputId}>
-          {inputLabel}
-        </label>
-      )}
-      <div className="input-wrap">
-        <input
-          placeholder={isFocused ? '' : placeholder}
-          onChange={onChange}
-          value={inputText}
-          onFocus={() => setIsFocused(true)}
-          onBlur={() => setIsFocused(false)}
-          id={inputId}
-          style={{ background: 'transparent' }}
-        />
-      </div>
-    </Wrapper>
-  );
-}
-
-export default Input;
 
 const INPUT_STYLES = {
   SMALL: {
@@ -150,61 +110,70 @@ const Wrapper = styled.div<{
   ${({ template }) => template !== 'SMALL' && INPUT_STYLES[template].FLEX}
   ${({ isFocused, template }) =>
     template !== 'SMALL' && isFocused && INPUT_STYLES[template].PADDING.FOCUSED}
+`;
 
-  .input-label {
-    /* template SMALL style */
-    width: ${({ template }) => template === 'SMALL' && INPUT_STYLES[template].LABEL.WIDTH}px;
-    line-height: ${({ height }) => height};
-    ${({ template }) => template === 'SMALL' && INPUT_STYLES[template].LABEL.MARGIN}
-    ${({ template }) =>
-      template === 'SMALL' &&
-      css`
-        font-size: ${INPUT_STYLES[template].LABEL.FONT_STYLE.INITIAL.SIZE};
-        color: ${INPUT_STYLES[template].LABEL.FONT_STYLE.INITIAL.COLOR};
-      `}
+const CustomLabel = styled.label<{
+  height?: string;
+  isFocused: boolean;
+  template: TemplateType;
+}>`
+  /* template SMALL style */
+  width: ${({ template }) => template === 'SMALL' && INPUT_STYLES[template].LABEL.WIDTH}px;
+  line-height: ${({ height }) => height};
+  ${({ template }) => template === 'SMALL' && INPUT_STYLES[template].LABEL.MARGIN}
+  ${({ template }) =>
+    template === 'SMALL' &&
+    css`
+      font-size: ${INPUT_STYLES[template].LABEL.FONT_STYLE.INITIAL.SIZE};
+      color: ${INPUT_STYLES[template].LABEL.FONT_STYLE.INITIAL.COLOR};
+    `}
 
     ${({ isFocused, template }) =>
-      template === 'SMALL' &&
-      isFocused &&
-      css`
-        font-size: ${INPUT_STYLES[template].LABEL.FONT_STYLE.FOCUSED.SIZE};
-        color: ${INPUT_STYLES[template].LABEL.FONT_STYLE.FOCUSED.COLOR};
-      `}
+    template === 'SMALL' &&
+    isFocused &&
+    css`
+      font-size: ${INPUT_STYLES[template].LABEL.FONT_STYLE.FOCUSED.SIZE};
+      color: ${INPUT_STYLES[template].LABEL.FONT_STYLE.FOCUSED.COLOR};
+    `}
 
     /* template MEDIUM, LARGE style */
     height: ${({ template }) => template !== 'SMALL' && INPUT_STYLES.MEDIUM.LABEL.HEIGHT}px;
-    ${({ template }) =>
-      template !== 'SMALL' &&
-      css`
-        font-size: ${INPUT_STYLES.MEDIUM.LABEL.FONT_STYLE.INITIAL.SIZE};
-        color: ${INPUT_STYLES.MEDIUM.LABEL.FONT_STYLE.INITIAL.COLOR};
-        line-height: ${INPUT_STYLES.MEDIUM.LABEL.FONT_STYLE.INITIAL.LINE_HEIGHT}px;
-        display: ${INPUT_STYLES.MEDIUM.LABEL.DISPLAY};
-      `}
+  ${({ template }) =>
+    template !== 'SMALL' &&
+    css`
+      font-size: ${INPUT_STYLES.MEDIUM.LABEL.FONT_STYLE.INITIAL.SIZE};
+      color: ${INPUT_STYLES.MEDIUM.LABEL.FONT_STYLE.INITIAL.COLOR};
+      line-height: ${INPUT_STYLES.MEDIUM.LABEL.FONT_STYLE.INITIAL.LINE_HEIGHT}px;
+      display: ${INPUT_STYLES.MEDIUM.LABEL.DISPLAY};
+    `}
 
-    ${({ isFocused, template }) =>
-      template !== 'SMALL' &&
-      isFocused &&
-      css`
-        display: ${INPUT_STYLES.MEDIUM.LABEL.FONT_STYLE.FOCUSED.DISPLAY};
-      `}
-  }
+  ${({ isFocused, template }) =>
+    template !== 'SMALL' &&
+    isFocused &&
+    css`
+      display: ${INPUT_STYLES.MEDIUM.LABEL.FONT_STYLE.FOCUSED.DISPLAY};
+    `}
+`;
 
-  .input-wrap {
-    /* template SMALL style */
-    ${({ template }) => template === 'SMALL' && INPUT_STYLES.SMALL.INPUT_WRAP.INITIAL}
+const InputWrap = styled.div<{
+  isFocused: boolean;
+  template: TemplateType;
+}>`
+  /* template SMALL style */
+  ${({ template }) => template === 'SMALL' && INPUT_STYLES.SMALL.INPUT_WRAP.INITIAL}
 
-    /* template MEDIUM, LARGE style */
+  /* template MEDIUM, LARGE style */
     ${({ template }) => template !== 'SMALL' && INPUT_STYLES.MEDIUM.INPUT_WRAP.INITIAL}
 
     ${({ isFocused, template }) =>
-      template !== 'SMALL' && isFocused && INPUT_STYLES.MEDIUM.INPUT_WRAP.FOCUSED}
-  }
+    template !== 'SMALL' && isFocused && INPUT_STYLES.MEDIUM.INPUT_WRAP.FOCUSED}
 `;
 
-type TemplateType = keyof typeof INPUT_STYLES;
+export { INPUT_STYLES, InputWrap, CustomLabel, Wrapper };
 
-interface InputProps {
+export type TemplateType = keyof typeof INPUT_STYLES;
+
+export interface InputProps {
   placeholder: string;
   width?: string;
   height?: string;
