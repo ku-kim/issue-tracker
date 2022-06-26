@@ -9,8 +9,8 @@ function ListContainer({
 }: ListContainerProps) {
   return (
     <Wrapper width={width}>
-      <div className="list-header">{headerItem}</div>
-      <div className="list-body">{children}</div>
+      <ListHeader>{headerItem}</ListHeader>
+      <ListBody>{children}</ListBody>
     </Wrapper>
   );
 }
@@ -25,29 +25,29 @@ const Wrapper = styled.div<{ width: string }>`
   border: 1px solid ${BORDER_COLOR};
   margin-bottom: 27px;
   overflow: hidden;
+`;
 
-  .list-header {
-    width: 100%;
-    height: ${SIZE.LIST_CONTAINER.HEADER.HEIGHT}px;
-    display: flex;
-    align-items: center;
-    background-color: ${COLOR.GREY[100]};
-    font-size: ${SIZE.LIST_CONTAINER.HEADER.FONT_SIZE}px;
-    padding: ${SIZE.LIST_CONTAINER.HEADER.PADDING_TOP}px ${SIZE.LIST_CONTAINER.PADDING_LEFT}px;
-    border-bottom: 1px solid ${BORDER_COLOR};
-  }
+const ListHeader = styled.div`
+  width: 100%;
+  height: ${SIZE.LIST_CONTAINER.HEADER.HEIGHT}px;
+  display: flex;
+  align-items: center;
+  background-color: ${COLOR.GREY[100]};
+  font-size: ${SIZE.LIST_CONTAINER.HEADER.FONT_SIZE}px;
+  padding: ${SIZE.LIST_CONTAINER.HEADER.PADDING_TOP}px ${SIZE.LIST_CONTAINER.PADDING_LEFT}px;
+  border-bottom: 1px solid ${BORDER_COLOR};
+`;
 
-  .list-body {
-    width: 100%;
-    background-color: ${COLOR.WHITE};
+const ListBody = styled.div`
+  width: 100%;
+  background-color: ${COLOR.WHITE};
 
-    > :nth-child(n) {
-      min-height: ${SIZE.LIST_CONTAINER.BODY.ITEM_HEIGHT}px;
-      padding: ${SIZE.LIST_CONTAINER.BODY.PADDING_TOP}px ${SIZE.LIST_CONTAINER.PADDING_LEFT}px;
+  > :nth-child(n) {
+    min-height: ${SIZE.LIST_CONTAINER.BODY.ITEM_HEIGHT}px;
+    padding: ${SIZE.LIST_CONTAINER.BODY.PADDING_TOP}px ${SIZE.LIST_CONTAINER.PADDING_LEFT}px;
 
-      &:not(:last-child) {
-        border-bottom: 1px solid ${BORDER_COLOR};
-      }
+    &:not(:last-child) {
+      border-bottom: 1px solid ${BORDER_COLOR};
     }
   }
 `;

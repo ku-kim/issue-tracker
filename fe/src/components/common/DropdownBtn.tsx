@@ -13,12 +13,11 @@ function DropdownBtn({
   gap = SIZE.DROPDOWN_BTN.GAP,
   width = 'fit-content',
   height = `${SIZE.DROPDOWN_BTN.HEIGHT}px`,
-  className,
 }: DropdownBtnProps) {
   const [isModalActive, setIsModalActive] = useState(false);
 
   return (
-    <Wrapper width={width} height={height} className={className}>
+    <Wrapper width={width} height={height}>
       <Button onClick={handleClickedBtn} gap={gap}>
         {name}
         <Icon
@@ -83,7 +82,6 @@ type DropdownBtnProps = {
   gap?: number;
   width?: string;
   height?: string;
-  className?: string;
 };
 
 export default DropdownBtn;

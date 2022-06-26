@@ -1,10 +1,13 @@
 import { useState } from 'react';
 import styled from 'styled-components';
 import { COLOR } from 'styles/color';
+import { flexCenterStyle } from 'styles/commonStyles';
 import FONT from 'styles/font';
 import SIZE from 'styles/size';
 import DropdownBtn from '../common/DropdownBtn';
 import Icon from '../common/Icon';
+
+const INPUT_ID = 'filter-input';
 
 function FilterBar({ placeholder }: { placeholder: string }) {
   const [isFocused, setIsFocused] = useState(false);
@@ -16,32 +19,30 @@ function FilterBar({ placeholder }: { placeholder: string }) {
 
   return (
     <Wrapper isFocused={isFocused}>
-      <DropdownBtn
+      <FilterDropdown
         name="필터"
         startLocation="LEFT"
         width={`${SIZE.FILTER_BAR.WIDTH}px`}
         height="100%"
         gap={SIZE.FILTER_BAR.GAP}
-        className="filter-dropdown"
       >
         <div>이런이런이런</div>
-      </DropdownBtn>
+      </FilterDropdown>
 
-      <div className="input-area flex-center">
-        <label htmlFor="filter-bar-input" className="flex-center">
+      <InputArea isFocused={isFocused}>
+        <Label htmlFor={INPUT_ID}>
           <Icon icon="search" stroke="inherit" />
-          <input
+          <InputText
             type="text"
-            className="input-text"
+            id={INPUT_ID}
             placeholder={placeholder}
             onFocus={() => setIsFocused(true)}
             onBlur={() => setIsFocused(false)}
             onChange={onChange}
             value={inputText}
-            id="filter-bar-input"
           />
-        </label>
-      </div>
+        </Label>
+      </InputArea>
     </Wrapper>
   );
 }
@@ -55,33 +56,40 @@ const Wrapper = styled.div<{ isFocused: boolean }>`
   border-radius: 11px;
   border: 1px solid ${({ isFocused }) => (isFocused ? COLOR.BLACK : COLOR.GREY[300])};
   background-color: ${({ isFocused }) => (isFocused ? COLOR.WHITE : COLOR.GREY[300])};
+`;
 
-  .filter-dropdown:hover {
+const FilterDropdown = styled(DropdownBtn)`
+  &:hover {
     background-color: ${COLOR.GREY[300]};
   }
+`;
 
-  .input-area {
-    width: 472px;
-    height: 100%;
-    stroke: ${COLOR.GREY[400]};
-    background-color: ${({ isFocused }) => (isFocused ? COLOR.WHITE : COLOR.GREY[200])};
-    border-left: 1px solid ${COLOR.GREY[300]};
-    stroke: ${({ isFocused }) => (isFocused ? COLOR.GREY[500] : COLOR.GREY[400])};
+const InputArea = styled.div<{ isFocused: boolean }>`
+  ${flexCenterStyle};
+  width: 472px;
+  height: 100%;
+  stroke: ${COLOR.GREY[400]};
+  background-color: ${({ isFocused }) => (isFocused ? COLOR.WHITE : COLOR.GREY[200])};
+  border-left: 1px solid ${COLOR.GREY[300]};
+  stroke: ${({ isFocused }) => (isFocused ? COLOR.GREY[500] : COLOR.GREY[400])};
+`;
 
-    .input-text {
-      width: 400px;
-      height: 28px;
-      font-size: ${FONT.SIZE.SMALL};
-      margin-left: 10px;
-      background-color: transparent;
+const Label = styled.label`
+  ${flexCenterStyle};
+`;
 
-      &::placeholder {
-        color: ${COLOR.GREY[400]};
-      }
+const InputText = styled.input`
+  width: 400px;
+  height: 28px;
+  font-size: ${FONT.SIZE.SMALL};
+  margin-left: 10px;
+  background-color: transparent;
 
-      &:focus {
-        color: ${COLOR.BLACK};
-      }
-    }
+  &::placeholder {
+    color: ${COLOR.GREY[400]};
+  }
+
+  &:focus {
+    color: ${COLOR.BLACK};
   }
 `;

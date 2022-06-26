@@ -1,0 +1,41 @@
+import { useState } from 'react';
+import SIZE from 'styles/size';
+import { CustomLabel, InputProps, InputWrap, Wrapper } from './Input.style';
+
+function Input({
+  template = 'MEDIUM',
+  placeholder,
+  width = `${SIZE.INPUT[template].WIDTH}px`,
+  height = `${SIZE.INPUT[template].HEIGHT}px`,
+  inputLabel = '',
+  inputId,
+}: InputProps) {
+  const [isFocused, setIsFocused] = useState(false);
+  const [inputText, setInputText] = useState('');
+
+  const onChange = ({ target }: { target: HTMLInputElement }) => {
+    setInputText(target.value);
+  };
+  return (
+    <Wrapper width={width} height={height} isFocused={isFocused} template={template}>
+      {inputLabel && (
+        <CustomLabel height={height} isFocused={isFocused} template={template} htmlFor={inputId}>
+          {inputLabel}
+        </CustomLabel>
+      )}
+      <InputWrap isFocused={isFocused} template={template}>
+        <input
+          placeholder={isFocused ? '' : placeholder}
+          onChange={onChange}
+          value={inputText}
+          onFocus={() => setIsFocused(true)}
+          onBlur={() => setIsFocused(false)}
+          id={inputId}
+          style={{ background: 'transparent' }}
+        />
+      </InputWrap>
+    </Wrapper>
+  );
+}
+
+export default Input;
