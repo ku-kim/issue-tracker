@@ -6,24 +6,15 @@ type State = {
 };
 
 function useFetch({ url, options }: { url: string; options?: RequestInit }) {
-  const INIT_STATE: State = { data: { 난: '초기값' }, error: undefined };
-  function fetchReducer(state: any, action: any) {
-    switch (action.type) {
-      case 'fetch':
-        return { ...state, data: action.data };
-      case 'error':
-        return { ...state, error: action.error };
-      default:
-        return state;
-    }
-  }
+  const INIT_STATE: State = { data: {}, error: undefined };
 
   const [state, dispatch] = useReducer(fetchReducer, INIT_STATE);
 
   useEffect(() => {
-    if (!url) {
-      return;
-    }
+    if (!url) return;
+
+    fetchData();
+
     async function fetchData() {
       try {
         const res = await fetch(url, options);
@@ -31,16 +22,25 @@ function useFetch({ url, options }: { url: string; options?: RequestInit }) {
           throw new Error(res.statusText);
         }
         const resJSON = await res.json();
-        dispatch({ action: 'fetch', data: resJSON });
-      } catch (e) {
-        dispatch({ action: 'error', error: e });
+        dispatch({ type: 'fetch', data: resJSON });
+      } catch (error) {
+        dispatch({ type: 'error', error });
       }
     }
-
-    fetchData();
   }, []);
 
   return state;
+}
+
+function fetchReducer(state: any, action: any) {
+  switch (action.type) {
+    case 'fetch':
+      return { ...state, data: action.data };
+    case 'error':
+      return { ...state, error: action.error };
+    default:
+      return state;
+  }
 }
 
 export default useFetch;
