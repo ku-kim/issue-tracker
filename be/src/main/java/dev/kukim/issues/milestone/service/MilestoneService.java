@@ -42,19 +42,26 @@ public class MilestoneService {
 			milestoneRespons);
 	}
 
-	public MilestoneResponse insertMilestone(MilestoneCreateRequest milestoneCreateRequest) {
-		Milestone saveMilestone = mileStoneRepository.save(
-			Milestone.createBy(milestoneCreateRequest));
+	public MilestoneResponse insertMilestone(MilestoneCreateRequest request) {
+		Milestone milestone = Milestone.of(request.getTitle(),
+			request.getDescription(),
+			request.getDueDate());
 
-		return MilestoneResponse.createBy(saveMilestone);
+		Milestone insertedMilestone = mileStoneRepository.save(milestone);
+
+		return MilestoneResponse.createBy(insertedMilestone);
 	}
 
 	public MilestoneResponse updateMilestone(Long milestoneId,
-		MilestoneUpdateRequest milestoneUpdateRequest) {
+		MilestoneUpdateRequest request) {
 		Milestone findMilestone = mileStoneRepository.findById(milestoneId)
 			.orElseThrow(MilestoneNotFoundException::new);
 
-		findMilestone.update(milestoneUpdateRequest);
+		findMilestone.update(request.getTitle(),
+			request.getDescription(),
+			request.getDueDate(),
+			request.getOpen());
+
 		Milestone updatedMilestone = mileStoneRepository.save(findMilestone);
 
 		return MilestoneResponse.createBy(updatedMilestone);
