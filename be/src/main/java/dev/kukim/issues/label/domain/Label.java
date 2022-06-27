@@ -20,7 +20,8 @@ public class Label extends BaseTimeEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	private String title;
+	@Embedded
+	private Title title;
 
 	@Embedded
 	private Description description;
@@ -30,13 +31,17 @@ public class Label extends BaseTimeEntity {
 
 	private Label(Long id, String title, String description, String backgroundColor) {
 		this.id = id;
-		this.title = title;
+		this.title = new Title(title);
 		this.description = new Description(description);
 		this.backgroundColor = new BackgroundColor(backgroundColor);
 	}
 
 	public static Label of(String title, String description, String backgroundColor) {
 		return new Label(null, title, description, backgroundColor);
+	}
+
+	public String getTitle() {
+		return title.getTitle();
 	}
 
 	public String getDescription() {
@@ -51,7 +56,7 @@ public class Label extends BaseTimeEntity {
 	public void update(String title, String description, String backgroundColor) {
 		// TODO 리팩토링 필요
 		if (title != null) {
-			this.title = title;
+			this.title = new Title(title);
 		}
 		if (description != null) {
 			this.description = new Description(description);
