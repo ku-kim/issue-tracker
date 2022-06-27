@@ -141,14 +141,14 @@ class MilestoneServiceTest extends MysqlTestContainer {
 		milestoneCreateRequest.setTitle("마일스톤 저장 1");
 		MilestoneResponse saveMilestone = milestoneService.insertMilestone(milestoneCreateRequest);
 
-		milestoneService.delete(saveMilestone.getId());
+		milestoneService.removeMilestone(saveMilestone.getId());
 
 		assertThat(mileStoneRepository.findById(saveMilestone.getId())).isEmpty();
 	}
 
 	@Test
 	void 만약_존재하지않는_마일스톤_삭제요청이_온다면_예외를발생한다() {
-		assertThatThrownBy(() -> milestoneService.delete(1000000L))
+		assertThatThrownBy(() -> milestoneService.removeMilestone(1000000L))
 			.isInstanceOf(MilestoneNotFoundException.class);
 	}
 }

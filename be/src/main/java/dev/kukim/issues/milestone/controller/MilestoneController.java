@@ -41,7 +41,7 @@ public class MilestoneController {
 	}
 
 	@DeleteMapping("/{milestoneId}")
-	public void deleteMilestone(@PathVariable Long milestoneId) {
-		milestoneService.delete(milestoneId);
+	public void removeMilestone(@PathVariable Long milestoneId) {
+		milestoneService.removeMilestone(milestoneId);
 	}
 }

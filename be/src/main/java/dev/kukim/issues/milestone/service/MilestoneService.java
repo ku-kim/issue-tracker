@@ -60,7 +60,7 @@ public class MilestoneService {
 		return MilestoneResponse.createBy(updatedMilestone);
 	}
 
-	public void delete(Long milestoneId) {
+	public void removeMilestone(Long milestoneId) {
 		Milestone findMilestone = mileStoneRepository.findById(milestoneId)
 			.orElseThrow(MilestoneNotFoundException::new);
 
