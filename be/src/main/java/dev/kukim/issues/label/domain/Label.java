@@ -37,6 +37,7 @@ public class Label extends BaseTimeEntity {
 	}
 
 	public void update(String title, String description, String backgroundColor) {
+		// TODO 리팩토링 필요
 		if (title != null) {
 			this.title = title;
 		}

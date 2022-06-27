@@ -38,9 +38,9 @@ public class LabelService {
 			request.getDescription(),
 			request.getBackgroundColor());
 
-		Label saveLabel = labelRepository.save(label);
+		Label insertedLabel = labelRepository.save(label);
 
-		return LabelResponse.createBy(saveLabel);
+		return LabelResponse.createBy(insertedLabel);
 	}
 
 	public LabelResponse updateLabel(Long labelId, LabelUpdateRequest request) {
