@@ -1,6 +1,7 @@
 package dev.kukim.issues.label.domain;
 
 import dev.kukim.issues.common.domain.BaseTimeEntity;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -23,17 +24,22 @@ public class Label extends BaseTimeEntity {
 
 	private String description;
 
-	private String backgroundColor;
+	@Embedded
+	private BackgroundColor backgroundColor;
 
 	private Label(Long id, String title, String description, String backgroundColor) {
 		this.id = id;
 		this.title = title;
 		this.description = description;
-		this.backgroundColor = backgroundColor;
+		this.backgroundColor = new BackgroundColor(backgroundColor);
 	}
 
 	public static Label of(String title, String description, String backgroundColor) {
 		return new Label(null, title, description, backgroundColor);
+	}
+
+	public String getBackgroundColor() {
+		return backgroundColor.getBackgroundColor();
 	}
 
 	public void update(String title, String description, String backgroundColor) {
@@ -45,7 +51,7 @@ public class Label extends BaseTimeEntity {
 			this.description = description;
 		}
 		if (backgroundColor != null) {
-			this.backgroundColor = backgroundColor;
+			this.backgroundColor = new BackgroundColor(backgroundColor);
 		}
 	}
 }

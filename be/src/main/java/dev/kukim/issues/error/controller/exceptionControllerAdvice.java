@@ -3,6 +3,7 @@ package dev.kukim.issues.error.controller;
 import dev.kukim.issues.common.exception.ElementNotFoundException;
 import dev.kukim.issues.common.exception.InvalidSearchRequestParamException;
 import dev.kukim.issues.error.controller.response.ErrorResponse;
+import dev.kukim.issues.label.exception.InvalidBackgroudColorException;
 import dev.kukim.issues.user.auth.exception.AuthorizationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -36,5 +37,12 @@ public class exceptionControllerAdvice {
 			elementNotFoundException.getMessage());
 	}
 
+	@ExceptionHandler(IllegalArgumentException.class)
+	@ResponseStatus(HttpStatus.BAD_REQUEST)
+	public ErrorResponse illegalArgumentException(
+		IllegalArgumentException illegalArgumentException) {
+		return new ErrorResponse(HttpStatus.BAD_REQUEST,
+			illegalArgumentException.getMessage());
+	}
 
 }
