@@ -1,5 +1,6 @@
 package dev.kukim.issues.user.user.domain;
 
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,7 +12,6 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
 import lombok.Setter;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -26,7 +26,6 @@ public class User {
 
 	private Long thirdPartyId;
 
-	@Column(nullable = false)
 	private String name;
 
 	@Column(length = 255)
@@ -36,7 +35,7 @@ public class User {
 	private String avatarUrl;
 
 	@Builder
-	private User(Long id, @NonNull Long thirdPartyId, @NonNull String name, String email, String avatarUrl) {
+	private User(Long id, Long thirdPartyId, String name, String email, String avatarUrl) {
 		this.id = id;
 		this.thirdPartyId = thirdPartyId;
 		this.name = name;
