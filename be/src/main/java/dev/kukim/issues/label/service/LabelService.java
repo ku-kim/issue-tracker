@@ -55,4 +55,11 @@ public class LabelService {
 
 		return LabelResponse.createBy(updatedLabel);
 	}
+
+	public void removeLabel(Long labelId) {
+		Label findLabel = labelRepository.findById(labelId)
+			.orElseThrow(LabelNotFountException::new);
+
+		labelRepository.delete(findLabel);
+	}
 }

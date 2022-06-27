@@ -5,9 +5,9 @@ import dev.kukim.issues.label.controller.request.LabelUpdateRequest;
 import dev.kukim.issues.label.controller.response.LabelListResponse;
 import dev.kukim.issues.label.controller.response.LabelResponse;
 import dev.kukim.issues.label.service.LabelService;
-import dev.kukim.issues.milestone.controller.request.MilestoneUpdateRequest;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -39,4 +39,10 @@ public class LabelController {
 
 		return labelService.updateLabel(labelId, labelUpdateRequest);
 	}
+
+	@DeleteMapping("/{labelId}")
+	public void removeLabel(@PathVariable Long labelId) {
+		labelService.removeLabel(labelId);
+	}
+
 }
