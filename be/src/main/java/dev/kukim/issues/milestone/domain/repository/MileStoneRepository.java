@@ -10,4 +10,6 @@ public interface MileStoneRepository extends JpaRepository<Milestone, Long> {
 
 	List<Milestone> findAllByIsOpen(boolean status);
 
+	long countByIsOpen(boolean status);
+
 }
