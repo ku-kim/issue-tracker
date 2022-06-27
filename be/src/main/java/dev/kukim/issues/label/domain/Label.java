@@ -7,13 +7,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import lombok.AccessLevel;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Getter @Setter
 public class Label extends BaseTimeEntity {
 
 	@Id
@@ -38,6 +35,10 @@ public class Label extends BaseTimeEntity {
 
 	public static Label of(String title, String description, String backgroundColor) {
 		return new Label(null, title, description, backgroundColor);
+	}
+
+	public Long getId() {
+		return id;
 	}
 
 	public String getTitle() {
