@@ -1,6 +1,7 @@
 package dev.kukim.issues.milestone.service;
 
 import dev.kukim.issues.common.domain.Status;
+import dev.kukim.issues.label.domain.repository.LabelRepository;
 import dev.kukim.issues.milestone.controller.request.MilestoneCreateRequest;
 import dev.kukim.issues.milestone.controller.request.MilestoneUpdateRequest;
 import dev.kukim.issues.milestone.controller.response.MilestoneResponse;
@@ -18,6 +19,7 @@ import org.springframework.stereotype.Service;
 public class MilestoneService {
 
 	private final MileStoneRepository mileStoneRepository;
+	private final LabelRepository labelRepository;
 
 	public MilestoneListResponse findAllBy(String status) {
 		boolean statusBoolean = Status.statusToBoolean(status);
@@ -28,11 +30,19 @@ public class MilestoneService {
 			.map(MilestoneResponse::createBy)
 			.collect(Collectors.toList());
 
-		return MilestoneListResponse.of(milestoneRespons);
+		long labelsCount = labelRepository.count();
+		long openedMilestonesCount = mileStoneRepository.countByIsOpen(true);
+		long closedMilestonesCount = mileStoneRepository.countByIsOpen(false);
+
+		return new MilestoneListResponse(labelsCount,
+			openedMilestonesCount,
+			closedMilestonesCount,
+			milestoneRespons);
 	}
 
 	public MilestoneResponse save(MilestoneCreateRequest milestoneCreateRequest) {
-		Milestone saveMilestone = mileStoneRepository.save(Milestone.createBy(milestoneCreateRequest));
+		Milestone saveMilestone = mileStoneRepository.save(
+			Milestone.createBy(milestoneCreateRequest));
 
 		return MilestoneResponse.createBy(saveMilestone);
 	}
