@@ -22,7 +22,8 @@ public class Label extends BaseTimeEntity {
 
 	private String title;
 
-	private String description;
+	@Embedded
+	private Description description;
 
 	@Embedded
 	private BackgroundColor backgroundColor;
@@ -30,7 +31,7 @@ public class Label extends BaseTimeEntity {
 	private Label(Long id, String title, String description, String backgroundColor) {
 		this.id = id;
 		this.title = title;
-		this.description = description;
+		this.description = new Description(description);
 		this.backgroundColor = new BackgroundColor(backgroundColor);
 	}
 
@@ -38,9 +39,14 @@ public class Label extends BaseTimeEntity {
 		return new Label(null, title, description, backgroundColor);
 	}
 
+	public String getDescription() {
+		return description.getDescription();
+	}
+
 	public String getBackgroundColor() {
 		return backgroundColor.getBackgroundColor();
 	}
+
 
 	public void update(String title, String description, String backgroundColor) {
 		// TODO 리팩토링 필요
@@ -48,7 +54,7 @@ public class Label extends BaseTimeEntity {
 			this.title = title;
 		}
 		if (description != null) {
-			this.description = description;
+			this.description = new Description(description);
 		}
 		if (backgroundColor != null) {
 			this.backgroundColor = new BackgroundColor(backgroundColor);
