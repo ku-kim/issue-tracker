@@ -38,10 +38,10 @@ class MilestoneServiceTest extends MysqlTestContainer {
 		// 테스트 마일스톤 객체 준비
 		this.milestone = Milestone.of("마일스톤1", "description1", LocalDate.now());
 
-		this.milestoneCreateRequest = MilestoneCreateRequest.of("마일스톤 요청1", "description1",
+		this.milestoneCreateRequest = new MilestoneCreateRequest("마일스톤 요청1", "description1",
 			LocalDate.now());
 
-		this.milestoneUpdateRequest = MilestoneUpdateRequest.of("마일스톤 제목변경", null, null, null);
+		this.milestoneUpdateRequest = new MilestoneUpdateRequest("마일스톤 제목변경", null, null, null);
 	}
 
 	@BeforeEach
@@ -57,7 +57,8 @@ class MilestoneServiceTest extends MysqlTestContainer {
 		milestone.setOpen(true);
 		mileStoneRepository.save(milestone);
 
-		MilestoneListResponse milestoneListResponse = milestoneService.showMilestoneBySearch("open");
+		MilestoneListResponse milestoneListResponse = milestoneService.showMilestoneBySearch(
+			"open");
 
 		assertThat(milestoneListResponse.getMilestones()).hasSize(1);
 		assertThat(milestoneListResponse.getMilestones().get(0).getTitle())
@@ -72,7 +73,8 @@ class MilestoneServiceTest extends MysqlTestContainer {
 		milestone.setOpen(true);
 		mileStoneRepository.save(milestone);
 
-		MilestoneListResponse milestoneListResponse = milestoneService.showMilestoneBySearch("close");
+		MilestoneListResponse milestoneListResponse = milestoneService.showMilestoneBySearch(
+			"close");
 
 		assertThat(milestoneListResponse.getMilestones()).isEmpty();
 	}
@@ -88,7 +90,8 @@ class MilestoneServiceTest extends MysqlTestContainer {
 		milestoneCreateRequest.setTitle("마일스톤 저장 요청1");
 		milestoneCreateRequest.setDescription("내용 1");
 
-		MilestoneResponse mileStoneResponse = milestoneService.insertMilestone(milestoneCreateRequest);
+		MilestoneResponse mileStoneResponse = milestoneService.insertMilestone(
+			milestoneCreateRequest);
 
 		assertThat(mileStoneResponse.getTitle()).isEqualTo("마일스톤 저장 요청1");
 	}
