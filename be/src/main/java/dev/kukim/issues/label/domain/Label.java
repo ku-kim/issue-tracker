@@ -35,4 +35,16 @@ public class Label extends BaseTimeEntity {
 	public static Label of(String title, String description, String backgroundColor) {
 		return new Label(null, title, description, backgroundColor);
 	}
+
+	public void update(String title, String description, String backgroundColor) {
+		if (title != null) {
+			this.title = title;
+		}
+		if (description != null) {
+			this.description = description;
+		}
+		if (backgroundColor != null) {
+			this.backgroundColor = backgroundColor;
+		}
+	}
 }
