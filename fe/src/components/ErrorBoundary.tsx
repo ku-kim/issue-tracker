@@ -1,4 +1,4 @@
-import React, { ReactNode, useState } from 'react';
+import React, { ReactNode } from 'react';
 
 class ErrorBoundary extends React.Component<
   { children: ReactNode; fallback: ReactNode },
