@@ -33,4 +33,10 @@ public class LabelController {
 		return labelService.insertLabel(labelInsertRequest);
 	}
 
+	@PatchMapping("/{labelId}")
+	public LabelResponse updateLabel(@PathVariable Long labelId,
+		@RequestBody LabelUpdateRequest labelUpdateRequest) {
+
+		return labelService.updateLabel(labelId, labelUpdateRequest);
+	}
 }

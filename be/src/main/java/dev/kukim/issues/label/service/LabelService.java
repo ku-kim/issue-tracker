@@ -43,5 +43,16 @@ public class LabelService {
 		return LabelResponse.createBy(saveLabel);
 	}
 
+	public LabelResponse updateLabel(Long labelId, LabelUpdateRequest request) {
+		Label findLabel = labelRepository.findById(labelId)
+			.orElseThrow(LabelNotFountException::new);
 
+		findLabel.update(request.getTitle(),
+			request.getDescription(),
+			request.getBackgroundColor());
+
+		Label updatedLabel = labelRepository.save(findLabel);
+
+		return LabelResponse.createBy(updatedLabel);
+	}
 }
