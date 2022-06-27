@@ -18,11 +18,13 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class MilestoneService {
 
+	public static final boolean OPEND = true;
+	public static final boolean CLOSED = false;
 	private final MileStoneRepository mileStoneRepository;
 	private final LabelRepository labelRepository;
 
-	public MilestoneListResponse findAllBy(String status) {
-		boolean statusBoolean = Status.statusToBoolean(status);
+	public MilestoneListResponse showMilestoneBySearch(String milestoneStatus) {
+		boolean statusBoolean = Status.statusToBoolean(milestoneStatus);
 
 		List<MilestoneResponse> milestoneRespons = mileStoneRepository.findAllByIsOpen(
 				statusBoolean)
@@ -31,8 +33,8 @@ public class MilestoneService {
 			.collect(Collectors.toList());
 
 		long labelsCount = labelRepository.count();
-		long openedMilestonesCount = mileStoneRepository.countByIsOpen(true);
-		long closedMilestonesCount = mileStoneRepository.countByIsOpen(false);
+		long openedMilestonesCount = mileStoneRepository.countByIsOpen(OPEND);
+		long closedMilestonesCount = mileStoneRepository.countByIsOpen(CLOSED);
 
 		return new MilestoneListResponse(labelsCount,
 			openedMilestonesCount,
@@ -40,14 +42,14 @@ public class MilestoneService {
 			milestoneRespons);
 	}
 
-	public MilestoneResponse save(MilestoneCreateRequest milestoneCreateRequest) {
+	public MilestoneResponse insertMilestone(MilestoneCreateRequest milestoneCreateRequest) {
 		Milestone saveMilestone = mileStoneRepository.save(
 			Milestone.createBy(milestoneCreateRequest));
 
 		return MilestoneResponse.createBy(saveMilestone);
 	}
 
-	public MilestoneResponse update(Long milestoneId,
+	public MilestoneResponse updateMilestone(Long milestoneId,
 		MilestoneUpdateRequest milestoneUpdateRequest) {
 		Milestone findMilestone = mileStoneRepository.findById(milestoneId)
 			.orElseThrow(MilestoneNotFoundException::new);
