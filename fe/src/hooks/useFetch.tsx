@@ -5,9 +5,9 @@ type State = {
   error?: Error;
 };
 
-function useFetch({ url, options }: { url: string; options?: RequestInit }) {
-  const INIT_STATE: State = { data: {}, error: undefined };
+const INIT_STATE: State = { data: {}, error: undefined };
 
+function useFetch({ url, options }: { url: string; options?: RequestInit }) {
   const [state, dispatch] = useReducer(fetchReducer, INIT_STATE);
 
   useEffect(() => {
@@ -35,9 +35,9 @@ function useFetch({ url, options }: { url: string; options?: RequestInit }) {
 function fetchReducer(state: any, action: any) {
   switch (action.type) {
     case 'fetch':
-      return { ...state, data: action.data };
+      return { ...INIT_STATE, data: action.data };
     case 'error':
-      return { ...state, error: action.error };
+      return { ...INIT_STATE, error: action.error };
     default:
       return state;
   }
