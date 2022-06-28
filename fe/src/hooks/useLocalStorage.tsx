@@ -1,12 +1,11 @@
-function useLocalStorage({ key }: { key: string }): any {
-  return [getValue(), setValue];
+function useLocalStorage<T>({ key }: { key: string }): [() => T | 'null', (value: T) => void] {
+  return [getValue, setValue];
 
-  function getValue() {
-    const item = localStorage.getItem(key);
-    return JSON.parse(item as string);
+  function getValue(): T {
+    return JSON.parse(localStorage.getItem(key) || 'null');
   }
 
-  function setValue(value: any) {
+  function setValue(value: T) {
     localStorage.setItem(key, JSON.stringify(value));
   }
 }

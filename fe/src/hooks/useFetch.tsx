@@ -1,18 +1,17 @@
 import { useEffect, useReducer } from 'react';
 
 type State = {
-  data?: object;
+  data?: object | null;
   error?: Error;
 };
 
-const INIT_STATE: State = { data: {}, error: undefined };
+const INIT_STATE: State = { data: null, error: undefined };
 
 function useFetch({ url, options }: { url: string; options?: RequestInit }) {
   const [state, dispatch] = useReducer(fetchReducer, INIT_STATE);
 
   useEffect(() => {
     if (!url) return;
-
     fetchData();
 
     async function fetchData() {
@@ -35,9 +34,9 @@ function useFetch({ url, options }: { url: string; options?: RequestInit }) {
 function fetchReducer(state: any, action: any) {
   switch (action.type) {
     case 'fetch':
-      return { ...INIT_STATE, data: action.data };
+      return { ...state, data: action.data };
     case 'error':
-      return { ...INIT_STATE, error: action.error };
+      return { ...state, error: action.error };
     default:
       return state;
   }
