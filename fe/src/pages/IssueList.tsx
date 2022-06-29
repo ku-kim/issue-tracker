@@ -35,7 +35,7 @@ function IssueList() {
       <MainHeader>
         <FilterBar placeholder="Search all Issues" />
         <ButtonArea>
-          <Tabs activeItem="LABEL" />
+          <Tabs />
           <ButtonLink
             template="SMALL_STANDARD"
             backgroundColor={{ initial: COLOR.BLUE[200], hover: COLOR.BLUE[300] }}
