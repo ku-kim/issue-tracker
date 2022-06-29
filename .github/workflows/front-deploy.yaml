@@ -23,6 +23,18 @@ jobs:
         with:
           node-version: 14
 
+      # .env 생성 
+      - name: Generate Environment Variables File for Production
+        run: |
+          echo "REACT_APP_API_END_POINT=$REACT_APP_API_END_POINT" >> .env
+        env:
+          REACT_APP_API_END_POINT: ${{ secrets.REACT_APP_API_END_POINT }}
+
+      # .env 확인
+      - name: env 확인
+        run: |
+          cat ./.env
+
       # npm cache : https://github.com/actions/cache/blob/main/examples.md#node---npm
       - name: Get npm cache directory
         id: npm-cache-dir
