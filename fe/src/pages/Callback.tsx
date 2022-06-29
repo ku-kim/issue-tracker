@@ -1,5 +1,4 @@
 import { Navigate, useSearchParams } from 'react-router-dom';
-import Error from 'components/common/Error';
 import Loading from 'components/common/Loading';
 import useFetchFromIssueTracker from 'hooks/useFetchFromIssueTracker';
 import useLocalStorage from 'hooks/useLocalStorage';
@@ -16,7 +15,7 @@ function Callback() {
   });
 
   if (error) {
-    return <Error message="로그인에 실패하였습니다. 다시 시도해주세요." />;
+    return <div>실패</div>;
   }
 
   if (!data) {
