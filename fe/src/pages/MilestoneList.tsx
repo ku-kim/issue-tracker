@@ -16,8 +16,8 @@ function MilestoneList() {
       <Header avatarUrl="null" />
       <SubNav
         location="MILESTONE"
-        isActiveMilestoneFormField={isActiveMilestoneFormField}
-        setIsActiveMilestoneFormField={setIsActiveMilestoneFormField}
+        isActiveFormField={isActiveMilestoneFormField}
+        setIsActiveFormField={setIsActiveMilestoneFormField}
       />
       {isActiveMilestoneFormField && <MilestoneFormField />}
       <ListContainer headerItem={<MilestoneHeader />}>
