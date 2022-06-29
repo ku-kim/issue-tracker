@@ -13,12 +13,13 @@ function App() {
       <GlobalStyle />
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Login />} />
-          <Route path="/callback" element={<Callback />} />
+          <Route path="/" element={<div />} />
           <Route path="/template" element={<Template />} />
           <Route path="/issueList" element={<IssueList />} />
           <Route path="/labelList" element={<LabelList />} />
           <Route path="/milestoneList" element={<MilestoneList />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/callback" element={<Callback />} />
         </Routes>
       </BrowserRouter>
     </>
