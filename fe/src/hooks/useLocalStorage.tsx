@@ -1,4 +1,4 @@
-function useLocalStorage<T>({ key }: { key: string }): [() => T | 'null', (value: T) => void] {
+function useLocalStorage<T>({ key }: { key: string }): [() => T | null, (value: T) => void] {
   return [getValue, setValue];
 
   function getValue(): T {
