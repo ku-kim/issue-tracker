@@ -1,9 +1,6 @@
-import { Navigate, useSearchParams } from 'react-router-dom';
-import Loading from 'components/common/Loading';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import useFetchFromIssueTracker from 'hooks/useFetchFromIssueTracker';
 import useLocalStorage from 'hooks/useLocalStorage';
-
-const USER_DEFAULT_NAME = '익명의 쿼카';
 
 function Callback() {
   const [searchParams] = useSearchParams();
@@ -14,19 +11,25 @@ function Callback() {
     url: `api/login/token?code=${code}`,
   });
 
+  const navigate = useNavigate();
+
   if (error) {
     return <div>실패</div>;
   }
 
   if (!data) {
-    return <Loading />;
+    return <div>로딩중</div>;
   }
 
   const { accessToken, name, email, avatarUrl } = data;
-  const userData = { accessToken, name: name || USER_DEFAULT_NAME, email, avatarUrl };
-  setAccessToken(userData);
 
-  return <Navigate to="/issueList" />;
+  const newData = { accessToken, name: name || '익명의 쿼카', email, avatarUrl };
+
+  setAccessToken(newData);
+
+  navigate('/issueList');
+
+  return <div />;
 }
 
 export default Callback;
