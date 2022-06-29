@@ -9,6 +9,7 @@ import Input from 'components/common/Input/Input';
 import Label from 'components/common/Label';
 import LinearGraph from 'components/common/LinearGraph';
 import ListContainer from 'components/common/ListContainer';
+import Spinner from 'components/common/Loading/Spinner';
 import Logo from 'components/common/Logo';
 import Text from 'components/common/Text';
 import { COLOR } from 'styles/color';
@@ -18,6 +19,7 @@ import FONT from 'styles/font';
 function Template() {
   return (
     <Wrap>
+      <Spinner />
       <Title>Logo</Title>
       <Column>
         <Logo size="MEDIUM" />
