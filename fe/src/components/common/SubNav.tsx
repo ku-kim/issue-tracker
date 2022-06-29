@@ -6,37 +6,25 @@ import Button from './Button/Button';
 import Icon from './Icon';
 import Tabs, { ActiveItemType } from './Tabs';
 
-function SubNav({
-  location,
-  isActiveMilestoneFormField,
-  setIsActiveMilestoneFormField,
-}: SubNavProps) {
+function SubNav({ location, isActiveFormField, setIsActiveFormField }: SubNavProps) {
   return (
     <MainHeader>
       <Tabs activeItem={location} />
-      {isActiveMilestoneFormField ? (
-        <SmallBtn type="CLOSE" setIsActiveMilestoneFormField={setIsActiveMilestoneFormField} />
-      ) : (
-        <SmallBtn type="ADD" setIsActiveMilestoneFormField={setIsActiveMilestoneFormField} />
-      )}
+      <SmallBtn type={isActiveFormField ? 'CLOSE' : 'ADD'} onClick={setIsActiveFormField} />
     </MainHeader>
   );
 }
 
-function SmallBtn({ type, setIsActiveMilestoneFormField }: SmallBtnProps) {
+function SmallBtn({ type, onClick: setIsActiveFormField }: SmallBtnProps) {
   const isAddButton = type === 'ADD';
 
   return (
     <Button
-      onClick={() => {
-        if (setIsActiveMilestoneFormField) {
-          setIsActiveMilestoneFormField(isAddButton);
-        }
-      }}
+      onClick={() => setIsActiveFormField?.(isAddButton)}
       template="SMALL_STANDARD"
       backgroundColor={{ initial: COLOR.BLUE[200], hover: COLOR.BLUE[300] }}
     >
-      <Icon icon={isAddButton ? 'plus' : 'xSquare'} stroke={COLOR.WHITE} />{' '}
+      <Icon icon={isAddButton ? 'plus' : 'xSquare'} stroke={COLOR.WHITE} />
       {isAddButton ? '추가' : '닫기'}
     </Button>
   );
@@ -50,11 +38,11 @@ const MainHeader = styled.div`
 
 type SmallBtnProps = {
   type: string;
-  setIsActiveMilestoneFormField?: Dispatch<SetStateAction<boolean>>;
+  onClick?: Dispatch<SetStateAction<boolean>>;
 };
 
 type SubNavProps = {
   location: ActiveItemType;
-  isActiveMilestoneFormField?: boolean;
-  setIsActiveMilestoneFormField?: Dispatch<SetStateAction<boolean>>;
+  isActiveFormField?: boolean;
+  setIsActiveFormField?: Dispatch<SetStateAction<boolean>>;
 };
