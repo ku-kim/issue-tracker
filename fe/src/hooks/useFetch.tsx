@@ -26,7 +26,7 @@ function useFetch({ url, options }: { url: string; options?: RequestInit }) {
         dispatch({ type: 'error', error });
       }
     }
-  }, []);
+  }, [url, options]);
 
   return state;
 }
