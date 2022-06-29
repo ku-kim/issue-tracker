@@ -1,4 +1,7 @@
-import { useNavigate, useSearchParams } from 'react-router-dom';
+// import { useEffect } from 'react';
+
+// import { useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import useFetchFromIssueTracker from 'hooks/useFetchFromIssueTracker';
 import useLocalStorage from 'hooks/useLocalStorage';
 
@@ -7,29 +10,26 @@ function Callback() {
   const [, setAccessToken] = useLocalStorage({ key: 'user_info' });
 
   const code = searchParams.get('code');
-  const { data, error } = useFetchFromIssueTracker({
+  const { data: userDataResponse, error } = useFetchFromIssueTracker({
     url: `api/login/token?code=${code}`,
   });
-
-  const navigate = useNavigate();
 
   if (error) {
     return <div>실패</div>;
   }
 
-  if (!data) {
+  if (!userDataResponse) {
     return <div>로딩중</div>;
   }
 
-  const { accessToken, name, email, avatarUrl } = data;
+  // if (userDataResponse.data) {
+  const { accessToken: token, name, email, avatarUrl } = userDataResponse;
 
-  const newData = { accessToken, name: name || '익명의 쿼카', email, avatarUrl };
+  const newData = { token, name: name || '익명의 쿼카', email, avatarUrl };
 
   setAccessToken(newData);
-
-  navigate('/issueList');
-
-  return <div />;
+  // }
+  return <div>나는 콜백 페이지야.</div>;
 }
 
 export default Callback;
