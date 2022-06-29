@@ -36,16 +36,12 @@ class MilestoneServiceTest extends MysqlTestContainer {
 	@BeforeEach
 	void initObject() {
 		// 테스트 마일스톤 객체 준비
-		this.milestone = Milestone.builder()
-			.title("마일스톤1")
-			.description("description1")
-			.dueDate(LocalDate.now())
-			.isOpen(true)
-			.build();
-		this.milestoneCreateRequest = MilestoneCreateRequest.of("마일스톤 요청1", "description1",
+		this.milestone = Milestone.of("마일스톤1", "description1", LocalDate.now());
+
+		this.milestoneCreateRequest = new MilestoneCreateRequest("마일스톤 요청1", "description1",
 			LocalDate.now());
 
-		this.milestoneUpdateRequest = MilestoneUpdateRequest.of("마일스톤 제목변경", null, null, null);
+		this.milestoneUpdateRequest = new MilestoneUpdateRequest("마일스톤 제목변경", null, null, null);
 	}
 
 	@BeforeEach
@@ -61,7 +57,8 @@ class MilestoneServiceTest extends MysqlTestContainer {
 		milestone.setOpen(true);
 		mileStoneRepository.save(milestone);
 
-		MilestoneListResponse milestoneListResponse = milestoneService.findAllBy("open");
+		MilestoneListResponse milestoneListResponse = milestoneService.showMilestoneBySearch(
+			"open");
 
 		assertThat(milestoneListResponse.getMilestones()).hasSize(1);
 		assertThat(milestoneListResponse.getMilestones().get(0).getTitle())
@@ -76,14 +73,15 @@ class MilestoneServiceTest extends MysqlTestContainer {
 		milestone.setOpen(true);
 		mileStoneRepository.save(milestone);
 
-		MilestoneListResponse milestoneListResponse = milestoneService.findAllBy("close");
+		MilestoneListResponse milestoneListResponse = milestoneService.showMilestoneBySearch(
+			"close");
 
 		assertThat(milestoneListResponse.getMilestones()).isEmpty();
 	}
 
 	@Test
 	void 만약_잘못된_status_조건이들어온다면_예외를_발생시킨다() {
-		assertThatThrownBy(() -> milestoneService.findAllBy("ErrorStatus"))
+		assertThatThrownBy(() -> milestoneService.showMilestoneBySearch("ErrorStatus"))
 			.isInstanceOf(InvalidSearchRequestParamException.class);
 	}
 
@@ -92,7 +90,8 @@ class MilestoneServiceTest extends MysqlTestContainer {
 		milestoneCreateRequest.setTitle("마일스톤 저장 요청1");
 		milestoneCreateRequest.setDescription("내용 1");
 
-		MilestoneResponse mileStoneResponse = milestoneService.save(milestoneCreateRequest);
+		MilestoneResponse mileStoneResponse = milestoneService.insertMilestone(
+			milestoneCreateRequest);
 
 		assertThat(mileStoneResponse.getTitle()).isEqualTo("마일스톤 저장 요청1");
 	}
@@ -101,10 +100,10 @@ class MilestoneServiceTest extends MysqlTestContainer {
 	@Test
 	void 만약_특정_마일스톤_제목_수정_요청이들어온다면_마일스톤을_수정하고_수정한_마일스톤을_리턴한다() {
 		milestoneCreateRequest.setTitle("마일스톤 1");
-		MilestoneResponse saveMilestone = milestoneService.save(milestoneCreateRequest);
+		MilestoneResponse saveMilestone = milestoneService.insertMilestone(milestoneCreateRequest);
 		milestoneUpdateRequest.setTitle("마일스톤 제목수정 1");
 
-		MilestoneResponse updateMilestone = milestoneService.update(saveMilestone.getId(),
+		MilestoneResponse updateMilestone = milestoneService.updateMilestone(saveMilestone.getId(),
 			milestoneUpdateRequest);
 
 		assertThat(updateMilestone.getId()).isEqualTo(saveMilestone.getId());
@@ -114,12 +113,12 @@ class MilestoneServiceTest extends MysqlTestContainer {
 	@Test
 	void 만약_특정_마일스톤_많은내용_수정_요청이들어온다면_마일스톤을_수정하고_수정한_마일스톤을_리턴한다() {
 		milestoneCreateRequest.setTitle("마일스톤 1");
-		MilestoneResponse saveMilestone = milestoneService.save(milestoneCreateRequest);
+		MilestoneResponse saveMilestone = milestoneService.insertMilestone(milestoneCreateRequest);
 		milestoneUpdateRequest.setTitle("마일스톤 제목수정 2");
 		milestoneUpdateRequest.setDescription("내용 수정");
 		milestoneUpdateRequest.setOpen(false);
 
-		MilestoneResponse updateMilestone = milestoneService.update(saveMilestone.getId(),
+		MilestoneResponse updateMilestone = milestoneService.updateMilestone(saveMilestone.getId(),
 			milestoneUpdateRequest);
 
 		assertThat(updateMilestone.getId()).isEqualTo(saveMilestone.getId());
@@ -131,7 +130,7 @@ class MilestoneServiceTest extends MysqlTestContainer {
 	@Test
 	void 만약_존재하지않는_마일스톤_요청이들어온다면_예외를발생한다() {
 		milestoneUpdateRequest.setTitle("마일스톤 제목수정 1");
-		assertThatThrownBy(() -> milestoneService.update(100000L,
+		assertThatThrownBy(() -> milestoneService.updateMilestone(100000L,
 			milestoneUpdateRequest))
 			.isInstanceOf(MilestoneNotFoundException.class);
 	}
@@ -139,16 +138,16 @@ class MilestoneServiceTest extends MysqlTestContainer {
 	@Test
 	void 만약_특정_마일스톤_삭제요청이_주어진다면_해당마일스톤을삭제한다() {
 		milestoneCreateRequest.setTitle("마일스톤 저장 1");
-		MilestoneResponse saveMilestone = milestoneService.save(milestoneCreateRequest);
+		MilestoneResponse saveMilestone = milestoneService.insertMilestone(milestoneCreateRequest);
 
-		milestoneService.delete(saveMilestone.getId());
+		milestoneService.removeMilestone(saveMilestone.getId());
 
 		assertThat(mileStoneRepository.findById(saveMilestone.getId())).isEmpty();
 	}
 
 	@Test
 	void 만약_존재하지않는_마일스톤_삭제요청이_온다면_예외를발생한다() {
-		assertThatThrownBy(() -> milestoneService.delete(1000000L))
+		assertThatThrownBy(() -> milestoneService.removeMilestone(1000000L))
 			.isInstanceOf(MilestoneNotFoundException.class);
 	}
 }

@@ -9,8 +9,7 @@ import lombok.Setter;
 
 
 @NoArgsConstructor
-@Getter
-@Setter
+@Getter @Setter
 public class MilestoneCreateRequest {
 
 	@NotEmpty
@@ -20,13 +19,10 @@ public class MilestoneCreateRequest {
 
 	private LocalDate dueDate;
 
-	private MilestoneCreateRequest(String title, String description, LocalDate dueDate) {
+	public MilestoneCreateRequest(String title, String description, LocalDate dueDate) {
 		this.title = title;
 		this.description = description;
 		this.dueDate = dueDate;
 	}
-
-	public static MilestoneCreateRequest of(String title, String description, LocalDate dueDate) {
-		return new MilestoneCreateRequest(title, description, dueDate);
-	}
+	
 }

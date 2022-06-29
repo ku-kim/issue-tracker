@@ -1,6 +1,7 @@
 package dev.kukim.issues.milestone.service;
 
 import dev.kukim.issues.common.domain.Status;
+import dev.kukim.issues.label.domain.repository.LabelRepository;
 import dev.kukim.issues.milestone.controller.request.MilestoneCreateRequest;
 import dev.kukim.issues.milestone.controller.request.MilestoneUpdateRequest;
 import dev.kukim.issues.milestone.controller.response.MilestoneResponse;
@@ -17,10 +18,13 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class MilestoneService {
 
+	public static final boolean OPEND = true;
+	public static final boolean CLOSED = false;
 	private final MileStoneRepository mileStoneRepository;
+	private final LabelRepository labelRepository;
 
-	public MilestoneListResponse findAllBy(String status) {
-		boolean statusBoolean = Status.statusToBoolean(status);
+	public MilestoneListResponse showMilestoneBySearch(String milestoneStatus) {
+		boolean statusBoolean = Status.statusToBoolean(milestoneStatus);
 
 		List<MilestoneResponse> milestoneRespons = mileStoneRepository.findAllByIsOpen(
 				statusBoolean)
@@ -28,27 +32,42 @@ public class MilestoneService {
 			.map(MilestoneResponse::createBy)
 			.collect(Collectors.toList());
 
-		return MilestoneListResponse.of(milestoneRespons);
+		long labelsCount = labelRepository.count();
+		long openedMilestonesCount = mileStoneRepository.countByIsOpen(OPEND);
+		long closedMilestonesCount = mileStoneRepository.countByIsOpen(CLOSED);
+
+		return new MilestoneListResponse(labelsCount,
+			openedMilestonesCount,
+			closedMilestonesCount,
+			milestoneRespons);
 	}
 
-	public MilestoneResponse save(MilestoneCreateRequest milestoneCreateRequest) {
-		Milestone saveMilestone = mileStoneRepository.save(Milestone.createBy(milestoneCreateRequest));
+	public MilestoneResponse insertMilestone(MilestoneCreateRequest request) {
+		Milestone milestone = Milestone.of(request.getTitle(),
+			request.getDescription(),
+			request.getDueDate());
 
-		return MilestoneResponse.createBy(saveMilestone);
+		Milestone insertedMilestone = mileStoneRepository.save(milestone);
+
+		return MilestoneResponse.createBy(insertedMilestone);
 	}
 
-	public MilestoneResponse update(Long milestoneId,
-		MilestoneUpdateRequest milestoneUpdateRequest) {
+	public MilestoneResponse updateMilestone(Long milestoneId,
+		MilestoneUpdateRequest request) {
 		Milestone findMilestone = mileStoneRepository.findById(milestoneId)
 			.orElseThrow(MilestoneNotFoundException::new);
 
-		findMilestone.update(milestoneUpdateRequest);
+		findMilestone.update(request.getTitle(),
+			request.getDescription(),
+			request.getDueDate(),
+			request.getOpen());
+
 		Milestone updatedMilestone = mileStoneRepository.save(findMilestone);
 
 		return MilestoneResponse.createBy(updatedMilestone);
 	}
 
-	public void delete(Long milestoneId) {
+	public void removeMilestone(Long milestoneId) {
 		Milestone findMilestone = mileStoneRepository.findById(milestoneId)
 			.orElseThrow(MilestoneNotFoundException::new);
 

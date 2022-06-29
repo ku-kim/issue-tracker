@@ -17,7 +17,7 @@ public class MilestoneUpdateRequest {
 
 	private Boolean open;
 
-	private MilestoneUpdateRequest(String title, String description, LocalDate dueDate,
+	public MilestoneUpdateRequest(String title, String description, LocalDate dueDate,
 		Boolean open) {
 		this.title = title;
 		this.description = description;
@@ -25,7 +25,4 @@ public class MilestoneUpdateRequest {
 		this.open = open;
 	}
 
-	public static MilestoneUpdateRequest of(String title, String description, LocalDate dueDate, Boolean open) {
-		return new MilestoneUpdateRequest(title, description, dueDate, open);
-	}
 }
