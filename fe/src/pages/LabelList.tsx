@@ -47,7 +47,7 @@ function LabelList() {
   return (
     <Main>
       <Header avatarUrl="null" />
-      <SubNav location="LABEL" />
+      <SubNav location="LABEL" labelCount={0} milestoneCount={0} />
       <ListContainer
         headerItem={
           <Text weight={FONT.WEIGHT.BOLD} color={COLOR.GREY[500]}>

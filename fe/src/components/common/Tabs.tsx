@@ -4,15 +4,15 @@ import FONT from 'styles/font';
 import ButtonLink from './Button/ButtonLink';
 import Icon from './Icon';
 
-function Tabs({ activeItem = null }: { activeItem?: ActiveItemType }) {
+function Tabs({ activeItem = null, labelCount, milestoneCount }: TabsProps) {
   return (
     <Wrapper>
       <TabItem to="/labelList" active={activeItem === 'LABEL'}>
-        <Icon icon="tag" stroke="inherit" /> 레이블 <TabItemCount>(0)</TabItemCount>
+        <Icon icon="tag" stroke="inherit" /> 레이블 <TabItemCount>({labelCount})</TabItemCount>
       </TabItem>
       <TabItem to="/milestoneList" active={activeItem === 'MILESTONE'}>
         <Icon icon="milestone" stroke="transparent" fill="inherit" /> 마일스톤
-        <TabItemCount>(0)</TabItemCount>
+        <TabItemCount>({milestoneCount})</TabItemCount>
       </TabItem>
     </Wrapper>
   );
@@ -41,6 +41,12 @@ interface TabItemProps {
   children: React.ReactNode;
   active: boolean;
   to: string;
+}
+
+interface TabsProps {
+  activeItem: ActiveItemType;
+  milestoneCount: number;
+  labelCount: number;
 }
 
 const tabsButtonBackGroundColors = { initial: 'transparent', hover: COLOR.GREY[200] };
