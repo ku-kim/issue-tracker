@@ -1,11 +1,6 @@
 import styled from 'styled-components';
 import { COLOR } from 'styles/color';
 
-const TEXT_COLOR = {
-  LIGHT: COLOR.WHITE,
-  DARK: COLOR.BLACK,
-};
-
 function TextColorSelect({ color, setColor }: TextColorSelectProps) {
   return (
     <Wrapper>
@@ -42,6 +37,11 @@ function TextColorSelect({ color, setColor }: TextColorSelectProps) {
 export default TextColorSelect;
 
 export type TextColorTypes = keyof typeof TEXT_COLOR;
+
+export const TEXT_COLOR = {
+  LIGHT: COLOR.WHITE,
+  DARK: COLOR.BLACK,
+};
 
 interface TextColorSelectProps {
   color: TextColorTypes;

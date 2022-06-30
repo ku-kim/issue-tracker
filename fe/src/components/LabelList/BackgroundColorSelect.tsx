@@ -3,7 +3,7 @@ import Icon from 'components/common/Icon';
 import Text from 'components/common/Text';
 import { COLOR, LABEL_COLORS } from 'styles/color';
 
-const FIRST_INDEX = 0;
+export const FIRST_INDEX = 0;
 const LAST_INDEX = LABEL_COLORS.length - 1;
 
 function getRandomLabelColorsIndex() {
