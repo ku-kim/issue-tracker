@@ -1,22 +1,16 @@
 import styled from 'styled-components';
-import ButtonLink from 'components/common/Button/ButtonLink';
+import Anchor from 'components/Login/Anchor';
 import Logo from 'components/common/Logo';
-import { COLOR } from 'styles/color';
 import { flexCenterStyle } from 'styles/commonStyles';
-import FONT from 'styles/font';
+
+const AUTHORIZE_URL =
+  'https://github.com/login/oauth/authorize?client_id=dd0ee875caf7ce9d591b&scope=id,name,email,avatar_url';
 
 function Login() {
   return (
     <Wrapper>
       <Logo size="LARGE" />
-      <ButtonLink
-        template="LARGE"
-        backgroundColor={{ initial: COLOR.BLACK }}
-        fontStyles={{ fontColor: { initial: COLOR.WHITE }, fontWeight: FONT.WEIGHT.BOLD }}
-        to="/"
-      >
-        <ButtonText>GitHub 계정으로 로그인</ButtonText>
-      </ButtonLink>
+      <Anchor name="GitHub 계정으로 로그인" href={AUTHORIZE_URL} />
     </Wrapper>
   );
 }
@@ -31,8 +25,4 @@ const Wrapper = styled.div`
   > :not(:last-child) {
     margin-bottom: 60px;
   }
-`;
-
-const ButtonText = styled.span`
-  ${flexCenterStyle};
 `;
