@@ -6,10 +6,16 @@ import Button from './Button/Button';
 import Icon from './Icon';
 import Tabs, { ActiveItemType } from './Tabs';
 
-function SubNav({ location, isActiveFormField, setIsActiveFormField }: SubNavProps) {
+function SubNav({
+  location,
+  isActiveFormField,
+  setIsActiveFormField,
+  labelCount,
+  milestoneCount,
+}: SubNavProps) {
   return (
     <MainHeader>
-      <Tabs activeItem={location} />
+      <Tabs activeItem={location} labelCount={labelCount} milestoneCount={milestoneCount} />
       <SmallBtn type={isActiveFormField ? 'CLOSE' : 'ADD'} onClick={setIsActiveFormField} />
     </MainHeader>
   );
@@ -45,4 +51,6 @@ type SubNavProps = {
   location: ActiveItemType;
   isActiveFormField?: boolean;
   setIsActiveFormField?: Dispatch<SetStateAction<boolean>>;
+  labelCount: number;
+  milestoneCount: number;
 };
