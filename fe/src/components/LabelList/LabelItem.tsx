@@ -1,15 +1,22 @@
 import styled from 'styled-components';
 import TextButtonLink from 'components/common/Button/TextButtonLink';
+import Label from 'components/common/Label';
 import { COLOR } from 'styles/color';
 import { ellipsisStyle } from 'styles/commonStyles';
 import Icon from '../common/Icon';
 import Text from '../common/Text';
 
-function LabelItem({ id, label, desc }: LabelItemProps) {
+function LabelItem({
+  data: { id, textColor, backgroundColor, title, description },
+}: LabelItemProps) {
   return (
     <Wrapper>
-      <div>{label}</div>
-      <LabelDesc color={COLOR.GREY[500]}>{desc}</LabelDesc>
+      <div>
+        <Label color={textColor} backgroundColor={backgroundColor}>
+          {title}
+        </Label>
+      </div>
+      <LabelDesc color={COLOR.GREY[500]}>{description}</LabelDesc>
       <ButtonArea>
         <TextButtonLink to={`/${id}`} color={COLOR.GREY[500]}>
           <Icon icon="edit" stroke={COLOR.GREY[500]} />
@@ -26,10 +33,16 @@ function LabelItem({ id, label, desc }: LabelItemProps) {
 
 export default LabelItem;
 
+export type LabelDataType = {
+  id: number;
+  title: string;
+  description: string;
+  backgroundColor: string;
+  textColor: string;
+};
+
 export type LabelItemProps = {
-  id: string;
-  label: JSX.Element;
-  desc: string;
+  data: LabelDataType;
 };
 
 const Wrapper = styled.div`
