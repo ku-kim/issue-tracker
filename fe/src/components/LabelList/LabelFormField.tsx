@@ -5,15 +5,15 @@ import Input from 'components/common/Input/Input';
 import Label from 'components/common/Label';
 import { LABEL_COLORS } from 'styles/color';
 import { flexCenterStyle } from 'styles/commonStyles';
-import BackgroundColorSelect from './BackgroundColorSelect';
+import BackgroundColorSelect, { FIRST_INDEX } from './BackgroundColorSelect';
 import LabelSelectItem from './LabelSelectItem';
-import TextColorSelect, { TextColorTypes } from './TextColorSelect';
+import TextColorSelect, { TextColorTypes, TEXT_COLOR } from './TextColorSelect';
 
 function LabelFormField() {
   const [isChangedRequiredValue, setIsChangedRequiredValue] = useState(false);
   const [labelTitle, setLabelTitle] = useState('');
   const [textColor, setTextColor] = useState<TextColorTypes>('DARK');
-  const [backgroundColor, setBackgroundColor] = useState(LABEL_COLORS[0]);
+  const [backgroundColor, setBackgroundColor] = useState(LABEL_COLORS[FIRST_INDEX]);
 
   const handleOnChange = ({ target }: { target: HTMLInputElement }) => {
     setLabelTitle(target.value);
@@ -23,7 +23,7 @@ function LabelFormField() {
     <FormField name="새로운 라벨 추가" disabled={!isChangedRequiredValue}>
       <FieldInnerItem>
         <LabelPreview>
-          <Label color={textColor} backgroundColor={backgroundColor}>
+          <Label color={TEXT_COLOR[textColor]} backgroundColor={backgroundColor}>
             {labelTitle || '레이블 이름'}
           </Label>
         </LabelPreview>
