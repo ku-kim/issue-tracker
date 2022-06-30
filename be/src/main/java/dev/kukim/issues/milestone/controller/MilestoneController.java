@@ -25,23 +25,23 @@ public class MilestoneController {
 	private final MilestoneService milestoneService;
 
 	@GetMapping
-	public MilestoneListResponse read(@RequestParam String status) {
-		return milestoneService.findAllBy(status);
+	public MilestoneListResponse showMilestoneBySearch(@RequestParam String milestoneStatus) {
+		return milestoneService.showMilestoneBySearch(milestoneStatus);
 	}
 
 	@PostMapping
-	public MilestoneResponse save(@Valid @RequestBody MilestoneCreateRequest milestoneCreateRequest) {
-		return milestoneService.save(milestoneCreateRequest);
+	public MilestoneResponse insertMilestone(@Valid @RequestBody MilestoneCreateRequest milestoneCreateRequest) {
+		return milestoneService.insertMilestone(milestoneCreateRequest);
 	}
 
 	@PatchMapping("/{milestoneId}")
-	public MilestoneResponse update(@PathVariable Long milestoneId,
+	public MilestoneResponse updateMilestone(@PathVariable Long milestoneId,
 		@RequestBody MilestoneUpdateRequest milestoneUpdateRequest) {
-		return milestoneService.update(milestoneId, milestoneUpdateRequest);
+		return milestoneService.updateMilestone(milestoneId, milestoneUpdateRequest);
 	}
 
 	@DeleteMapping("/{milestoneId}")
-	public void delete(@PathVariable Long milestoneId) {
-		milestoneService.delete(milestoneId);
+	public void removeMilestone(@PathVariable Long milestoneId) {
+		milestoneService.removeMilestone(milestoneId);
 	}
 }
