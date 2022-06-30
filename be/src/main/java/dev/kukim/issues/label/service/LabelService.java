@@ -23,7 +23,7 @@ public class LabelService {
 	public LabelListResponse showLabels() {
 		List<LabelResponse> labelResponses = labelRepository.findAll()
 			.stream()
-			.map(LabelResponse::createBy)
+			.map(LabelResponse::from)
 			.collect(Collectors.toList());
 
 		long labelsCount = labelRepository.count();
@@ -40,7 +40,7 @@ public class LabelService {
 
 		Label insertedLabel = labelRepository.save(label);
 
-		return LabelResponse.createBy(insertedLabel);
+		return LabelResponse.from(insertedLabel);
 	}
 
 	public LabelResponse updateLabel(Long labelId, LabelUpdateRequest request) {
@@ -53,7 +53,7 @@ public class LabelService {
 
 		Label updatedLabel = labelRepository.save(findLabel);
 
-		return LabelResponse.createBy(updatedLabel);
+		return LabelResponse.from(updatedLabel);
 	}
 
 	public void removeLabel(Long labelId) {
