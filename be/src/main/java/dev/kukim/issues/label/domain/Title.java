@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @Getter
 public class Title {
 
-	public static final int LIMIT_LENGTH = 250;
+	private static final int LIMIT_LENGTH = 250;
 
 	@Column(length = LIMIT_LENGTH)
 	private String title;
