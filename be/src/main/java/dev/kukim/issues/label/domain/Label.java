@@ -26,15 +26,15 @@ public class Label extends BaseTimeEntity {
 	@Embedded
 	private BackgroundColor backgroundColor;
 
-	private Label(Long id, String title, String description, String backgroundColor) {
+	public Label(Long id, String title, String description, String backgroundColor) {
 		this.id = id;
 		this.title = new Title(title);
 		this.description = new Description(description);
 		this.backgroundColor = new BackgroundColor(backgroundColor);
 	}
 
-	public static Label of(String title, String description, String backgroundColor) {
-		return new Label(null, title, description, backgroundColor);
+	public Label(String title, String description, String backgroundColor) {
+		this(null, title, description, backgroundColor);
 	}
 
 	public Long getId() {

@@ -36,7 +36,7 @@ class MilestoneServiceTest extends MysqlTestContainer {
 	@BeforeEach
 	void initObject() {
 		// 테스트 마일스톤 객체 준비
-		this.milestone = Milestone.of("마일스톤1", "description1", LocalDate.now());
+		this.milestone = new Milestone("마일스톤1", "description1", LocalDate.now());
 
 		this.milestoneCreateRequest = new MilestoneCreateRequest("마일스톤 요청1", "description1",
 			LocalDate.now());

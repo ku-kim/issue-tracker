@@ -43,7 +43,7 @@ public class MilestoneService {
 	}
 
 	public MilestoneResponse insertMilestone(MilestoneCreateRequest request) {
-		Milestone milestone = Milestone.of(request.getTitle(),
+		Milestone milestone = new Milestone(request.getTitle(),
 			request.getDescription(),
 			request.getDueDate());
 

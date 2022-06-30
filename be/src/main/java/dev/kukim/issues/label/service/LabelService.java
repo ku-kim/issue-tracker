@@ -34,7 +34,7 @@ public class LabelService {
 
 	public LabelResponse insertLabel(
 		LabelInsertRequest request) {
-		Label label = Label.of(request.getTitle(),
+		Label label = new Label(request.getTitle(),
 			request.getDescription(),
 			request.getBackgroundColor());
 
