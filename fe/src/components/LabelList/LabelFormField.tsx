@@ -3,20 +3,16 @@ import styled from 'styled-components';
 import FormField from 'components/common/FormField';
 import Input from 'components/common/Input/Input';
 import Label from 'components/common/Label';
-import { COLOR, LABEL_COLORS } from 'styles/color';
+import { LABEL_COLORS } from 'styles/color';
 import { flexCenterStyle } from 'styles/commonStyles';
 import BackgroundColorSelect from './BackgroundColorSelect';
 import LabelSelectItem from './LabelSelectItem';
-
-const TEXT_COLOR = {
-  LIGHT: COLOR.WHITE,
-  DARK: COLOR.BLACK,
-};
+import TextColorSelect, { TextColorTypes } from './TextColorSelect';
 
 function LabelFormField() {
   const [isChangedRequiredValue, setIsChangedRequiredValue] = useState(false);
   const [labelTitle, setLabelTitle] = useState('');
-  const [textColor] = useState(TEXT_COLOR.DARK);
+  const [textColor, setTextColor] = useState<TextColorTypes>('DARK');
   const [backgroundColor, setBackgroundColor] = useState(LABEL_COLORS[0]);
 
   const handleOnChange = ({ target }: { target: HTMLInputElement }) => {
@@ -46,7 +42,9 @@ function LabelFormField() {
             <LabelSelectItem title="배경 색상">
               <BackgroundColorSelect color={backgroundColor} setColor={setBackgroundColor} />
             </LabelSelectItem>
-            <LabelSelectItem title="텍스트 색상">테스트</LabelSelectItem>
+            <LabelSelectItem title="텍스트 색상">
+              <TextColorSelect color={textColor} setColor={setTextColor} />
+            </LabelSelectItem>
           </LabelSelectItems>
         </LabelInputWrap>
       </FieldInnerItem>
