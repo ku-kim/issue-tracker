@@ -12,9 +12,11 @@
     "@types/react-dom": "^18.0.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
-    "typescript": "^4.7.3",
-    "web-vitals": "^2.1.4"
+    "styled-components": "^5.3.5",
+    "styled-reset": "^4.4.1",
+    "typescript": "^4.7.3"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -25,8 +27,68 @@
   "eslintConfig": {
     "extends": [
       "react-app",
-      "react-app/jest"
-    ]
+      "react-app/jest",
+      "airbnb",
+      "airbnb-typescript",
+      "prettier"
+    ],
+    "rules": {
+      "react/require-default-props": 0,
+      "react/react-in-jsx-scope": 0,
+      "react/jsx-props-no-spreading": 0,
+      "@typescript-eslint/no-use-before-define": 0,
+      "jsx-a11y/label-has-associated-control": [
+        2,
+        {
+          "controlComponents": [
+            "InputText"
+          ],
+          "depth": 1
+        }
+      ],
+      "import/order": [
+        "error",
+        {
+          "groups": [
+            "builtin",
+            "external",
+            "internal"
+          ],
+          "pathGroups": [
+            {
+              "pattern": "react",
+              "group": "external",
+              "position": "before"
+            }
+          ],
+          "pathGroupsExcludedImportTypes": [
+            "react"
+          ],
+          "alphabetize": {
+            "order": "asc",
+            "caseInsensitive": false
+          }
+        }
+      ]
+    },
+    "plugins": [
+      "import"
+    ],
+    "settings": {
+      "import/resolver": {
+        "typescript": {}
+      }
+    },
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+      "project": [
+        "tsconfig.json"
+      ],
+      "ecmaFeatures": {
+        "jsx": true,
+        "modules": true
+      }
+    }
   },
   "browserslist": {
     "production": [
@@ -39,5 +101,15 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@types/styled-components": "^5.1.25",
+    "@typescript-eslint/eslint-plugin": "^5.28.0",
+    "@typescript-eslint/parser": "^5.28.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-airbnb-typescript": "^17.0.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-import-resolver-typescript": "^2.7.1",
+    "eslint-plugin-import": "^2.26.0"
   }
 }

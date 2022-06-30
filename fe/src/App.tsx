@@ -1,25 +1,26 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import IssueList from 'pages/IssueList';
+import LabelList from 'pages/LabelList';
+import Login from 'pages/Login';
+import MilestoneList from 'pages/MilestoneList';
+import Template from 'pages/Template';
+import GlobalStyle from 'styles/GlobalStyle';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <GlobalStyle />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<div />} />
+          <Route path="/template" element={<Template />} />
+          <Route path="/issueList" element={<IssueList />} />
+          <Route path="/labelList" element={<LabelList />} />
+          <Route path="/milestoneList" element={<MilestoneList />} />
+          <Route path="/login" element={<Login />} />
+        </Routes>
+      </BrowserRouter>
+    </>
   );
 }
 
