@@ -11,20 +11,28 @@ function Input({
   inputLabel = '',
   inputId,
   setIsChangedRequiredValue,
+  inputValue,
+  onChange: onChangeHandler,
+  maxLength,
 }: InputProps) {
   const [isFocused, setIsFocused] = useState(false);
   const [inputText, setInputText] = useState('');
 
   const onChange = ({ target }: { target: HTMLInputElement }) => {
-    setInputText(target.value);
-
+    if (onChangeHandler) {
+      onChangeHandler({ target });
+    } else {
+      setInputText(target.value);
+    }
     if (!setIsChangedRequiredValue) {
       return;
     }
+
     if (!target.value) {
       setIsChangedRequiredValue(false);
       return;
     }
+
     if (target.value) {
       setIsChangedRequiredValue(true);
     }
@@ -41,11 +49,12 @@ function Input({
           name={name}
           placeholder={isFocused ? '' : placeholder}
           onChange={onChange}
-          value={inputText}
+          value={inputValue || inputText}
           onFocus={() => setIsFocused(true)}
           onBlur={() => setIsFocused(false)}
           id={inputId}
           style={{ background: 'transparent' }}
+          maxLength={maxLength}
         />
       </InputWrap>
     </Wrapper>

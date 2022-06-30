@@ -183,4 +183,7 @@ export interface InputProps {
   inputId?: string;
   inputLabel?: React.ReactNode;
   setIsChangedRequiredValue?: Dispatch<SetStateAction<boolean>>;
+  inputValue?: string;
+  onChange?: ({ target }: { target: HTMLInputElement }) => void;
+  maxLength?: number;
 }
