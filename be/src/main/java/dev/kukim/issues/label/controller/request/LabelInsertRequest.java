@@ -7,11 +7,16 @@ import lombok.Getter;
 public class LabelInsertRequest {
 
 	@NotEmpty
-	private String title;
+	private final String title;
 
-	private String description;
+	private final String description;
 
 	@NotEmpty
-	private String backgroundColor;
+	private final String backgroundColor;
 
+	public LabelInsertRequest(String title, String description, String backgroundColor) {
+		this.title = title;
+		this.description = description;
+		this.backgroundColor = backgroundColor;
+	}
 }

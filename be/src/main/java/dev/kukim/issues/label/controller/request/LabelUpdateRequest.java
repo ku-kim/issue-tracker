@@ -5,10 +5,15 @@ import lombok.Getter;
 @Getter
 public class LabelUpdateRequest {
 
-	private String title;
+	private final String title;
 
-	private String description;
+	private final String description;
 
-	private String backgroundColor;
+	private final String backgroundColor;
 
+	public LabelUpdateRequest(String title, String description, String backgroundColor) {
+		this.title = title;
+		this.description = description;
+		this.backgroundColor = backgroundColor;
+	}
 }
