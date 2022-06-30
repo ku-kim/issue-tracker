@@ -44,7 +44,7 @@ interface TabItemProps {
 }
 
 interface TabsProps {
-  activeItem: ActiveItemType;
+  activeItem?: ActiveItemType;
   milestoneCount: number;
   labelCount: number;
 }

@@ -48,7 +48,7 @@ type SmallBtnProps = {
 };
 
 type SubNavProps = {
-  location: ActiveItemType;
+  location?: ActiveItemType;
   isActiveFormField?: boolean;
   setIsActiveFormField?: Dispatch<SetStateAction<boolean>>;
   labelCount: number;
