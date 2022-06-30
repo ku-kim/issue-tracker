@@ -32,6 +32,7 @@ const COLOR = {
 };
 
 const LABEL_COLORS = [
+  '#EFF0F6',
   '#00A8FF',
   '#0097E6',
   '#E84118',
