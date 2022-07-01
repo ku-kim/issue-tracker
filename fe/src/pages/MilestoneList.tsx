@@ -20,13 +20,15 @@ function MilestoneList() {
     return <Loading />;
   }
 
-  const { milestones } = fetchedMilestoneData.data;
+  const { milestones, labelsCount, openedMilestonesCount } = fetchedMilestoneData.data;
 
   return (
     <Main>
       <Header avatarUrl="null" />
       <SubNav
         location="MILESTONE"
+        labelCount={labelsCount}
+        milestoneCount={openedMilestonesCount}
         isActiveFormField={isActiveMilestoneFormField}
         setIsActiveFormField={setIsActiveMilestoneFormField}
       />
