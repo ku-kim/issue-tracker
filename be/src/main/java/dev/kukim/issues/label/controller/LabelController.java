@@ -3,9 +3,7 @@ package dev.kukim.issues.label.controller;
 import dev.kukim.issues.label.controller.request.LabelInsertRequest;
 import dev.kukim.issues.label.controller.request.LabelUpdateRequest;
 import dev.kukim.issues.label.controller.response.LabelListResponse;
-import dev.kukim.issues.label.controller.response.LabelResponse;
 import dev.kukim.issues.label.service.LabelService;
-import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -31,15 +29,15 @@ public class LabelController {
 	}
 
 	@PostMapping
-	public LabelResponse insertLabel(@Valid @RequestBody LabelInsertRequest labelInsertRequest) {
-		return labelService.insertLabel(labelInsertRequest);
+	@ResponseStatus(HttpStatus.CREATED)
+	public void insertLabel(@RequestBody LabelInsertRequest labelInsertRequest) {
+		labelService.insertLabel(labelInsertRequest);
 	}
 
 	@PatchMapping("/{labelId}")
-	public LabelResponse updateLabel(@PathVariable Long labelId,
+	public void updateLabel(@PathVariable Long labelId,
 		@RequestBody LabelUpdateRequest labelUpdateRequest) {
-
-		return labelService.updateLabel(labelId, labelUpdateRequest);
+		labelService.updateLabel(labelId, labelUpdateRequest);
 	}
 
 	@DeleteMapping("/{labelId}")
