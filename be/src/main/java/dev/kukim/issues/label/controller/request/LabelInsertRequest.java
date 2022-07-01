@@ -2,21 +2,18 @@ package dev.kukim.issues.label.controller.request;
 
 import javax.validation.constraints.NotEmpty;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
+@NoArgsConstructor
 public class LabelInsertRequest {
 
 	@NotEmpty
-	private final String title;
+	private String title;
 
-	private final String description;
+	private String description;
 
 	@NotEmpty
-	private final String backgroundColor;
+	private String backgroundColor;
 
-	public LabelInsertRequest(String title, String description, String backgroundColor) {
-		this.title = title;
-		this.description = description;
-		this.backgroundColor = backgroundColor;
-	}
 }

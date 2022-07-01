@@ -1,19 +1,16 @@
 package dev.kukim.issues.label.controller.request;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
+@NoArgsConstructor
 public class LabelUpdateRequest {
 
-	private final String title;
+	private String title;
 
-	private final String description;
+	private String description;
 
-	private final String backgroundColor;
+	private String backgroundColor;
 
-	public LabelUpdateRequest(String title, String description, String backgroundColor) {
-		this.title = title;
-		this.description = description;
-		this.backgroundColor = backgroundColor;
-	}
 }
