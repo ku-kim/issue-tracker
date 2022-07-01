@@ -95,6 +95,7 @@ const BUTTON_STYLES = {
 };
 
 const buttonStyle = css<{
+  type?: 'button' | 'submit' | 'reset' | undefined;
   width: string;
   height: string;
   borderStyle?: string;
@@ -138,6 +139,7 @@ export { BUTTON_STYLES, buttonStyle };
 export type TemplateType = keyof typeof BUTTON_STYLES;
 
 export interface ButtonProps {
+  type?: 'button' | 'submit' | 'reset' | undefined;
   onClick?: () => void;
   children: React.ReactNode;
   disabled?: boolean;
