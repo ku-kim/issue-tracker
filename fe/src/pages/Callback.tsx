@@ -8,7 +8,8 @@ const USER_DEFAULT_NAME = '익명의 쿼카';
 
 function Callback() {
   const [searchParams] = useSearchParams();
-  const [, setAccessToken] = useLocalStorage({ key: 'user_info' });
+  const [, setUserInfo] = useLocalStorage({ key: 'user_info' });
+  const [, setAccessToken] = useLocalStorage({ key: 'ACCESS_TOKEN' });
 
   const code = searchParams.get('code');
   const { data, error } = useFetchFromIssueTracker({
@@ -24,8 +25,9 @@ function Callback() {
   }
 
   const { accessToken, name, email, avatarUrl } = data;
-  const userData = { accessToken, name: name || USER_DEFAULT_NAME, email, avatarUrl };
-  setAccessToken(userData);
+  const userData = { name: name || USER_DEFAULT_NAME, email, avatarUrl };
+  setUserInfo(userData);
+  setAccessToken(accessToken);
 
   return <Navigate to="/issueList" />;
 }
