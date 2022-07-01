@@ -14,7 +14,7 @@ public class LabelResponse {
 	private final LocalDateTime createdAt;
 	private final LocalDateTime updatedAt;
 
-	public static LabelResponse createBy(Label label) {
+	public static LabelResponse from(Label label) {
 		return new LabelResponse(label.getId(),
 			label.getTitle(),
 			label.getDescription(),

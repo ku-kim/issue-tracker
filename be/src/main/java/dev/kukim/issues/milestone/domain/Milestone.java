@@ -31,7 +31,7 @@ public class Milestone extends BaseTimeEntity {
 	@OneToMany(mappedBy = "milestone")
 	private List<Issue> issues;
 
-	private Milestone(Long id, String title, String description, LocalDate dueDate, boolean isOpen) {
+	public Milestone(Long id, String title, String description, LocalDate dueDate, boolean isOpen) {
 		this.id = id;
 		this.title = title;
 		this.description = description;
@@ -39,8 +39,8 @@ public class Milestone extends BaseTimeEntity {
 		this.isOpen = isOpen;
 	}
 
-	public static Milestone of(String title, String description, LocalDate dueDate) {
-		return new Milestone(null, title, description, dueDate, true);
+	public Milestone(String title, String description, LocalDate dueDate) {
+		this(null, title, description, dueDate, true);
 	}
 
 	public void update(String title, String description, LocalDate dueDate, Boolean open) {

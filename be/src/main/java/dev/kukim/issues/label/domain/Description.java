@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @Getter
 public class Description {
 
-	public static final int LIMIT_LENGTH = 500;
+	private static final int LIMIT_LENGTH = 500;
 
 	@Column(length = LIMIT_LENGTH)
 	private String description;
