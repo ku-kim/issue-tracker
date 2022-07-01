@@ -5,19 +5,26 @@ import Input from 'components/common/Input/Input';
 
 function MilestoneFormField() {
   const [isChangedRequiredValue, setIsChangedRequiredValue] = useState(false);
+
   return (
     <FormField name="새로운 마일스톤 추가" disabled={!isChangedRequiredValue}>
       <Column>
         <Row>
           <Input
+            name="milestone"
             template="SMALL"
             placeholder="마일스톤 이름"
             width="600px"
             setIsChangedRequiredValue={setIsChangedRequiredValue}
           />
-          <Input template="SMALL" placeholder="완료일(선택) ex. YYYY-MM-DD" width="600px" />
+          <Input
+            name="dueDate"
+            template="SMALL"
+            placeholder="완료일(선택) ex. YYYY-MM-DD"
+            width="600px"
+          />
         </Row>
-        <Input template="SMALL" placeholder="설명(선택)" width="1216px" />
+        <Input name="desc" template="SMALL" placeholder="설명(선택)" width="1216px" />
       </Column>
     </FormField>
   );
