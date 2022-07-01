@@ -5,6 +5,7 @@ import { CustomLabel, InputProps, InputWrap, Wrapper } from './Input.style';
 function Input({
   template = 'MEDIUM',
   placeholder,
+  name,
   width = `${SIZE.INPUT[template].WIDTH}px`,
   height = `${SIZE.INPUT[template].HEIGHT}px`,
   inputLabel = '',
@@ -37,6 +38,7 @@ function Input({
       )}
       <InputWrap isFocused={isFocused} template={template}>
         <input
+          name={name}
           placeholder={isFocused ? '' : placeholder}
           onChange={onChange}
           value={inputText}
