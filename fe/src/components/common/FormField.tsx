@@ -17,11 +17,25 @@ function FormField({
   disabled?: boolean;
 }) {
   return (
-    <Wrapper>
+    <Wrapper
+      onSubmit={(event) => {
+        event.preventDefault();
+        const target = event.target as HTMLFormElement;
+
+        const title = target.milestone.value;
+        const dueDate = target.dueDate.value;
+        const desc = target.desc.value;
+
+        console.log('title', title);
+        console.log('dueDate', dueDate);
+        console.log('desc', desc);
+      }}
+    >
       <Text size={FONT.SIZE.LARGE}>{name}</Text>
       <Inputs>{children}</Inputs>
       <BtnWrapper>
         <Button
+          type="submit"
           template="SMALL_STANDARD"
           backgroundColor={{
             initial: COLOR.BLUE[200],
@@ -37,7 +51,7 @@ function FormField({
   );
 }
 
-const Wrapper = styled.div`
+const Wrapper = styled.form`
   display: flex;
   flex-direction: column;
   gap: 24px;
