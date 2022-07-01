@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { buttonStyle, BUTTON_STYLES, ButtonProps } from './button.style';
 
 function Button({
+  type,
   template,
   onClick,
   children,
@@ -18,6 +19,7 @@ function Button({
 }: ButtonProps) {
   return (
     <CustomButton
+      type={type}
       onClick={onClick}
       disabled={disabled}
       width={width}
