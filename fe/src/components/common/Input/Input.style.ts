@@ -178,6 +178,7 @@ export interface InputProps {
   placeholder: string;
   width?: string;
   height?: string;
+  name?: string;
   template?: TemplateType;
   inputId?: string;
   inputLabel?: React.ReactNode;
