@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { FormEventHandler, ReactNode } from 'react';
 import styled from 'styled-components';
 import { COLOR } from 'styles/color';
 import FONT from 'styles/font';
@@ -11,26 +11,15 @@ function FormField({
   name,
   children,
   disabled,
+  onSubmit,
 }: {
   name: string;
   children: ReactNode;
   disabled?: boolean;
+  onSubmit?: FormEventHandler<HTMLFormElement>;
 }) {
   return (
-    <Wrapper
-      onSubmit={(event) => {
-        event.preventDefault();
-        const target = event.target as HTMLFormElement;
-
-        const title = target.milestone.value;
-        const dueDate = target.dueDate.value;
-        const desc = target.desc.value;
-
-        console.log('title', title);
-        console.log('dueDate', dueDate);
-        console.log('desc', desc);
-      }}
-    >
+    <Wrapper onSubmit={onSubmit}>
       <Text size={FONT.SIZE.LARGE}>{name}</Text>
       <Inputs>{children}</Inputs>
       <BtnWrapper>

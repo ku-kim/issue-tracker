@@ -1,13 +1,19 @@
-import { useState } from 'react';
+import { FormEvent, useState } from 'react';
 import styled from 'styled-components';
 import FormField from 'components/common/FormField';
 import Input from 'components/common/Input/Input';
+import usePost from 'hooks/usePost';
 
 function MilestoneFormField() {
   const [isChangedRequiredValue, setIsChangedRequiredValue] = useState(false);
+  const post = usePost();
 
   return (
-    <FormField name="새로운 마일스톤 추가" disabled={!isChangedRequiredValue}>
+    <FormField
+      name="새로운 마일스톤 추가"
+      disabled={!isChangedRequiredValue}
+      onSubmit={handleSubmission}
+    >
       <Column>
         <Row>
           <Input
@@ -28,6 +34,23 @@ function MilestoneFormField() {
       </Column>
     </FormField>
   );
+
+  function handleSubmission(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const target = event.target as HTMLFormElement;
+
+    const title = target.milestone.value;
+    const dueDate = target.dueDate.value;
+    const desc = target.desc.value;
+
+    const body = {
+      title,
+      dueDate,
+      description: desc,
+    };
+
+    post({ url: 'http://3.34.52.237:8080/api/milestones', body });
+  }
 }
 
 const Row = styled.div`
