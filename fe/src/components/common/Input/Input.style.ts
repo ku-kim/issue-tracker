@@ -1,3 +1,4 @@
+import { Dispatch, SetStateAction } from 'react';
 import styled, { css } from 'styled-components';
 import { COLOR } from 'styles/color';
 import FONT from 'styles/font';
@@ -178,6 +179,7 @@ export interface InputProps {
   width?: string;
   height?: string;
   template?: TemplateType;
-  inputId: string;
+  inputId?: string;
   inputLabel?: React.ReactNode;
+  setIsChangedRequiredValue?: Dispatch<SetStateAction<boolean>>;
 }

@@ -1,4 +1,5 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Callback from 'pages/Callback';
 import IssueList from 'pages/IssueList';
 import LabelList from 'pages/LabelList';
 import Login from 'pages/Login';
@@ -12,12 +13,12 @@ function App() {
       <GlobalStyle />
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<div />} />
+          <Route path="/" element={<Login />} />
+          <Route path="/callback" element={<Callback />} />
           <Route path="/template" element={<Template />} />
           <Route path="/issueList" element={<IssueList />} />
           <Route path="/labelList" element={<LabelList />} />
           <Route path="/milestoneList" element={<MilestoneList />} />
-          <Route path="/login" element={<Login />} />
         </Routes>
       </BrowserRouter>
     </>

@@ -28,7 +28,7 @@ public class MilestoneResponse {
 		this.isOpen = isOpen;
 	}
 
-	public static MilestoneResponse createBy(Milestone milestone) {
+	public static MilestoneResponse from(Milestone milestone) {
 		return new MilestoneResponse(milestone.getId(),
 			milestone.getTitle(), milestone.getDescription(), milestone.getCreatedAt(),
 			milestone.getUpdatedAt(),

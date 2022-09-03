@@ -29,7 +29,7 @@ public class MilestoneService {
 		List<MilestoneResponse> milestoneRespons = mileStoneRepository.findAllByIsOpen(
 				statusBoolean)
 			.stream()
-			.map(MilestoneResponse::createBy)
+			.map(MilestoneResponse::from)
 			.collect(Collectors.toList());
 
 		long labelsCount = labelRepository.count();
@@ -43,13 +43,13 @@ public class MilestoneService {
 	}
 
 	public MilestoneResponse insertMilestone(MilestoneCreateRequest request) {
-		Milestone milestone = Milestone.of(request.getTitle(),
+		Milestone milestone = new Milestone(request.getTitle(),
 			request.getDescription(),
 			request.getDueDate());
 
 		Milestone insertedMilestone = mileStoneRepository.save(milestone);
 
-		return MilestoneResponse.createBy(insertedMilestone);
+		return MilestoneResponse.from(insertedMilestone);
 	}
 
 	public MilestoneResponse updateMilestone(Long milestoneId,
@@ -64,7 +64,7 @@ public class MilestoneService {
 
 		Milestone updatedMilestone = mileStoneRepository.save(findMilestone);
 
-		return MilestoneResponse.createBy(updatedMilestone);
+		return MilestoneResponse.from(updatedMilestone);
 	}
 
 	public void removeMilestone(Long milestoneId) {
